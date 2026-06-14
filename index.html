@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <meta name="description" content="StackUp Nest — Ghana's premium savings circle, loan services, and trading group. Save together. Borrow smart. Trade and grow."/>
 <meta name="theme-color" content="#050816"/>
-<title>StackUp Nest | Save. Borrow. Trade.</title>
+<title>StackUp Nest — Save. Borrow. Trade.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
@@ -322,7 +322,7 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
 <!-- NAV -->
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <img src="https://i.ibb.co/zW1gzyZz/Stack-Up-Nest-Logo1.png" style="width:38px;height:38px;border-radius:12px;object-fit:cover"/>
+    <div class="nav-logo-mark"><img src="https://i.ibb.co/zW1gzyZz/Stack-Up-Nest-Logo1.png" style="width:38px;height:38px;border-radius:12px;object-fit:cover"/></div>
     StackUp Nest
   </a>
   <div class="nav-links">
@@ -623,14 +623,14 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
     <h2 class="section-title reveal">The numbers<br/>speak clearly.</h2>
   </div>
   <div class="dash-grid">
-    <div class="dash-card"><div class="dash-label">Active Members</div><div class="dash-value" data-target="248" data-prefix="">0</div><div class="dash-delta">18% growth this quarter</div></div>
-    <div class="dash-card"><div class="dash-label">Total Savings Pool</div><div class="dash-value" data-target="186400" data-prefix="GHS ">GHS 0</div><div class="dash-delta">Record high this cycle</div></div>
-    <div class="dash-card"><div class="dash-label">Loans Disbursed</div><div class="dash-value" data-target="94" data-prefix="">0</div><div class="dash-delta">100% repayment rate</div></div>
-    <div class="dash-card"><div class="dash-label">Trade Volume</div><div class="dash-value" data-target="430000" data-prefix="GHS ">GHS 0</div><div class="dash-delta">Up 42% year-over-year</div></div>
+    <div class="dash-card"><div class="dash-label">Active Members</div><div class="dash-value" data-target="9" data-prefix="">0</div><div class="dash-delta">0 inactive members</div></div>
+    <div class="dash-card"><div class="dash-label">Total Savings (Year)</div><div class="dash-value" data-target="24890" data-prefix="GHS ">GHS 0</div><div class="dash-delta">2026 cycle</div></div>
+    <div class="dash-card"><div class="dash-label">Total Loans Issued</div><div class="dash-value" data-target="28920" data-prefix="GHS ">GHS 0</div><div class="dash-delta">GHS 10,294 outstanding</div></div>
+    <div class="dash-card"><div class="dash-label">Interest Collected</div><div class="dash-value" data-target="1902" data-prefix="GHS ">GHS 0</div><div class="dash-delta">From active loans</div></div>
   </div>
   <div class="dash-chart-wrap reveal">
     <div class="dash-chart-head">
-      <div class="dash-chart-title">Monthly Savings Growth — 2025</div>
+      <div class="dash-chart-title">Monthly Contributions — 2026</div>
       <div class="dash-chart-legend">
         <div class="legend-item"><div class="legend-dot" style="background:var(--emerald)"></div>Savings</div>
         <div class="legend-item"><div class="legend-dot" style="background:rgba(34,255,136,0.4)"></div>Target</div>
@@ -704,7 +704,7 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <a href="#" class="footer-logo"><img src="https://i.ibb.co/zW1gzyZz/Stack-Up-Nest-Logo1.png" style="width:32px;height:32px;border-radius:10px;object-fit:cover"/>StackUp Nest</a>
+      <a href="#" class="footer-logo"><div class="footer-mark"><img src="https://i.ibb.co/zW1gzyZz/Stack-Up-Nest-Logo1.png" style="width:32px;height:32px;border-radius:10px;object-fit:cover"/></div>StackUp Nest</a>
       <p>Ghana's savings, loans and trading circle. Save together, borrow smart, and grow through commerce.</p>
       <div class="footer-socials">
         <a href="#" class="footer-social">X</a>
@@ -1241,14 +1241,14 @@ window.addEventListener('resize', () => {
 // SVG CHART (proper)
 // ============================================================
 const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const chartData = [42, 55, 48, 70, 65, 82, 90, 78, 95, 110, 105, 130];
-const targetData = [50, 60, 60, 75, 75, 85, 90, 90, 100, 115, 115, 130];
+const chartData = [3000, 4800, 3900, 4100, 5700, 3010, 0, 0, 0, 0, 0, 0];
+const targetData = [4070, 4070, 4070, 4070, 4070, 4070, 4070, 4070, 4070, 4070, 4070, 4070];
 
 function buildChart() {
   const area = document.getElementById('chartArea');
   const W = area.offsetWidth, H = 160;
   const pad = { l: 8, r: 8, t: 10, b: 10 };
-  const max = 140;
+  const max = 6500;
   const pts = chartData.map((v,i) => [pad.l + (i/(months.length-1))*(W-pad.l-pad.r), H - pad.b - (v/max)*(H-pad.t-pad.b)]);
   const tpts = targetData.map((v,i) => [pad.l + (i/(months.length-1))*(W-pad.l-pad.r), H - pad.b - (v/max)*(H-pad.t-pad.b)]);
 
@@ -1281,7 +1281,7 @@ function buildChart() {
       const i = parseInt(dot.dataset.i);
       const r = area.getBoundingClientRect();
       const cx = parseFloat(dot.getAttribute('cx')), cy2 = parseFloat(dot.getAttribute('cy'));
-      tooltip.innerHTML = `<strong>GHS ${chartData[i]}K</strong>${months[i]} 2025`;
+      tooltip.innerHTML = `<strong>GHS ${chartData[i].toLocaleString('en-GH')}</strong>${months[i]} 2026`;
       tooltip.style.opacity = '1';
       tooltip.style.left = Math.min(cx - 40, W - 130) + 'px';
       tooltip.style.top = (cy2 - 55) + 'px';
