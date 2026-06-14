@@ -286,9 +286,16 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   .testi-card{min-width:300px;max-width:300px}
   body,#cursor,#cursor-ring{cursor:auto}
   #cursor,#cursor-ring{display:none}
-  a,button,.div-card,.why-card,.faq-q,.dash-card,.div-open-btn,.modal-close{cursor:pointer}
+  a,button,.div-card,.why-card,.faq-q,.dash-card,.div-open-btn,.modal-close,.how-dot{cursor:pointer}
   #modal-box{padding:32px 24px;border-radius:20px}
   .modal-stat-row{display:grid;grid-template-columns:1fr 1fr}
+  /* How section mobile */
+  #how-outer{position:relative!important}
+  #how{position:relative!important;height:auto!important;overflow:visible!important}
+  .how-intro{padding:80px 5% 40px}
+  .how-slide-inner{grid-template-columns:1fr!important;gap:24px!important}
+  .how-slide-visual{height:200px!important}
+  .how-viz{width:160px!important;height:160px!important}
 }
 @media(max-width:480px){
   #hero{padding:100px 5% 60px}
@@ -1080,6 +1087,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 // HOW IT WORKS — intercepted wheel + touch, no GSAP needed
 // ============================================================
 const howSection = document.getElementById('how');
+const howOuter = document.getElementById('how-outer');
 const howTrack = document.getElementById('howTrack');
 const howProgress = document.getElementById('howProgress');
 const howDots = document.querySelectorAll('.how-dot');
@@ -1103,10 +1111,12 @@ function goToStep(s) { setHowStep(s); }
 
 function isMobile() { return window.innerWidth < 768; }
 
-// Check if #how is in the viewport
+// Check if the sticky #how is currently filling the viewport
 function howInView() {
+  if (isMobile()) return false;
   const r = howSection.getBoundingClientRect();
-  return r.top <= 10 && r.bottom >= window.innerHeight - 10;
+  // Section is pinned at top and visible when its top is ≤ 5px and bottom ≥ vh
+  return r.top <= 5 && r.bottom >= window.innerHeight - 5;
 }
 
 // Wheel handler — intercept only when section is pinned in view
@@ -1165,60 +1175,67 @@ let howTop = 0;
 let snapLocked = false;
 
 function updateHowTop() {
-  howTop = howSection.getBoundingClientRect().top + window.scrollY;
+  howTop = howOuter.getBoundingClientRect().top + window.scrollY;
 }
 updateHowTop();
 window.addEventListener('resize', updateHowTop);
 
+// Arrow key navigation
+document.addEventListener('keydown', e => {
+  if (isMobile()) return;
+  if (!howInView()) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (currentStep < STEPS - 1) setHowStep(currentStep + 1);
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (currentStep > 0) setHowStep(currentStep - 1);
+  }
+});
+
 window.addEventListener('scroll', () => {
   if (isMobile() || snapLocked) return;
-  const r = howSection.getBoundingClientRect();
-  // If section is entering viewport (top coming into view), snap to its top
-  if (r.top > 0 && r.top < 80) {
+  const outerRect = howOuter.getBoundingClientRect();
+  // When how-outer's top is about to go off screen, snap it into view
+  if (outerRect.top > 0 && outerRect.top < 60) {
     snapLocked = true;
     window.scrollTo({ top: howTop, behavior: 'smooth' });
-    setTimeout(() => { snapLocked = false; }, 600);
-    return;
+    setTimeout(() => { snapLocked = false; }, 700);
   }
-  // If we're mid-section and user scroll tries to go past, we don't need to act —
-  // the wheel handler above prevents scrolling out while steps remain.
 }, { passive: true });
 
-// Mobile: stack vertically
 function applyMobileLayout() {
+  howSection.style.cssText = 'height:auto;position:relative;overflow:visible';
   howTrack.style.cssText = 'display:block;width:auto;transform:none;transition:none';
   howTrack.querySelectorAll('.how-slide').forEach(s => {
-    s.style.cssText = 'width:auto;height:auto;display:block;padding:0 5% 60px';
+    s.style.cssText = 'width:auto;height:auto;display:block;padding:32px 5% 60px';
   });
   document.querySelector('.how-nav-dots').style.display = 'none';
   howProgress.style.display = 'none';
-  howSection.style.position = 'relative';
 }
 
 function applyDesktopLayout() {
-  howSection.style.position = 'sticky';
-  howSection.style.top = '0';
-  howSection.style.height = '100vh';
-  howTrack.style.display = 'flex';
-  howTrack.style.width = (STEPS * 100) + 'vw';
+  howSection.style.cssText = 'height:100vh;position:sticky;top:0;overflow:hidden';
+  howTrack.style.cssText = `display:flex;width:${STEPS*100}vw;height:100%;will-change:transform`;
   howTrack.querySelectorAll('.how-slide').forEach(s => {
-    s.style.width = '100vw';
-    s.style.height = '100vh';
-    s.style.display = 'flex';
-    s.style.padding = '';
+    s.style.cssText = 'width:100vw;height:100vh;display:flex;align-items:center;flex-shrink:0;padding:0 8%';
   });
   document.querySelector('.how-nav-dots').style.display = 'flex';
   howProgress.style.display = 'block';
   setHowStep(currentStep, false);
+  updateHowTop();
 }
 
 function initHowLayout() {
-  if (isMobile()) { applyMobileLayout(); }
-  else { applyDesktopLayout(); updateHowTop(); }
+  if (isMobile()) applyMobileLayout();
+  else applyDesktopLayout();
 }
 
 initHowLayout();
-window.addEventListener('resize', initHowLayout);
+window.addEventListener('resize', () => {
+  initHowLayout();
+  if (!isMobile()) updateHowTop();
+});
 
 // ============================================================
 // SVG CHART (proper)
