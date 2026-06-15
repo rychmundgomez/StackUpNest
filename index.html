@@ -304,7 +304,7 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   .how-cards{padding-left:0}
   .how-card-visual{display:none}
   .how-card-inner{grid-template-columns:auto 1fr}
-  #howPaths{display:none}
+  #howPaths{display:block;opacity:0.35;left:-20px;width:calc(100% + 40px)}
 }
 @media(max-width:480px){
   #hero{padding:100px 5% 60px}
@@ -585,10 +585,10 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
     <h2 class="section-title reveal">The numbers<br/>speak clearly.</h2>
   </div>
   <div class="dash-grid">
-    <div class="dash-card"><div class="dash-label">Active Members</div><div class="dash-value" data-target="50" data-prefix="">0</div><div class="dash-delta">Growing every cycle</div></div>
-    <div class="dash-card"><div class="dash-label">Total Savings Pool</div><div class="dash-value" data-target="100000" data-prefix="GHS ">GHS 0</div><div class="dash-delta">Across all active members</div></div>
-    <div class="dash-card"><div class="dash-label">Total Loans Issued</div><div class="dash-value" data-target="95000" data-prefix="GHS ">GHS 0</div><div class="dash-delta">100% tracked & managed</div></div>
-    <div class="dash-card"><div class="dash-label">Interest Collected</div><div class="dash-value" data-target="15000" data-prefix="GHS ">GHS 0</div><div class="dash-delta">Returned to the pool</div></div>
+    <div class="dash-card"><div class="dash-label">Active Members</div><div class="dash-value" data-target="120" data-prefix="">0</div><div class="dash-delta">Growing every cycle</div></div>
+    <div class="dash-card"><div class="dash-label">Total Savings Pool</div><div class="dash-value" data-target="284000" data-prefix="GHS ">GHS 0</div><div class="dash-delta">Across all active members</div></div>
+    <div class="dash-card"><div class="dash-label">Total Loans Issued</div><div class="dash-value" data-target="196000" data-prefix="GHS ">GHS 0</div><div class="dash-delta">100% tracked & managed</div></div>
+    <div class="dash-card"><div class="dash-label">Interest Collected</div><div class="dash-value" data-target="18400" data-prefix="GHS ">GHS 0</div><div class="dash-delta">Returned to the pool</div></div>
   </div>
   <div class="dash-chart-wrap reveal">
     <div class="dash-chart-head">
@@ -1088,7 +1088,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 // SVG CHART (proper)
 // ============================================================
 const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const chartData = [18000, 22000, 20000, 26000, 24000, 28400, 32000, 37000, 39000, 41000, 49000, 55000];
+const chartData = [18000, 22000, 20000, 26000, 24000, 28400, 0, 0, 0, 0, 0, 0];
 const targetData = [25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000];
 
 function buildChart() {
