@@ -47,8 +47,8 @@ body.cursor-hover #cursor-ring{width:64px;height:64px;border-color:rgba(34,255,1
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5%;height:80px;display:flex;align-items:center;justify-content:space-between;transition:all .5s}
 nav.scrolled{background:rgba(5,8,22,0.88);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-bottom:1px solid var(--glass-border)}
 .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white);font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;letter-spacing:-0.02em}
-.nav-logo-mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--emerald),#007a42);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:var(--white);box-shadow:0 0 20px rgba(0,196,106,0.35);position:relative;overflow:hidden}
-.nav-logo-mark::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.2),transparent)}
+.nav-logo-mark{width:38px;height:38px;border-radius:12px;background:transparent;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.nav-logo-mark::before{display:none}
 .nav-links{display:flex;align-items:center;gap:36px}
 .nav-links a{color:rgba(255,255,255,0.55);text-decoration:none;font-size:14px;font-weight:500;letter-spacing:0.01em;transition:color .2s}
 .nav-links a:hover{color:var(--white)}
@@ -135,25 +135,35 @@ nav.scrolled{background:rgba(5,8,22,0.88);backdrop-filter:blur(30px);-webkit-bac
 .modal-scroll-hint{display:none}
 
 /* ── HOW IT WORKS ── */
-#how-outer{position:relative}
-.how-intro{padding:0 5%}
-#how{height:100vh;position:relative}
-.how-progress-bar{position:absolute;bottom:0;left:0;height:2px;background:linear-gradient(90deg,var(--emerald),var(--electric));width:25%;transition:width .4s ease;z-index:10}
-.how-track{display:flex;width:400vw;height:100%;will-change:transform;transition:transform .75s cubic-bezier(.23,1,.32,1)}
-.how-slide{width:100vw;height:100vh;display:flex;align-items:center;padding:0 8%;flex-shrink:0}
-.how-slide-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1200px;margin:0 auto;width:100%}
-.how-slide-visual{display:flex;align-items:center;justify-content:center;height:320px}
-.how-viz{width:260px;height:260px}
-.viz-svg{width:100%;height:100%}
-.how-step-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(0,196,106,0.08);border:1px solid rgba(0,196,106,0.18);border-radius:100px;padding:8px 18px;font-family:'DM Mono',monospace;font-size:12px;color:var(--emerald);letter-spacing:0.08em;margin-bottom:28px}
-.how-slide-content h3{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin-bottom:18px}
-.how-slide-content p{color:var(--muted);font-size:0.97rem;line-height:1.85;margin-bottom:28px;max-width:400px}
-.how-features{display:flex;flex-direction:column;gap:11px}
-.how-feature-item{display:flex;align-items:center;gap:12px;font-size:0.88rem;color:rgba(255,255,255,0.55)}
-.how-feature-item::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--emerald);flex-shrink:0}
-.how-nav-dots{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:10}
-.how-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.2);transition:all .3s;cursor:pointer}
-.how-dot.active{background:var(--emerald);width:24px;border-radius:3px}
+#how{padding:140px 5%;position:relative}
+.how-header{margin-bottom:80px}
+.how-scene{position:relative;max-width:1100px;margin:0 auto}
+#howPaths{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.7}
+#howPath1,#howPath2{stroke-dasharray:2400;stroke-dashoffset:2400;transition:stroke-dashoffset .1s linear}
+.how-cards{position:relative;z-index:2;display:flex;flex-direction:column;gap:28px;padding-left:40px}
+.how-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:24px;overflow:hidden;opacity:0;transform:translateY(40px) translateX(-20px);transition:all .7s cubic-bezier(.23,1,.32,1),border-color .3s}
+.how-card.visible{opacity:1;transform:translateY(0) translateX(0)}
+.how-card:hover{border-color:rgba(0,196,106,0.2);background:rgba(0,196,106,0.02)}
+.how-card-inner{display:grid;grid-template-columns:auto 1fr auto;align-items:stretch;gap:0}
+.how-card-left{display:flex;flex-direction:column;align-items:center;padding:36px 24px;border-right:1px solid var(--glass-border)}
+.how-step-num{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--emerald);line-height:1;margin-bottom:16px;letter-spacing:-0.02em}
+.how-step-line{flex:1;width:1px;background:linear-gradient(to bottom,rgba(0,196,106,0.3),transparent);min-height:40px}
+.how-card-body{padding:36px 32px;flex:1}
+.how-card-badge{display:inline-flex;font-family:'DM Mono',monospace;font-size:10px;font-weight:600;color:var(--emerald);letter-spacing:0.14em;text-transform:uppercase;background:rgba(0,196,106,0.08);border:1px solid rgba(0,196,106,0.18);border-radius:100px;padding:5px 14px;margin-bottom:16px}
+.how-card-body h3{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:12px;line-height:1.1}
+.how-card-body p{font-size:0.93rem;color:var(--muted);line-height:1.8;margin-bottom:20px;max-width:440px}
+.how-card-features{display:flex;flex-wrap:wrap;gap:8px}
+.how-card-features span{font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:5px 12px;letter-spacing:0.04em}
+.how-card-visual{width:160px;border-left:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;padding:24px;flex-shrink:0}
+.how-card-visual svg{width:120px;height:120px}
+@media(max-width:768px){
+  .how-cards{padding-left:0}
+  .how-card-visual{display:none}
+  .how-card-inner{grid-template-columns:auto 1fr}
+  #howPaths{display:none}
+  .how-card-body{padding:24px 20px}
+  .how-card-left{padding:24px 16px}
+}
 
 /* ── DASHBOARD ── */
 #dashboard{padding:140px 5%;max-width:1300px;margin:0 auto}
@@ -243,7 +253,7 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
 .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:60px}
 .footer-brand{max-width:300px}
 .footer-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:18px}
-.footer-mark{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--emerald),#007a42);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
+.footer-mark{width:32px;height:32px;border-radius:10px;background:transparent;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .footer-brand p{font-size:0.87rem;color:rgba(255,255,255,0.33);line-height:1.75;margin-bottom:22px}
 .footer-socials{display:flex;gap:10px}
 .footer-social{width:36px;height:36px;border-radius:10px;background:var(--glass);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);font-size:12px;font-weight:600;text-decoration:none;transition:all .2s}
@@ -290,12 +300,11 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   #modal-box{padding:32px 24px;border-radius:20px}
   .modal-stat-row{display:grid;grid-template-columns:1fr 1fr}
   /* How section mobile */
-  #how-outer{position:relative!important}
-  #how{position:relative!important;height:auto!important;overflow:visible!important}
-  .how-intro{padding:80px 5% 40px}
-  .how-slide-inner{grid-template-columns:1fr!important;gap:24px!important}
-  .how-slide-visual{height:200px!important}
-  .how-viz{width:160px!important;height:160px!important}
+  #how{padding:80px 5%}
+  .how-cards{padding-left:0}
+  .how-card-visual{display:none}
+  .how-card-inner{grid-template-columns:auto 1fr}
+  #howPaths{display:none}
 }
 @media(max-width:480px){
   #hero{padding:100px 5% 60px}
@@ -407,214 +416,167 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
 </div>
 
 <!-- HOW IT WORKS -->
-<div id="how-outer">
-  <div class="how-intro" style="padding:140px 5% 60px">
+<section id="how">
+  <div class="how-header">
     <div class="section-eyebrow reveal">The Process</div>
     <h2 class="section-title reveal">Four steps.<br/>One destination.</h2>
   </div>
-  <section id="how" style="overflow:hidden">
-    <div class="how-progress-bar" id="howProgress"></div>
-    <div class="how-track" id="howTrack">
 
-        <!-- Step 1 -->
-        <div class="how-slide">
-          <div class="how-slide-inner">
-            <div class="how-slide-visual">
-              <div class="how-viz">
-                <svg class="viz-svg" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="140" cy="140" r="120" stroke="rgba(0,196,106,0.1)" stroke-width="1"/>
-                  <circle cx="140" cy="140" r="80" stroke="rgba(0,196,106,0.15)" stroke-width="1"/>
-                  <circle cx="140" cy="140" r="40" fill="rgba(0,196,106,0.08)" stroke="rgba(0,196,106,0.3)" stroke-width="1.5"/>
-                  <text x="140" y="148" text-anchor="middle" font-family="Syne,sans-serif" font-size="22" font-weight="800" fill="#00C46A">S</text>
-                  <!-- Orbiting dots -->
-                  <circle class="orbit-dot" cx="220" cy="140" r="6" fill="#00C46A" opacity="0.8"/>
-                  <circle class="orbit-dot-2" cx="60" cy="140" r="4" fill="#22FF88" opacity="0.6"/>
-                  <circle class="orbit-dot-3" cx="140" cy="60" r="5" fill="#00C46A" opacity="0.7"/>
-                  <!-- Form icon suggestion -->
-                  <rect x="104" y="176" width="72" height="52" rx="8" fill="rgba(0,196,106,0.06)" stroke="rgba(0,196,106,0.2)" stroke-width="1"/>
-                  <line x1="116" y1="192" x2="164" y2="192" stroke="rgba(0,196,106,0.4)" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="116" y1="202" x2="155" y2="202" stroke="rgba(0,196,106,0.25)" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="116" y1="212" x2="148" y2="212" stroke="rgba(0,196,106,0.25)" stroke-width="1.5" stroke-linecap="round"/>
-                  <style>
-                    .orbit-dot{animation:orbit1 4s linear infinite;transform-origin:140px 140px}
-                    .orbit-dot-2{animation:orbit2 6s linear infinite;transform-origin:140px 140px}
-                    .orbit-dot-3{animation:orbit3 5s linear infinite;transform-origin:140px 140px}
-                    @keyframes orbit1{from{transform:rotate(0deg) translateX(80px) rotate(0deg)}to{transform:rotate(360deg) translateX(80px) rotate(-360deg)}}
-                    @keyframes orbit2{from{transform:rotate(120deg) translateX(80px) rotate(-120deg)}to{transform:rotate(480deg) translateX(80px) rotate(-480deg)}}
-                    @keyframes orbit3{from{transform:rotate(240deg) translateX(80px) rotate(-240deg)}to{transform:rotate(600deg) translateX(80px) rotate(-600deg)}}
-                  </style>
-                </svg>
-              </div>
-            </div>
-            <div class="how-slide-content">
-              <div class="how-step-badge">Step 01</div>
-              <h3>Join StackUp Nest</h3>
-              <p>Register online with your name, WhatsApp number, and email. Reviewed and activated within 24 hours — your Member ID and portal access arrive in your inbox.</p>
-              <div class="how-features">
-                <div class="how-feature-item">Online registration form — no paperwork</div>
-                <div class="how-feature-item">Admin review within 24 hours</div>
-                <div class="how-feature-item">Welcome email with Member ID and portal access</div>
-                <div class="how-feature-item">Instant visibility into your dashboard</div>
-              </div>
+  <div class="how-scene">
+
+    <!-- Animated SVG paths running behind the cards -->
+    <svg id="howPaths" viewBox="0 0 600 1800" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="howGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1800">
+          <stop offset="0%"   stop-color="#00C46A"/>
+          <stop offset="40%"  stop-color="#22FF88"/>
+          <stop offset="70%"  stop-color="#00C46A"/>
+          <stop offset="100%" stop-color="#22FF88"/>
+        </linearGradient>
+      </defs>
+      <!-- Path A — wide swooping line -->
+      <path id="howPath1" d="M 80,60 C 80,60 500,120 500,340 C 500,560 100,580 100,800 C 100,1020 520,1040 520,1260 C 520,1480 80,1500 80,1740" fill="none" stroke="url(#howGrad)" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+      <!-- Path B — inner line -->
+      <path id="howPath2" d="M 160,80 C 160,80 440,160 440,360 C 440,540 140,580 140,800 C 140,1000 460,1060 460,1280 C 460,1460 160,1500 160,1720" fill="none" stroke="url(#howGrad)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="8 16" opacity="0.3"/>
+    </svg>
+
+    <!-- Step Cards -->
+    <div class="how-cards">
+
+      <div class="how-card" id="howCard0">
+        <div class="how-card-inner">
+          <div class="how-card-left">
+            <div class="how-step-num">01</div>
+            <div class="how-step-line"></div>
+          </div>
+          <div class="how-card-body">
+            <div class="how-card-badge">Join</div>
+            <h3>Join StackUp Nest</h3>
+            <p>Register online with your name, WhatsApp number, and email. Reviewed and activated within 24 hours — your Member ID and portal access arrive in your inbox.</p>
+            <div class="how-card-features">
+              <span>No paperwork</span>
+              <span>24h activation</span>
+              <span>Member portal access</span>
             </div>
           </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="how-slide">
-          <div class="how-slide-inner">
-            <div class="how-slide-visual">
-              <div class="how-viz">
-                <svg class="viz-svg" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <!-- Growing bar chart -->
-                  <rect x="40" y="220" width="200" height="1" fill="rgba(255,255,255,0.1)"/>
-                  <rect x="60" y="170" width="28" height="50" rx="4" fill="rgba(0,196,106,0.15)" stroke="rgba(0,196,106,0.25)" stroke-width="1">
-                    <animate attributeName="y" from="220" to="170" dur="1.2s" fill="freeze"/>
-                    <animate attributeName="height" from="0" to="50" dur="1.2s" fill="freeze"/>
-                  </rect>
-                  <rect x="102" y="140" width="28" height="80" rx="4" fill="rgba(0,196,106,0.25)" stroke="rgba(0,196,106,0.35)" stroke-width="1">
-                    <animate attributeName="y" from="220" to="140" dur="1.2s" begin="0.15s" fill="freeze"/>
-                    <animate attributeName="height" from="0" to="80" dur="1.2s" begin="0.15s" fill="freeze"/>
-                  </rect>
-                  <rect x="144" y="100" width="28" height="120" rx="4" fill="rgba(0,196,106,0.4)" stroke="rgba(0,196,106,0.5)" stroke-width="1">
-                    <animate attributeName="y" from="220" to="100" dur="1.2s" begin="0.3s" fill="freeze"/>
-                    <animate attributeName="height" from="0" to="120" dur="1.2s" begin="0.3s" fill="freeze"/>
-                  </rect>
-                  <rect x="186" y="60" width="28" height="160" rx="4" fill="url(#barGrad)" stroke="rgba(0,196,106,0.6)" stroke-width="1">
-                    <animate attributeName="y" from="220" to="60" dur="1.2s" begin="0.45s" fill="freeze"/>
-                    <animate attributeName="height" from="0" to="160" dur="1.2s" begin="0.45s" fill="freeze"/>
-                  </rect>
-                  <defs>
-                    <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1" gradientTransform="rotate(90)">
-                      <stop offset="0%" stop-color="#22FF88"/>
-                      <stop offset="100%" stop-color="#00C46A"/>
-                    </linearGradient>
-                  </defs>
-                  <!-- Upward arrow -->
-                  <path d="M230 80 L230 40 M220 52 L230 40 L240 52" stroke="#22FF88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
-                  <text x="140" y="270" text-anchor="middle" font-family="DM Mono,monospace" font-size="11" fill="rgba(0,196,106,0.5)">MONTHLY CONTRIBUTIONS</text>
-                </svg>
-              </div>
-            </div>
-            <div class="how-slide-content">
-              <div class="how-step-badge">Step 02</div>
-              <h3>Save Consistently</h3>
-              <p>Contribute monthly. Every payment is logged in real time and reflected in your portal immediately. Weekly reminders keep discipline front of mind.</p>
-              <div class="how-features">
-                <div class="how-feature-item">Monthly contribution tracking in real time</div>
-                <div class="how-feature-item">Automated weekly savings reminders</div>
-                <div class="how-feature-item">Full payment history always visible</div>
-                <div class="how-feature-item">Email receipts sent on every contribution</div>
-              </div>
-            </div>
+          <div class="how-card-visual">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="80" stroke="rgba(0,196,106,0.12)" stroke-width="1"/>
+              <circle cx="100" cy="100" r="50" stroke="rgba(0,196,106,0.2)" stroke-width="1" stroke-dasharray="4 4"/>
+              <circle cx="100" cy="100" r="24" fill="rgba(0,196,106,0.1)" stroke="rgba(0,196,106,0.4)" stroke-width="1.5"/>
+              <text x="100" y="106" text-anchor="middle" font-family="Syne,sans-serif" font-size="14" font-weight="800" fill="#00C46A">S</text>
+              <circle r="5" fill="#00C46A" opacity="0.9"><animateMotion dur="4s" repeatCount="indefinite"><mpath href="#howOrbit1"/></animateMotion></circle>
+              <circle r="3.5" fill="#22FF88" opacity="0.7"><animateMotion dur="6s" repeatCount="indefinite" begin="-2s"><mpath href="#howOrbit2"/></animateMotion></circle>
+              <defs>
+                <path id="howOrbit1" d="M 100,20 A 80,80 0 1 1 99.9,20"/>
+                <path id="howOrbit2" d="M 100,50 A 50,50 0 1 0 99.9,50"/>
+              </defs>
+            </svg>
           </div>
         </div>
+      </div>
 
-        <!-- Step 3 -->
-        <div class="how-slide">
-          <div class="how-slide-inner">
-            <div class="how-slide-visual">
-              <div class="how-viz">
-                <svg class="viz-svg" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <!-- Central node -->
-                  <circle cx="140" cy="140" r="36" fill="rgba(0,196,106,0.1)" stroke="rgba(0,196,106,0.35)" stroke-width="1.5"/>
-                  <text x="140" y="148" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#00C46A">80%</text>
-                  <!-- Connection lines -->
-                  <line x1="140" y1="104" x2="140" y2="68" stroke="rgba(0,196,106,0.3)" stroke-width="1" stroke-dasharray="3 3"/>
-                  <line x1="171" y1="160" x2="200" y2="190" stroke="rgba(0,196,106,0.3)" stroke-width="1" stroke-dasharray="3 3"/>
-                  <line x1="109" y1="160" x2="80" y2="190" stroke="rgba(0,196,106,0.3)" stroke-width="1" stroke-dasharray="3 3"/>
-                  <!-- Satellite nodes -->
-                  <circle cx="140" cy="54" r="24" fill="rgba(0,196,106,0.08)" stroke="rgba(0,196,106,0.25)" stroke-width="1"/>
-                  <text x="140" y="59" text-anchor="middle" font-family="Syne,sans-serif" font-size="16" fill="#00C46A">🏦</text>
-                  <circle cx="210" cy="200" r="24" fill="rgba(0,196,106,0.08)" stroke="rgba(0,196,106,0.25)" stroke-width="1"/>
-                  <text x="210" y="205" text-anchor="middle" font-family="Syne,sans-serif" font-size="16" fill="#00C46A">📈</text>
-                  <circle cx="70" cy="200" r="24" fill="rgba(0,196,106,0.08)" stroke="rgba(0,196,106,0.25)" stroke-width="1"/>
-                  <text x="70" y="205" text-anchor="middle" font-family="Syne,sans-serif" font-size="16" fill="#00C46A">🌍</text>
-                  <!-- Pulse rings -->
-                  <circle cx="140" cy="140" r="50" stroke="rgba(0,196,106,0.1)" stroke-width="1">
-                    <animate attributeName="r" values="40;65;40" dur="3s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0.2;0;0.2" dur="3s" repeatCount="indefinite"/>
-                  </circle>
-                </svg>
-              </div>
-            </div>
-            <div class="how-slide-content">
-              <div class="how-step-badge">Step 03</div>
-              <h3>Access Opportunities</h3>
-              <p>Apply for a loan up to 80% of your contributions, join active trade deals, and benefit from all three divisions running in parallel for you.</p>
-              <div class="how-features">
-                <div class="how-feature-item">Loans up to 80% of total contributions</div>
-                <div class="how-feature-item">24-hour approval process</div>
-                <div class="how-feature-item">Automatic repayment tracking + alerts</div>
-                <div class="how-feature-item">Priority access to Trading & Commerce deals</div>
-              </div>
+      <div class="how-card" id="howCard1">
+        <div class="how-card-inner">
+          <div class="how-card-left">
+            <div class="how-step-num">02</div>
+            <div class="how-step-line"></div>
+          </div>
+          <div class="how-card-body">
+            <div class="how-card-badge">Save</div>
+            <h3>Save Consistently</h3>
+            <p>Contribute monthly. Every payment is logged in real time. Weekly reminders keep your discipline front of mind — automated, zero chasing.</p>
+            <div class="how-card-features">
+              <span>Real-time logging</span>
+              <span>Weekly reminders</span>
+              <span>PDF receipts</span>
             </div>
           </div>
-        </div>
-
-        <!-- Step 4 -->
-        <div class="how-slide">
-          <div class="how-slide-inner">
-            <div class="how-slide-visual">
-              <div class="how-viz">
-                <svg class="viz-svg" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <!-- Coin stack illustration -->
-                  <ellipse cx="140" cy="220" rx="60" ry="12" fill="rgba(0,196,106,0.08)" stroke="rgba(0,196,106,0.2)" stroke-width="1"/>
-                  <rect x="80" y="190" width="120" height="30" rx="4" fill="rgba(0,196,106,0.1)" stroke="rgba(0,196,106,0.25)" stroke-width="1"/>
-                  <ellipse cx="140" cy="190" rx="60" ry="12" fill="rgba(0,196,106,0.14)" stroke="rgba(0,196,106,0.3)" stroke-width="1"/>
-                  <rect x="80" y="158" width="120" height="32" rx="4" fill="rgba(0,196,106,0.12)" stroke="rgba(0,196,106,0.28)" stroke-width="1"/>
-                  <ellipse cx="140" cy="158" rx="60" ry="12" fill="rgba(0,196,106,0.18)" stroke="rgba(0,196,106,0.35)" stroke-width="1"/>
-                  <rect x="80" y="124" width="120" height="34" rx="4" fill="rgba(0,196,106,0.15)" stroke="rgba(0,196,106,0.3)" stroke-width="1"/>
-                  <ellipse cx="140" cy="124" rx="60" ry="12" fill="rgba(0,196,106,0.25)" stroke="rgba(0,196,106,0.45)" stroke-width="1"/>
-                  <!-- Top coin glow -->
-                  <ellipse cx="140" cy="124" rx="60" ry="12" fill="url(#coinTopGrad)"/>
-                  <text x="140" y="128" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="rgba(5,8,22,0.8)" font-weight="600">GHS</text>
-                  <!-- Sparkles -->
-                  <circle cx="80" cy="90" r="3" fill="#22FF88" opacity="0.7">
-                    <animate attributeName="opacity" values="0.7;0.1;0.7" dur="2s" repeatCount="indefinite"/>
-                  </circle>
-                  <circle cx="200" cy="80" r="2" fill="#00C46A" opacity="0.5">
-                    <animate attributeName="opacity" values="0.5;0.1;0.5" dur="2.5s" repeatCount="indefinite"/>
-                  </circle>
-                  <circle cx="220" cy="110" r="4" fill="#22FF88" opacity="0.6">
-                    <animate attributeName="opacity" values="0.6;0.1;0.6" dur="1.8s" repeatCount="indefinite"/>
-                  </circle>
-                  <defs>
-                    <radialGradient id="coinTopGrad" cx="50%" cy="50%">
-                      <stop offset="0%" stop-color="#22FF88" stop-opacity="0.5"/>
-                      <stop offset="100%" stop-color="#00C46A" stop-opacity="0.2"/>
-                    </radialGradient>
-                  </defs>
-                  <!-- Arrow up -->
-                  <path d="M140 100 L140 60 M128 72 L140 60 L152 72" stroke="#22FF88" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <animateTransform attributeName="transform" type="translate" values="0,0;0,-6;0,0" dur="1.5s" repeatCount="indefinite"/>
-                  </path>
-                </svg>
-              </div>
-            </div>
-            <div class="how-slide-content">
-              <div class="how-step-badge">Step 04</div>
-              <h3>Cash Out & Grow</h3>
-              <p>Year-end payout delivered to every active member — total contributions minus any outstanding loan balance, confirmed and transferred by the admin.</p>
-              <div class="how-features">
-                <div class="how-feature-item">Annual cashout for all active members</div>
-                <div class="how-feature-item">Admin previews and confirms before disbursement</div>
-                <div class="how-feature-item">Transparent calculation — zero surprises</div>
-                <div class="how-feature-item">Reinvest or withdraw — your choice</div>
-              </div>
-            </div>
+          <div class="how-card-visual">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="170" width="160" height="1" fill="rgba(255,255,255,0.08)"/>
+              <rect x="30" y="130" width="22" height="40" rx="3" fill="rgba(0,196,106,0.15)" stroke="rgba(0,196,106,0.3)" stroke-width="1"><animate attributeName="height" values="0;40;40" dur="2s" fill="freeze"/><animate attributeName="y" values="170;130;130" dur="2s" fill="freeze"/></rect>
+              <rect x="62" y="100" width="22" height="70" rx="3" fill="rgba(0,196,106,0.25)" stroke="rgba(0,196,106,0.4)" stroke-width="1"><animate attributeName="height" values="0;70;70" dur="2s" begin="0.2s" fill="freeze"/><animate attributeName="y" values="170;100;100" dur="2s" begin="0.2s" fill="freeze"/></rect>
+              <rect x="94" y="75" width="22" height="95" rx="3" fill="rgba(0,196,106,0.35)" stroke="rgba(0,196,106,0.5)" stroke-width="1"><animate attributeName="height" values="0;95;95" dur="2s" begin="0.4s" fill="freeze"/><animate attributeName="y" values="170;75;75" dur="2s" begin="0.4s" fill="freeze"/></rect>
+              <rect x="126" y="45" width="22" height="125" rx="3" fill="url(#howBarGrad)" stroke="rgba(34,255,136,0.6)" stroke-width="1"><animate attributeName="height" values="0;125;125" dur="2s" begin="0.6s" fill="freeze"/><animate attributeName="y" values="170;45;45" dur="2s" begin="0.6s" fill="freeze"/></rect>
+              <path d="M 152 40 L 152 25 M 145 33 L 152 25 L 159 33" stroke="#22FF88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs><linearGradient id="howBarGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#22FF88"/><stop offset="100%" stop-color="#00C46A"/></linearGradient></defs>
+            </svg>
           </div>
         </div>
+      </div>
 
-    </div><!-- how-track -->
-    <div class="how-nav-dots" id="howDots">
-      <div class="how-dot active" onclick="goToStep(0)"></div>
-      <div class="how-dot" onclick="goToStep(1)"></div>
-      <div class="how-dot" onclick="goToStep(2)"></div>
-      <div class="how-dot" onclick="goToStep(3)"></div>
-    </div>
-  </section>
-</div><!-- how-outer -->
+      <div class="how-card" id="howCard2">
+        <div class="how-card-inner">
+          <div class="how-card-left">
+            <div class="how-step-num">03</div>
+            <div class="how-step-line"></div>
+          </div>
+          <div class="how-card-body">
+            <div class="how-card-badge">Borrow & Trade</div>
+            <h3>Access Opportunities</h3>
+            <p>Apply for a loan up to 80% of your contributions, join active trade deals, and benefit from all three divisions running in parallel.</p>
+            <div class="how-card-features">
+              <span>Loans up to 80%</span>
+              <span>24h approval</span>
+              <span>Trade access</span>
+            </div>
+          </div>
+          <div class="how-card-visual">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="28" fill="rgba(0,196,106,0.1)" stroke="rgba(0,196,106,0.4)" stroke-width="1.5"/>
+              <text x="100" y="105" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#00C46A">80%</text>
+              <line x1="100" y1="72" x2="100" y2="44" stroke="rgba(0,196,106,0.3)" stroke-width="1" stroke-dasharray="3 3"/>
+              <line x1="124" y1="116" x2="148" y2="148" stroke="rgba(0,196,106,0.3)" stroke-width="1" stroke-dasharray="3 3"/>
+              <line x1="76" y1="116" x2="52" y2="148" stroke="rgba(0,196,106,0.3)" stroke-width="1" stroke-dasharray="3 3"/>
+              <circle cx="100" cy="34" r="18" fill="rgba(0,196,106,0.08)" stroke="rgba(0,196,106,0.25)" stroke-width="1"/><text x="100" y="39" text-anchor="middle" font-size="13">🏦</text>
+              <circle cx="158" cy="158" r="18" fill="rgba(0,196,106,0.08)" stroke="rgba(0,196,106,0.25)" stroke-width="1"/><text x="158" y="163" text-anchor="middle" font-size="13">📈</text>
+              <circle cx="42" cy="158" r="18" fill="rgba(0,196,106,0.08)" stroke="rgba(0,196,106,0.25)" stroke-width="1"/><text x="42" y="163" text-anchor="middle" font-size="13">🌍</text>
+              <circle cx="100" cy="100" r="44" stroke="rgba(0,196,106,0.08)" stroke-width="1"><animate attributeName="r" values="44;60;44" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite"/></circle>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="how-card" id="howCard3">
+        <div class="how-card-inner">
+          <div class="how-card-left">
+            <div class="how-step-num">04</div>
+            <div class="how-step-line" style="display:none"></div>
+          </div>
+          <div class="how-card-body">
+            <div class="how-card-badge">Cash Out</div>
+            <h3>Cash Out & Grow</h3>
+            <p>Year-end payout to every active member — your total contributions minus any outstanding balance, calculated transparently and transferred in full.</p>
+            <div class="how-card-features">
+              <span>Annual payout</span>
+              <span>Zero surprises</span>
+              <span>Reinvest or withdraw</span>
+            </div>
+          </div>
+          <div class="how-card-visual">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="100" cy="168" rx="48" ry="10" fill="rgba(0,196,106,0.06)" stroke="rgba(0,196,106,0.15)" stroke-width="1"/>
+              <rect x="52" y="143" width="96" height="25" rx="3" fill="rgba(0,196,106,0.08)" stroke="rgba(0,196,106,0.2)" stroke-width="1"/>
+              <ellipse cx="100" cy="143" rx="48" ry="10" fill="rgba(0,196,106,0.12)" stroke="rgba(0,196,106,0.25)" stroke-width="1"/>
+              <rect x="52" y="115" width="96" height="28" rx="3" fill="rgba(0,196,106,0.12)" stroke="rgba(0,196,106,0.25)" stroke-width="1"/>
+              <ellipse cx="100" cy="115" rx="48" ry="10" fill="rgba(0,196,106,0.18)" stroke="rgba(0,196,106,0.32)" stroke-width="1"/>
+              <rect x="52" y="85" width="96" height="30" rx="3" fill="rgba(0,196,106,0.16)" stroke="rgba(0,196,106,0.3)" stroke-width="1"/>
+              <ellipse cx="100" cy="85" rx="48" ry="10" fill="url(#coinGlow)" stroke="rgba(0,196,106,0.5)" stroke-width="1.5"/>
+              <text x="100" y="89" text-anchor="middle" font-family="DM Mono,monospace" font-size="8" fill="rgba(5,8,22,0.9)" font-weight="600">GHS</text>
+              <path d="M 100 72 L 100 45 M 91 54 L 100 45 L 109 54" stroke="#22FF88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><animateTransform attributeName="transform" type="translate" values="0,0;0,-5;0,0" dur="1.5s" repeatCount="indefinite"/></path>
+              <circle cx="58" cy="62" r="3" fill="#22FF88"><animate attributeName="opacity" values="0.8;0.1;0.8" dur="2s" repeatCount="indefinite"/></circle>
+              <circle cx="148" cy="52" r="2" fill="#00C46A"><animate attributeName="opacity" values="0.6;0.1;0.6" dur="2.7s" repeatCount="indefinite"/></circle>
+              <circle cx="162" cy="80" r="3.5" fill="#22FF88"><animate attributeName="opacity" values="0.7;0.1;0.7" dur="1.9s" repeatCount="indefinite"/></circle>
+              <defs><radialGradient id="coinGlow" cx="50%" cy="50%"><stop offset="0%" stop-color="#22FF88" stop-opacity="0.5"/><stop offset="100%" stop-color="#00C46A" stop-opacity="0.2"/></radialGradient></defs>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- how-cards -->
+  </div><!-- how-scene -->
+</section>
 
 <!-- DASHBOARD -->
 <section id="dashboard">
@@ -623,10 +585,10 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
     <h2 class="section-title reveal">The numbers<br/>speak clearly.</h2>
   </div>
   <div class="dash-grid">
-    <div class="dash-card"><div class="dash-label">Active Members</div><div class="dash-value" data-target="9" data-prefix="">0</div><div class="dash-delta">0 inactive members</div></div>
-    <div class="dash-card"><div class="dash-label">Total Savings (Year)</div><div class="dash-value" data-target="24890" data-prefix="GHS ">GHS 0</div><div class="dash-delta">2026 cycle</div></div>
-    <div class="dash-card"><div class="dash-label">Total Loans Issued</div><div class="dash-value" data-target="28920" data-prefix="GHS ">GHS 0</div><div class="dash-delta">GHS 10,294 outstanding</div></div>
-    <div class="dash-card"><div class="dash-label">Interest Collected</div><div class="dash-value" data-target="1902" data-prefix="GHS ">GHS 0</div><div class="dash-delta">From active loans</div></div>
+    <div class="dash-card"><div class="dash-label">Active Members</div><div class="dash-value" data-target="50" data-prefix="">0</div><div class="dash-delta">Growing every cycle</div></div>
+    <div class="dash-card"><div class="dash-label">Total Savings Pool</div><div class="dash-value" data-target="100000" data-prefix="GHS ">GHS 0</div><div class="dash-delta">Across all active members</div></div>
+    <div class="dash-card"><div class="dash-label">Total Loans Issued</div><div class="dash-value" data-target="95000" data-prefix="GHS ">GHS 0</div><div class="dash-delta">100% tracked & managed</div></div>
+    <div class="dash-card"><div class="dash-label">Interest Collected</div><div class="dash-value" data-target="15000" data-prefix="GHS ">GHS 0</div><div class="dash-delta">Returned to the pool</div></div>
   </div>
   <div class="dash-chart-wrap reveal">
     <div class="dash-chart-head">
@@ -1084,171 +1046,56 @@ function closeModal() {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 // ============================================================
-// HOW IT WORKS — intercepted wheel + touch, no GSAP needed
+// HOW IT WORKS — scroll-driven SVG path + card reveal
 // ============================================================
-const howSection = document.getElementById('how');
-const howOuter = document.getElementById('how-outer');
-const howTrack = document.getElementById('howTrack');
-const howProgress = document.getElementById('howProgress');
-const howDots = document.querySelectorAll('.how-dot');
-const STEPS = 4;
-let currentStep = 0;
-let howActive = false;      // true when we're consuming scroll
-let stepping = false;        // debounce between steps
-let touchStartY = 0;
-let wheelAccum = 0;
-const WHEEL_THRESH = 80;
+(function() {
+  const path1 = document.getElementById('howPath1');
+  const path2 = document.getElementById('howPath2');
+  const cards = document.querySelectorAll('.how-card');
+  const howSection = document.getElementById('how');
 
-function setHowStep(step, smooth) {
-  currentStep = Math.max(0, Math.min(STEPS - 1, step));
-  howTrack.style.transition = smooth === false ? 'none' : 'transform .7s cubic-bezier(.23,1,.32,1)';
-  howTrack.style.transform = `translateX(-${currentStep * 100}vw)`;
-  howProgress.style.width = ((currentStep + 1) / STEPS * 100) + '%';
-  howDots.forEach((d, i) => d.classList.toggle('active', i === currentStep));
-}
+  // Animate SVG paths with scroll like the CodePen inspiration
+  const len1 = path1 ? path1.getTotalLength() : 2400;
+  const len2 = path2 ? path2.getTotalLength() : 2400;
+  if (path1) { path1.style.strokeDasharray = len1; path1.style.strokeDashoffset = len1; }
+  if (path2) { path2.style.strokeDasharray = len2; path2.style.strokeDashoffset = len2; }
 
-function goToStep(s) { setHowStep(s); }
+  function updateHow() {
+    if (!howSection) return;
+    const rect = howSection.getBoundingClientRect();
+    const winH = window.innerHeight;
+    // progress 0 → 1 as section scrolls through viewport
+    const progress = Math.max(0, Math.min(1, (-rect.top) / (rect.height - winH + 200)));
 
-function isMobile() { return window.innerWidth < 768; }
+    if (path1) path1.style.strokeDashoffset = len1 * (1 - progress);
+    if (path2) path2.style.strokeDashoffset = len2 * (1 - Math.min(1, progress * 1.2));
 
-// Check if the sticky #how is currently filling the viewport
-function howInView() {
-  if (isMobile()) return false;
-  const r = howSection.getBoundingClientRect();
-  // Section is pinned at top and visible when its top is ≤ 5px and bottom ≥ vh
-  return r.top <= 5 && r.bottom >= window.innerHeight - 5;
-}
-
-// Wheel handler — intercept only when section is pinned in view
-window.addEventListener('wheel', e => {
-  if (isMobile()) return;
-  if (!howInView()) return;
-
-  // Accumulate delta to avoid hair-trigger fires
-  wheelAccum += e.deltaY;
-  if (Math.abs(wheelAccum) < WHEEL_THRESH) {
-    e.preventDefault();
-    return;
-  }
-  const dir = wheelAccum > 0 ? 1 : -1;
-  wheelAccum = 0;
-
-  const next = currentStep + dir;
-
-  if (next < 0) {
-    // Allow normal upward scroll out of section
-    return;
-  }
-  if (next >= STEPS) {
-    // Allow normal downward scroll out of section
-    return;
+    // Reveal cards sequentially as user scrolls
+    cards.forEach((card, i) => {
+      const triggerAt = i / (cards.length + 0.5);
+      if (progress >= triggerAt) card.classList.add('visible');
+    });
   }
 
-  // Stay inside — consume the event
-  e.preventDefault();
-  if (stepping) return;
-  stepping = true;
-  setHowStep(next);
-  setTimeout(() => { stepping = false; }, 750);
-}, { passive: false });
+  window.addEventListener('scroll', updateHow, { passive: true });
+  window.addEventListener('resize', updateHow);
+  // Initial call for above-fold state
+  setTimeout(updateHow, 100);
+})();
 
-// Touch support
-howSection.addEventListener('touchstart', e => {
-  touchStartY = e.touches[0].clientY;
-}, { passive: true });
-
-howSection.addEventListener('touchend', e => {
-  if (isMobile()) return;
-  const diff = touchStartY - e.changedTouches[0].clientY;
-  if (Math.abs(diff) < 30) return;
-  const dir = diff > 0 ? 1 : -1;
-  const next = currentStep + dir;
-  if (next >= 0 && next < STEPS) {
-    e.preventDefault();
-    setHowStep(next);
-  }
-}, { passive: false });
-
-// Keep section sticky-pinned while navigating steps
-// We do this by watching scroll position and snapping back to the section top
-let howTop = 0;
-let snapLocked = false;
-
-function updateHowTop() {
-  howTop = howOuter.getBoundingClientRect().top + window.scrollY;
-}
-updateHowTop();
-window.addEventListener('resize', updateHowTop);
-
-// Arrow key navigation
-document.addEventListener('keydown', e => {
-  if (isMobile()) return;
-  if (!howInView()) return;
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-    e.preventDefault();
-    if (currentStep < STEPS - 1) setHowStep(currentStep + 1);
-  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-    e.preventDefault();
-    if (currentStep > 0) setHowStep(currentStep - 1);
-  }
-});
-
-window.addEventListener('scroll', () => {
-  if (isMobile() || snapLocked) return;
-  const outerRect = howOuter.getBoundingClientRect();
-  // When how-outer's top is about to go off screen, snap it into view
-  if (outerRect.top > 0 && outerRect.top < 60) {
-    snapLocked = true;
-    window.scrollTo({ top: howTop, behavior: 'smooth' });
-    setTimeout(() => { snapLocked = false; }, 700);
-  }
-}, { passive: true });
-
-function applyMobileLayout() {
-  howSection.style.cssText = 'height:auto;position:relative;overflow:visible';
-  howTrack.style.cssText = 'display:block;width:auto;transform:none;transition:none';
-  howTrack.querySelectorAll('.how-slide').forEach(s => {
-    s.style.cssText = 'width:auto;height:auto;display:block;padding:32px 5% 60px';
-  });
-  document.querySelector('.how-nav-dots').style.display = 'none';
-  howProgress.style.display = 'none';
-}
-
-function applyDesktopLayout() {
-  howSection.style.cssText = 'height:100vh;position:sticky;top:0;overflow:hidden';
-  howTrack.style.cssText = `display:flex;width:${STEPS*100}vw;height:100%;will-change:transform`;
-  howTrack.querySelectorAll('.how-slide').forEach(s => {
-    s.style.cssText = 'width:100vw;height:100vh;display:flex;align-items:center;flex-shrink:0;padding:0 8%';
-  });
-  document.querySelector('.how-nav-dots').style.display = 'flex';
-  howProgress.style.display = 'block';
-  setHowStep(currentStep, false);
-  updateHowTop();
-}
-
-function initHowLayout() {
-  if (isMobile()) applyMobileLayout();
-  else applyDesktopLayout();
-}
-
-initHowLayout();
-window.addEventListener('resize', () => {
-  initHowLayout();
-  if (!isMobile()) updateHowTop();
-});
 
 // ============================================================
 // SVG CHART (proper)
 // ============================================================
 const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const chartData = [3000, 4800, 3900, 4100, 5700, 3010, 0, 0, 0, 0, 0, 0];
-const targetData = [4070, 4070, 4070, 4070, 4070, 4070, 4070, 4070, 4070, 4070, 4070, 4070];
+const chartData = [18000, 22000, 20000, 26000, 24000, 28400, 32000, 37000, 39000, 41000, 49000, 55000];
+const targetData = [25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000];
 
 function buildChart() {
   const area = document.getElementById('chartArea');
   const W = area.offsetWidth, H = 160;
   const pad = { l: 8, r: 8, t: 10, b: 10 };
-  const max = 6500;
+  const max = 32000;
   const pts = chartData.map((v,i) => [pad.l + (i/(months.length-1))*(W-pad.l-pad.r), H - pad.b - (v/max)*(H-pad.t-pad.b)]);
   const tpts = targetData.map((v,i) => [pad.l + (i/(months.length-1))*(W-pad.l-pad.r), H - pad.b - (v/max)*(H-pad.t-pad.b)]);
 
