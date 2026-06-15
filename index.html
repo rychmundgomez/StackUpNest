@@ -141,7 +141,7 @@ nav.scrolled{background:rgba(5,8,22,0.88);backdrop-filter:blur(30px);-webkit-bac
 #howPaths{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.7}
 #howPath1,#howPath2{stroke-dasharray:2400;stroke-dashoffset:2400;transition:stroke-dashoffset .1s linear}
 .how-cards{position:relative;z-index:2;display:flex;flex-direction:column;gap:28px;padding-left:40px}
-.how-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:24px;overflow:hidden;opacity:0;transform:translateY(40px) translateX(-20px);transition:all .7s cubic-bezier(.23,1,.32,1),border-color .3s}
+.how-card{background:rgba(8,15,35,0.85);border:1px solid var(--glass-border);border-radius:24px;overflow:hidden;opacity:0;transform:translateY(40px) translateX(-20px);transition:all .7s cubic-bezier(.23,1,.32,1),border-color .3s;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .how-card.visible{opacity:1;transform:translateY(0) translateX(0)}
 .how-card:hover{border-color:rgba(0,196,106,0.2);background:rgba(0,196,106,0.02)}
 .how-card-inner{display:grid;grid-template-columns:auto 1fr auto;align-items:stretch;gap:0}
@@ -160,9 +160,14 @@ nav.scrolled{background:rgba(5,8,22,0.88);backdrop-filter:blur(30px);-webkit-bac
   .how-cards{padding-left:0}
   .how-card-visual{display:none}
   .how-card-inner{grid-template-columns:auto 1fr}
-  #howPaths{display:none}
-  .how-card-body{padding:24px 20px}
-  .how-card-left{padding:24px 16px}
+  #howPaths{display:block;opacity:0.25;left:-10px;width:calc(100% + 20px)}
+  .how-card-left{padding:16px 12px}
+  .how-step-num{font-size:1rem;margin-bottom:8px}
+  .how-card-body{padding:16px 14px}
+  .how-card-badge{font-size:9px;padding:3px 10px;margin-bottom:8px}
+  .how-card-body h3{font-size:1rem;margin-bottom:6px}
+  .how-card-body p{font-size:0.82rem;line-height:1.6;margin-bottom:12px;max-width:100%}
+  .how-card-features span{font-size:9px;padding:3px 9px}
 }
 
 /* ── DASHBOARD ── */
@@ -277,9 +282,6 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   .div-grid{grid-template-columns:1fr 1fr}
   .dash-grid{grid-template-columns:1fr 1fr}
   .footer-top{grid-template-columns:1fr 1fr;gap:40px}
-  .how-slide-inner{grid-template-columns:1fr;gap:40px;padding:0 6%}
-  .how-slide-visual{height:220px}
-  .how-viz{width:180px;height:180px}
   .modal-features{grid-template-columns:1fr}
   .modal-stat-row{flex-wrap:wrap}
   .modal-box{padding:40px 32px}
@@ -290,33 +292,51 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   .div-grid{grid-template-columns:1fr}
   .why-grid{grid-template-columns:1fr}
   .dash-grid{grid-template-columns:1fr 1fr}
-  .hero-title{font-size:clamp(2.6rem,10vw,4rem)}
-  .btn-primary,.btn-ghost{padding:14px 28px;font-size:14px}
-  .hero-btns{gap:12px}
-  .testi-card{min-width:300px;max-width:300px}
+  .hero-title{font-size:clamp(2rem,9vw,3.2rem)}
+  .hero-sub{font-size:0.9rem}
+  .btn-primary,.btn-ghost{padding:13px 24px;font-size:13px}
+  .hero-btns{gap:10px}
+  .testi-card{min-width:280px;max-width:280px}
   body,#cursor,#cursor-ring{cursor:auto}
   #cursor,#cursor-ring{display:none}
-  a,button,.div-card,.why-card,.faq-q,.dash-card,.div-open-btn,.modal-close,.how-dot{cursor:pointer}
-  #modal-box{padding:32px 24px;border-radius:20px}
+  a,button,.div-card,.why-card,.faq-q,.dash-card,.div-open-btn,.modal-close{cursor:pointer}
+  #modal-box{padding:28px 20px;border-radius:20px}
   .modal-stat-row{display:grid;grid-template-columns:1fr 1fr}
-  /* How section mobile */
-  #how{padding:80px 5%}
-  .how-cards{padding-left:0}
-  .how-card-visual{display:none}
-  .how-card-inner{grid-template-columns:auto 1fr}
-  #howPaths{display:block;opacity:0.35;left:-20px;width:calc(100% + 40px)}
+  #how{padding:60px 4% 80px}
+  .how-header{margin-bottom:36px}
+  .how-cards{gap:14px}
+  .section-title{font-size:clamp(1.8rem,7vw,3rem)}
 }
 @media(max-width:480px){
-  #hero{padding:100px 5% 60px}
-  .hero-title{font-size:clamp(2.2rem,11vw,3.2rem)}
-  .hero-sub{font-size:0.95rem}
-  #divisions,#how,#dashboard,#why,#testimonials,#faq,#cta{padding-top:100px;padding-bottom:100px}
+  #hero{padding:90px 4% 50px}
+  .hero-title{font-size:clamp(1.8rem,10vw,2.6rem)}
+  .hero-sub{font-size:0.85rem;margin-bottom:32px}
+  .hero-btns{flex-direction:column;align-items:stretch}
+  .btn-primary,.btn-ghost{width:100%;justify-content:center;text-align:center}
+  #divisions,#dashboard,#why,#testimonials,#faq,#cta{padding-top:72px;padding-bottom:72px}
+  #how{padding:56px 3% 72px}
+  .section-title{font-size:clamp(1.6rem,8vw,2.2rem)}
   .dash-grid{grid-template-columns:1fr}
-  .footer-top{grid-template-columns:1fr;gap:32px}
+  .dash-value{font-size:1.4rem}
+  .dash-label{font-size:10px}
+  .footer-top{grid-template-columns:1fr;gap:28px}
   .footer-brand{max-width:none}
   .modal-stat-row{grid-template-columns:1fr}
-  .how-slide{padding:0 5%}
-  .how-slide-inner{gap:24px}
+  .div-card{padding:28px 20px}
+  .why-card{padding:24px 20px}
+  .faq-q span{font-size:0.88rem}
+  .faq-q{padding:18px 20px}
+  .faq-a{font-size:0.85rem}
+  .how-cards{gap:12px}
+  .how-card-left{padding:14px 10px}
+  .how-step-num{font-size:0.95rem}
+  .how-card-body{padding:14px 12px}
+  .how-card-body h3{font-size:0.95rem}
+  .how-card-body p{font-size:0.8rem;line-height:1.6;margin-bottom:10px}
+  .how-card-features span{font-size:9px;padding:3px 8px}
+  .how-card-badge{font-size:8px;padding:3px 8px}
+  .testi-card{min-width:260px;max-width:260px;padding:24px}
+  .testi-card blockquote{font-size:0.85rem}
 }
 </style>
 </head>
@@ -585,10 +605,10 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
     <h2 class="section-title reveal">The numbers<br/>speak clearly.</h2>
   </div>
   <div class="dash-grid">
-    <div class="dash-card"><div class="dash-label">Active Members</div><div class="dash-value" data-target="120" data-prefix="">0</div><div class="dash-delta">Growing every cycle</div></div>
-    <div class="dash-card"><div class="dash-label">Total Savings Pool</div><div class="dash-value" data-target="284000" data-prefix="GHS ">GHS 0</div><div class="dash-delta">Across all active members</div></div>
-    <div class="dash-card"><div class="dash-label">Total Loans Issued</div><div class="dash-value" data-target="196000" data-prefix="GHS ">GHS 0</div><div class="dash-delta">100% tracked & managed</div></div>
-    <div class="dash-card"><div class="dash-label">Interest Collected</div><div class="dash-value" data-target="18400" data-prefix="GHS ">GHS 0</div><div class="dash-delta">Returned to the pool</div></div>
+    <div class="dash-card"><div class="dash-label">Active Members</div><div class="dash-value" data-target="55" data-prefix="">0</div><div class="dash-delta">Growing every cycle</div></div>
+    <div class="dash-card"><div class="dash-label">Total Savings Pool</div><div class="dash-value" data-target="125000" data-prefix="GHS ">GHS 0</div><div class="dash-delta">Across all active members</div></div>
+    <div class="dash-card"><div class="dash-label">Total Loans Issued</div><div class="dash-value" data-target="115000" data-prefix="GHS ">GHS 0</div><div class="dash-delta">100% tracked & managed</div></div>
+    <div class="dash-card"><div class="dash-label">Interest Collected</div><div class="dash-value" data-target="11500" data-prefix="GHS ">GHS 0</div><div class="dash-delta">Returned to the pool</div></div>
   </div>
   <div class="dash-chart-wrap reveal">
     <div class="dash-chart-head">
@@ -983,7 +1003,7 @@ const modalData = [
       { icon: '🔔', title: 'Weekly Reminders', desc: 'Smart automated reminders keep you on track every week with rotating motivational messages.' },
       { icon: '💰', title: 'Year-End Cashout', desc: 'At cycle end, every active member receives their full contribution balance, calculated transparently.' },
     ],
-    stats: [{ val: 'GHS 186K', label: 'Pool Size' }, { val: '248', label: 'Members' }, { val: '100%', label: 'Transparency' }],
+    stats: [{ val: 'GHS 125K', label: 'Pool Size' }, { val: '55', label: 'Members' }, { val: '100%', label: 'Transparency' }],
     cta: 'https://forms.gle/Uy8imKhmj8cfbnUx6'
   },
   {
@@ -997,7 +1017,7 @@ const modalData = [
       { icon: '📅', title: 'Smart Repayment Tracking', desc: 'Due dates are tracked automatically. Reminders fire as your deadline approaches — upcoming, same-day, and overdue.' },
       { icon: '🔐', title: 'Standing-Based Access', desc: 'Loans are available to members with consistent contribution history and no outstanding penalties.' },
     ],
-    stats: [{ val: '94', label: 'Loans Disbursed' }, { val: '< 24h', label: 'Approval Time' }, { val: '80%', label: 'Max LTV' }],
+    stats: [{ val: '39', label: 'Loans Disbursed' }, { val: '< 24h', label: 'Approval Time' }, { val: '80%', label: 'Max LTV' }],
     cta: 'https://forms.gle/Uy8imKhmj8cfbnUx6'
   },
   {
@@ -1011,7 +1031,7 @@ const modalData = [
       { icon: '📈', title: 'Commodities Trading', desc: 'Get exposure to commodity markets through the group\'s collective position and trading expertise.' },
       { icon: '🧠', title: 'Advisory Services', desc: 'Professional advisory for businesses and consumers looking to navigate Ghana\'s trade landscape.' },
     ],
-    stats: [{ val: 'GHS 430K', label: 'Trade Volume' }, { val: '3', label: 'Trade Verticals' }, { val: 'Priority', label: 'Member Access' }],
+    stats: [{ val: 'GHS 240K', label: 'Trade Volume' }, { val: '3', label: 'Trade Verticals' }, { val: 'Priority', label: 'Member Access' }],
     cta: 'https://forms.gle/Uy8imKhmj8cfbnUx6'
   }
 ];
@@ -1088,7 +1108,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 // SVG CHART (proper)
 // ============================================================
 const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const chartData = [18000, 22000, 20000, 26000, 24000, 28400, 0, 0, 0, 0, 0, 0];
+const chartData = [15000, 19000, 22000, 25000, 28000, 30000, 30900, 31500, 31900, 32500, 35000, 38000];
 const targetData = [25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000, 25000];
 
 function buildChart() {
