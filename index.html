@@ -253,6 +253,39 @@ nav.scrolled{background:rgba(5,8,22,0.88);backdrop-filter:blur(30px);-webkit-bac
 .cta-title{font-family:'Syne',sans-serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;letter-spacing:-0.04em;line-height:0.95;margin-bottom:28px}
 .cta-sub{font-size:1rem;color:var(--muted);max-width:500px;margin:0 auto 52px;line-height:1.85}
 
+/* ── APPLY NOW SECTION ── */
+#apply{padding:140px 5%;text-align:center;position:relative;overflow:hidden}
+.apply-inner{max-width:680px;margin:0 auto;position:relative;z-index:2}
+.apply-glow{position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(0,196,106,0.06),transparent);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:1}
+.apply-sub{font-size:1rem;color:var(--muted);max-width:520px;margin:0 auto 44px;line-height:1.85}
+
+/* ── APPLY MODAL ── */
+#apply-modal-overlay{position:fixed;inset:0;z-index:2100;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .4s}
+#apply-modal-overlay.open{opacity:1;pointer-events:all}
+#apply-modal-bg{position:absolute;inset:0;background:rgba(5,8,22,0.92);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px)}
+#apply-modal-box{position:relative;z-index:1;background:#0a1228;border:1px solid rgba(0,196,106,0.15);border-radius:32px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;transform:scale(0.92) translateY(30px);transition:transform .45s cubic-bezier(.23,1,.32,1);padding:48px 44px}
+#apply-modal-overlay.open #apply-modal-box{transform:scale(1) translateY(0)}
+
+.apply-field{margin-bottom:18px;text-align:left}
+.apply-field label{display:block;font-size:12px;font-weight:600;color:rgba(255,255,255,0.5);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:8px}
+.apply-field input{width:100%;background:var(--glass);border:1px solid var(--glass-border);border-radius:12px;padding:14px 16px;color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:14px;transition:border-color .2s,background .2s}
+.apply-field input:focus{outline:none;border-color:rgba(0,196,106,0.4);background:rgba(0,196,106,0.04)}
+.apply-field input::placeholder{color:rgba(255,255,255,0.22)}
+.apply-field-hint{font-size:11px;color:rgba(255,255,255,0.3);margin-top:6px}
+.apply-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;overflow:hidden}
+.apply-submit-row{margin-top:8px}
+.apply-submit-row .btn-primary{width:100%;justify-content:center}
+.apply-submit-row .btn-primary:disabled{opacity:0.55;cursor:not-allowed;transform:none;box-shadow:none}
+.apply-msg{margin-top:16px;font-size:13px;line-height:1.6;text-align:left;display:none}
+.apply-msg.show{display:block}
+.apply-msg.error{color:#ff8a87}
+.apply-msg.success{color:var(--emerald)}
+.apply-success-state{display:none;text-align:center;padding:20px 0}
+.apply-success-state.show{display:block}
+.apply-success-icon{width:64px;height:64px;border-radius:50%;background:rgba(0,196,106,0.1);border:1px solid rgba(0,196,106,0.25);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 24px}
+.apply-success-state h3{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:12px;letter-spacing:-0.02em}
+.apply-success-state p{font-size:0.92rem;color:var(--muted);line-height:1.75;margin-bottom:28px}
+
 /* ── FOOTER ── */
 footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:rgba(5,8,22,0.8)}
 .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:60px}
@@ -284,7 +317,7 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   .footer-top{grid-template-columns:1fr 1fr;gap:40px}
   .modal-features{grid-template-columns:1fr}
   .modal-stat-row{flex-wrap:wrap}
-  .modal-box{padding:40px 32px}
+  #modal-box{padding:40px 32px}
 }
 @media(max-width:768px){
   .nav-links,.nav-cta{display:none}
@@ -306,6 +339,7 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   .how-header{margin-bottom:36px}
   .how-cards{gap:14px}
   .section-title{font-size:clamp(1.8rem,7vw,3rem)}
+  #apply-modal-box{padding:32px 24px;border-radius:20px}
 }
 @media(max-width:480px){
   #hero{padding:90px 4% 50px}
@@ -313,7 +347,7 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   .hero-sub{font-size:0.85rem;margin-bottom:32px}
   .hero-btns{flex-direction:column;align-items:stretch}
   .btn-primary,.btn-ghost{width:100%;justify-content:center;text-align:center}
-  #divisions,#dashboard,#why,#testimonials,#faq,#cta{padding-top:72px;padding-bottom:72px}
+  #divisions,#dashboard,#why,#testimonials,#faq,#cta,#apply{padding-top:72px;padding-bottom:72px}
   #how{padding:56px 3% 72px}
   .section-title{font-size:clamp(1.6rem,8vw,2.2rem)}
   .dash-grid{grid-template-columns:1fr}
@@ -360,7 +394,7 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
     <a href="#why">Why Us</a>
     <a href="#faq">FAQ</a>
   </div>
-  <a href="https://forms.gle/Uy8imKhmj8cfbnUx6" class="nav-cta">Join Now</a>
+  <a href="#apply" class="nav-cta" onclick="openApplyModal();return false;">Apply Now</a>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -372,7 +406,7 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   <a href="#how" onclick="toggleMenu()">How It Works</a>
   <a href="#why" onclick="toggleMenu()">Why Us</a>
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
-  <a href="https://forms.gle/Uy8imKhmj8cfbnUx6" class="btn-primary" style="font-size:1rem;margin-top:8px">Join StackUp Nest →</a>
+  <a href="#apply" class="btn-primary" style="font-size:1rem;margin-top:8px" onclick="toggleMenu();openApplyModal();">Apply to StackUp Nest →</a>
 </div>
 
 <!-- HERO -->
@@ -385,7 +419,7 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   </h1>
   <p class="hero-sub" id="heroSub">StackUp Nest is Ghana's most disciplined savings circle — combining monthly contributions, smart loans, and a growing trading arm into one tightly run ecosystem.</p>
   <div class="hero-btns" id="heroBtns">
-    <a href="https://forms.gle/Uy8imKhmj8cfbnUx6" class="btn-primary">Join StackUp Nest →</a>
+    <button class="btn-primary" onclick="openApplyModal()" style="border:none;cursor:none">Apply Now →</button>
     <a href="#divisions" class="btn-ghost">Explore Ecosystem</a>
   </div>
   <div class="scroll-indicator"><div class="scroll-line"></div><div class="scroll-label">Scroll</div></div>
@@ -441,10 +475,7 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
     <div class="section-eyebrow reveal">The Process</div>
     <h2 class="section-title reveal">Four steps.<br/>One destination.</h2>
   </div>
-
   <div class="how-scene">
-
-    <!-- Animated SVG paths running behind the cards -->
     <svg id="howPaths" viewBox="0 0 600 1800" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="howGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1800">
@@ -454,30 +485,18 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
           <stop offset="100%" stop-color="#22FF88"/>
         </linearGradient>
       </defs>
-      <!-- Path A — wide swooping line -->
       <path id="howPath1" d="M 80,60 C 80,60 500,120 500,340 C 500,560 100,580 100,800 C 100,1020 520,1040 520,1260 C 520,1480 80,1500 80,1740" fill="none" stroke="url(#howGrad)" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-      <!-- Path B — inner line -->
       <path id="howPath2" d="M 160,80 C 160,80 440,160 440,360 C 440,540 140,580 140,800 C 140,1000 460,1060 460,1280 C 460,1460 160,1500 160,1720" fill="none" stroke="url(#howGrad)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="8 16" opacity="0.3"/>
     </svg>
-
-    <!-- Step Cards -->
     <div class="how-cards">
-
       <div class="how-card" id="howCard0">
         <div class="how-card-inner">
-          <div class="how-card-left">
-            <div class="how-step-num">01</div>
-            <div class="how-step-line"></div>
-          </div>
+          <div class="how-card-left"><div class="how-step-num">01</div><div class="how-step-line"></div></div>
           <div class="how-card-body">
             <div class="how-card-badge">Join</div>
             <h3>Join StackUp Nest</h3>
             <p>Register online with your name, WhatsApp number, and email. Reviewed and activated within 24 hours — your Member ID and portal access arrive in your inbox.</p>
-            <div class="how-card-features">
-              <span>No paperwork</span>
-              <span>24h activation</span>
-              <span>Member portal access</span>
-            </div>
+            <div class="how-card-features"><span>No paperwork</span><span>24h activation</span><span>Member portal access</span></div>
           </div>
           <div class="how-card-visual">
             <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -495,22 +514,14 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
           </div>
         </div>
       </div>
-
       <div class="how-card" id="howCard1">
         <div class="how-card-inner">
-          <div class="how-card-left">
-            <div class="how-step-num">02</div>
-            <div class="how-step-line"></div>
-          </div>
+          <div class="how-card-left"><div class="how-step-num">02</div><div class="how-step-line"></div></div>
           <div class="how-card-body">
             <div class="how-card-badge">Save</div>
             <h3>Save Consistently</h3>
             <p>Contribute monthly. Every payment is logged in real time. Weekly reminders keep your discipline front of mind — automated, zero chasing.</p>
-            <div class="how-card-features">
-              <span>Real-time logging</span>
-              <span>Weekly reminders</span>
-              <span>PDF receipts</span>
-            </div>
+            <div class="how-card-features"><span>Real-time logging</span><span>Weekly reminders</span><span>PDF receipts</span></div>
           </div>
           <div class="how-card-visual">
             <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -525,22 +536,14 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
           </div>
         </div>
       </div>
-
       <div class="how-card" id="howCard2">
         <div class="how-card-inner">
-          <div class="how-card-left">
-            <div class="how-step-num">03</div>
-            <div class="how-step-line"></div>
-          </div>
+          <div class="how-card-left"><div class="how-step-num">03</div><div class="how-step-line"></div></div>
           <div class="how-card-body">
             <div class="how-card-badge">Borrow & Trade</div>
             <h3>Access Opportunities</h3>
             <p>Apply for a loan up to 80% of your contributions, join active trade deals, and benefit from all three divisions running in parallel.</p>
-            <div class="how-card-features">
-              <span>Loans up to 80%</span>
-              <span>24h approval</span>
-              <span>Trade access</span>
-            </div>
+            <div class="how-card-features"><span>Loans up to 80%</span><span>24h approval</span><span>Trade access</span></div>
           </div>
           <div class="how-card-visual">
             <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -557,22 +560,14 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
           </div>
         </div>
       </div>
-
       <div class="how-card" id="howCard3">
         <div class="how-card-inner">
-          <div class="how-card-left">
-            <div class="how-step-num">04</div>
-            <div class="how-step-line" style="display:none"></div>
-          </div>
+          <div class="how-card-left"><div class="how-step-num">04</div><div class="how-step-line" style="display:none"></div></div>
           <div class="how-card-body">
             <div class="how-card-badge">Cash Out</div>
             <h3>Cash Out & Grow</h3>
             <p>Year-end payout to every active member — your total contributions minus any outstanding balance, calculated transparently and transferred in full.</p>
-            <div class="how-card-features">
-              <span>Annual payout</span>
-              <span>Zero surprises</span>
-              <span>Reinvest or withdraw</span>
-            </div>
+            <div class="how-card-features"><span>Annual payout</span><span>Zero surprises</span><span>Reinvest or withdraw</span></div>
           </div>
           <div class="how-card-visual">
             <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -593,9 +588,8 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
           </div>
         </div>
       </div>
-
-    </div><!-- how-cards -->
-  </div><!-- how-scene -->
+    </div>
+  </div>
 </section>
 
 <!-- DASHBOARD -->
@@ -676,11 +670,75 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
     <h2 class="cta-title reveal">Your next stack<br/>starts <span style="background:linear-gradient(90deg,var(--emerald),var(--electric));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">here.</span></h2>
     <p class="cta-sub reveal">Register today, get activated, and start building wealth alongside a community of focused, consistent members across Ghana.</p>
     <div class="hero-btns reveal">
-      <a href="https://forms.gle/Uy8imKhmj8cfbnUx6" class="btn-primary" style="font-size:16px;padding:18px 44px">Register Now →</a>
+      <button class="btn-primary" onclick="openApplyModal()" style="font-size:16px;padding:18px 44px;border:none;cursor:none">Apply Now →</button>
       <a href="https://wa.me/233540281796?text=Hello%2C%20I%20saw%20the%20StackUp%20Nest%20website%20and%20I%27d%20like%20to%20register%20as%20a%20member." target="_blank" rel="noopener" class="btn-ghost" style="font-size:16px;padding:17px 44px">Chat on WhatsApp</a>
     </div>
   </div>
 </section>
+
+<!-- APPLY NOW -->
+<section id="apply">
+  <div class="apply-glow"></div>
+  <div class="apply-inner">
+    <div class="section-eyebrow reveal" style="justify-content:center">Apply Now</div>
+    <h2 class="section-title reveal">Ready to join<br/>the nest?</h2>
+    <p class="apply-sub reveal">Tell us a little about yourself. Applications are reviewed and activated within 24 hours — no paperwork, no waiting in line.</p>
+    <div class="hero-btns reveal">
+      <button class="btn-primary" onclick="openApplyModal()" style="font-size:16px;padding:18px 44px;border:none;cursor:none">Apply Now →</button>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY MODAL -->
+<div id="apply-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="apply-modal-title">
+  <div id="apply-modal-bg" onclick="closeApplyModal()"></div>
+  <div id="apply-modal-box">
+    <button class="modal-close" onclick="closeApplyModal()" style="top:20px;right:20px;">✕</button>
+    <div id="apply-form-state">
+      <div class="modal-eyebrow">Member Application</div>
+      <div class="modal-title" id="apply-modal-title" style="font-size:1.8rem;margin-bottom:8px;">Apply to StackUp Nest</div>
+      <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:28px;">Fields marked * are required. We'll email you once your application is reviewed.</p>
+      <form id="apply-form" onsubmit="submitApplyForm(event)">
+        <div class="apply-field apply-hp" aria-hidden="true">
+          <label for="apply-website">Website</label>
+          <input type="text" id="apply-website" name="website" tabindex="-1" autocomplete="off"/>
+        </div>
+        <div class="apply-field">
+          <label for="apply-name">Full Name *</label>
+          <input type="text" id="apply-name" required autocomplete="name" placeholder="e.g. Kwame Mensah"/>
+        </div>
+        <div class="apply-field">
+          <label for="apply-phone">Phone Number *</label>
+          <input type="tel" id="apply-phone" required autocomplete="tel" placeholder="e.g. 024 123 4567"/>
+        </div>
+        <div class="apply-field">
+          <label for="apply-whatsapp">WhatsApp Number</label>
+          <input type="tel" id="apply-whatsapp" autocomplete="tel" placeholder="Same as phone, or different"/>
+          <div class="apply-field-hint">Leave blank if it's the same as your phone number.</div>
+        </div>
+        <div class="apply-field">
+          <label for="apply-email">Email Address *</label>
+          <input type="email" id="apply-email" required autocomplete="email" placeholder="you@example.com"/>
+        </div>
+        <div class="apply-field">
+          <label for="apply-ghana-card">Ghana Card Number</label>
+          <input type="text" id="apply-ghana-card" placeholder="GHA-000000000-0" autocomplete="off"/>
+          <div class="apply-field-hint">Optional for now — speeds up future loan processing if provided.</div>
+        </div>
+        <div class="apply-submit-row">
+          <button type="submit" class="btn-primary" id="apply-submit-btn">Submit Application →</button>
+        </div>
+        <div class="apply-msg" id="apply-msg"></div>
+      </form>
+    </div>
+    <div class="apply-success-state" id="apply-success-state">
+      <div class="apply-success-icon">✓</div>
+      <h3>Application Received</h3>
+      <p>Thanks for applying to StackUp Nest. We typically review applications within 24 hours — you'll get an email either way, so keep an eye on your inbox.</p>
+      <button class="btn-ghost" onclick="closeApplyModal()" style="cursor:none">Close</button>
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -723,53 +781,11 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
 
 </div><!-- #app -->
 
-<!-- SCRIPTS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 <script>
-// ============================================================
-// LENIS SMOOTH SCROLL (inline implementation)
-// ============================================================
-class Lenis {
-  constructor(opts = {}) {
-    this.lerp = opts.lerp || 0.1;
-    this.current = window.scrollY;
-    this.target = window.scrollY;
-    this.ticking = false;
-    window.addEventListener('wheel', e => {
-      this.target += e.deltaY;
-      this.target = Math.max(0, Math.min(this.target, document.body.scrollHeight - window.innerHeight));
-      if (!this.ticking) { this.tick(); this.ticking = true; }
-    }, { passive: true });
-    window.addEventListener('scroll', () => {
-      // Keep external scroll APIs in sync (GSAP ScrollTrigger)
-      ScrollTrigger && ScrollTrigger.update();
-    }, { passive: true });
-  }
-  tick() {
-    const diff = this.target - this.current;
-    if (Math.abs(diff) < 0.5) {
-      this.current = this.target;
-      this.ticking = false;
-      return;
-    }
-    this.current += diff * this.lerp;
-    window.scrollTo(0, this.current);
-    requestAnimationFrame(() => this.tick());
-  }
-  scrollTo(target) {
-    this.target = typeof target === 'number' ? target : target.offsetTop;
-  }
-}
-// Only enable Lenis on desktop (mobile scroll should be native)
-let lenis;
-if (window.innerWidth > 768) {
-  // Lenis causes issues with horizontal scroll sections — use GSAP's own smooth
-  // instead we'll just let native scroll be and use will-change optimizations
-}
-
 // ============================================================
 // CUSTOM CURSOR
 // ============================================================
@@ -784,7 +800,7 @@ document.querySelectorAll('a,button,.div-card,.why-card,.faq-q,.dash-card').forE
 });
 
 // ============================================================
-// WEBGL BACKGROUND SCENE
+// WEBGL BACKGROUND
 // ============================================================
 (function() {
   const canvas = document.getElementById('webgl-canvas');
@@ -801,14 +817,10 @@ document.querySelectorAll('a,button,.div-card,.why-card,.faq-q,.dash-card').forE
   const pointLight = new THREE.PointLight(0x22ff88, 1.5, 80);
   pointLight.position.set(0, 10, 10);
   scene.add(pointLight);
-
-  // Particles
   const N = 2000;
   const pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
   for (let i = 0; i < N; i++) {
-    pos[i*3] = (Math.random()-.5)*120;
-    pos[i*3+1] = (Math.random()-.5)*120;
-    pos[i*3+2] = (Math.random()-.5)*60 - 20;
+    pos[i*3] = (Math.random()-.5)*120; pos[i*3+1] = (Math.random()-.5)*120; pos[i*3+2] = (Math.random()-.5)*60 - 20;
     const g = 0.3 + Math.random() * 0.7;
     col[i*3] = 0; col[i*3+1] = g*.77; col[i*3+2] = g*.42;
   }
@@ -818,16 +830,12 @@ document.querySelectorAll('a,button,.div-card,.why-card,.faq-q,.dash-card').forE
   const pMat = new THREE.PointsMaterial({ size: 0.12, vertexColors: true, transparent: true, opacity: 0.55 });
   const particles = new THREE.Points(pGeo, pMat);
   scene.add(particles);
-
-  // Rings
   const rings = [];
   [[8,.04,0x00c46a,Math.PI/4,0],[12,.03,0x22ff88,Math.PI/2.5,.3],[16,.02,0x00c46a,Math.PI/3,-.2]].forEach(([r,t,c,rx,ry]) => {
     const m = new THREE.Mesh(new THREE.TorusGeometry(r,t,16,100), new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:0.35}));
     m.rotation.x = rx; m.rotation.y = ry; m.position.z = -8;
     scene.add(m); rings.push(m);
   });
-
-  // Floating coins
   const coins = [];
   for (let i = 0; i < 16; i++) {
     const size = 0.3 + Math.random() * 0.55;
@@ -840,12 +848,10 @@ document.querySelectorAll('a,button,.div-card,.why-card,.faq-q,.dash-card').forE
     mesh.userData = { ox:px,oy:py,speed:.3+Math.random()*.7,phase:Math.random()*Math.PI*2,rx:(Math.random()-.5)*.02,ry:(Math.random()-.5)*.02 };
     scene.add(mesh); coins.push(mesh);
   }
-
   let mx=0,my=0,sy=0,t=0;
   document.addEventListener('mousemove', e => { mx=(e.clientX/window.innerWidth-.5)*2; my=-(e.clientY/window.innerHeight-.5)*2; });
   window.addEventListener('scroll', () => { sy=window.scrollY; }, { passive:true });
   window.addEventListener('resize', () => { camera.aspect=window.innerWidth/window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth,window.innerHeight); });
-
   function animate() {
     requestAnimationFrame(animate); t += .008;
     camera.position.x += (mx*3 - camera.position.x) * .04;
@@ -853,73 +859,42 @@ document.querySelectorAll('a,button,.div-card,.why-card,.faq-q,.dash-card').forE
     camera.lookAt(0,0,0);
     particles.rotation.y = t*.05; particles.rotation.x = t*.02;
     rings.forEach((r,i) => { r.rotation.z = t*(0.1+i*.05); r.rotation.x += .002; });
-    coins.forEach(c => {
-      const d=c.userData;
-      c.position.y = d.oy + Math.sin(t*d.speed+d.phase)*1.4;
-      c.rotation.x += d.rx; c.rotation.y += d.ry;
-    });
+    coins.forEach(c => { const d=c.userData; c.position.y = d.oy + Math.sin(t*d.speed+d.phase)*1.4; c.rotation.x += d.rx; c.rotation.y += d.ry; });
     renderer.render(scene, camera);
   }
   animate();
 })();
 
 // ============================================================
-// CTA CANVAS — particle convergence
+// CTA CANVAS
 // ============================================================
 (function() {
   const canvas = document.getElementById('cta-canvas');
   const ctx = canvas.getContext('2d');
   let W, H, pts = [], frame = 0;
-  function resize() {
-    const section = document.getElementById('cta');
-    W = canvas.width = section.offsetWidth;
-    H = canvas.height = section.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  for (let i = 0; i < 120; i++) {
-    pts.push({ x: Math.random()*W, y: Math.random()*H,
-      vx: (Math.random()-.5)*.4, vy: (Math.random()-.5)*.4,
-      r: 1 + Math.random()*2, opacity: .1+Math.random()*.5 });
-  }
-
+  function resize() { const s = document.getElementById('cta'); W = canvas.width = s.offsetWidth; H = canvas.height = s.offsetHeight; }
+  resize(); window.addEventListener('resize', resize);
+  for (let i = 0; i < 120; i++) pts.push({ x: Math.random()*W, y: Math.random()*H, vx: (Math.random()-.5)*.4, vy: (Math.random()-.5)*.4, r: 1 + Math.random()*2, opacity: .1+Math.random()*.5 });
   let ctaVisible = false;
   new IntersectionObserver(entries => { ctaVisible = entries[0].isIntersecting; }, { threshold: .1 }).observe(document.getElementById('cta'));
-
   function drawCTA() {
     requestAnimationFrame(drawCTA);
     if (!ctaVisible) return;
-    ctx.clearRect(0, 0, W, H);
-    frame++;
-    const cx = W/2, cy = H/2;
-    // Orb
-    const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.min(W,H)*.45);
+    ctx.clearRect(0, 0, W, H); frame++;
+    const ccx = W/2, ccy = H/2;
+    const grad = ctx.createRadialGradient(ccx, ccy, 0, ccx, ccy, Math.min(W,H)*.45);
     grad.addColorStop(0, `rgba(0,196,106,${.06 + .02*Math.sin(frame*.02)})`);
     grad.addColorStop(.5, 'rgba(0,196,106,0.02)');
     grad.addColorStop(1, 'transparent');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, W, H);
-    // Rotating rings
-    for (let r = 0; r < 3; r++) {
-      ctx.beginPath();
-      ctx.arc(cx, cy, 80 + r*80, 0, Math.PI*2);
-      ctx.strokeStyle = `rgba(0,196,106,${.04 - r*.01})`;
-      ctx.lineWidth = 1;
-      ctx.stroke();
-    }
-    // Particles converging
+    ctx.fillStyle = grad; ctx.fillRect(0, 0, W, H);
+    for (let r = 0; r < 3; r++) { ctx.beginPath(); ctx.arc(ccx, ccy, 80 + r*80, 0, Math.PI*2); ctx.strokeStyle = `rgba(0,196,106,${.04 - r*.01})`; ctx.lineWidth = 1; ctx.stroke(); }
     pts.forEach(p => {
-      const dx = cx - p.x, dy = cy - p.y;
-      const dist = Math.sqrt(dx*dx+dy*dy);
+      const dx = ccx - p.x, dy = ccy - p.y, dist = Math.sqrt(dx*dx+dy*dy);
       const pull = .003 + .002*Math.sin(frame*.01);
-      p.x += p.vx + dx * pull;
-      p.y += p.vy + dy * pull;
+      p.x += p.vx + dx * pull; p.y += p.vy + dy * pull;
       if (dist < 30) { p.x = Math.random()*W; p.y = Math.random()*H; }
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(0,196,106,${p.opacity * Math.min(1, dist/100)})`;
-      ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(0,196,106,${p.opacity * Math.min(1, dist/100)})`; ctx.fill();
     });
   }
   drawCTA();
@@ -929,8 +904,6 @@ document.querySelectorAll('a,button,.div-card,.why-card,.faq-q,.dash-card').forE
 // GSAP
 // ============================================================
 gsap.registerPlugin(ScrollTrigger);
-
-// Hero entrance
 const tl = gsap.timeline({ delay: .3 });
 tl.to('#heroPill', { opacity:1, y:0, duration:.7, ease:'power3.out' })
   .to('#heroTitle', { opacity:1, duration:0 }, '-=.3')
@@ -938,28 +911,15 @@ tl.to('#heroPill', { opacity:1, y:0, duration:.7, ease:'power3.out' })
   .to('#heroSub', { opacity:1, y:0, duration:.7, ease:'power3.out' }, '-=.4')
   .to('#heroBtns', { opacity:1, y:0, duration:.7, ease:'power3.out' }, '-=.4');
 
-// Division cards stagger
 [0,1,2].forEach((i) => {
-  gsap.to(`#dcard-${i}`, { opacity:1, y:0, duration:.8, ease:'power3.out', delay:i*.12,
-    scrollTrigger: { trigger:'#divisions', start:'top 75%' }
-  });
+  gsap.to(`#dcard-${i}`, { opacity:1, y:0, duration:.8, ease:'power3.out', delay:i*.12, scrollTrigger: { trigger:'#divisions', start:'top 75%' } });
 });
-
-// Dashboard cards
 gsap.utils.toArray('.dash-card').forEach((el,i) => {
-  gsap.to(el, { opacity:1, y:0, duration:.7, ease:'power3.out', delay:i*.1,
-    scrollTrigger: { trigger:'#dashboard', start:'top 75%' }
-  });
+  gsap.to(el, { opacity:1, y:0, duration:.7, ease:'power3.out', delay:i*.1, scrollTrigger: { trigger:'#dashboard', start:'top 75%' } });
 });
-gsap.to('.dash-chart-wrap', { opacity:1, y:0, duration:.8, ease:'power3.out',
-  scrollTrigger: { trigger:'.dash-chart-wrap', start:'top 80%' }
-});
-
-// Why cards
+gsap.to('.dash-chart-wrap', { opacity:1, y:0, duration:.8, ease:'power3.out', scrollTrigger: { trigger:'.dash-chart-wrap', start:'top 80%' } });
 gsap.utils.toArray('.why-card').forEach((el,i) => {
-  gsap.to(el, { opacity:1, y:0, duration:.7, ease:'power3.out', delay:i*.1,
-    scrollTrigger: { trigger:'#why', start:'top 75%' }
-  });
+  gsap.to(el, { opacity:1, y:0, duration:.7, ease:'power3.out', delay:i*.1, scrollTrigger: { trigger:'#why', start:'top 75%' } });
 });
 
 // Magnetic buttons
@@ -979,8 +939,7 @@ document.querySelectorAll('.btn-primary,.btn-ghost,.nav-cta').forEach(btn => {
 document.querySelectorAll('.div-card').forEach(card => {
   card.addEventListener('mousemove', e => {
     const r = card.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width;
-    const y = (e.clientY - r.top) / r.height;
+    const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
     card.style.setProperty('--mx', (x*100)+'%');
     card.style.setProperty('--my', (y*100)+'%');
     card.style.transform = `translateY(-8px) perspective(800px) rotateX(${(y-.5)*-8}deg) rotateY(${(x-.5)*8}deg)`;
@@ -993,9 +952,7 @@ document.querySelectorAll('.div-card').forEach(card => {
 // ============================================================
 const modalData = [
   {
-    num: 'Division 01',
-    title: 'Savings Circle',
-    icon: '🔒',
+    num: 'Division 01', title: 'Savings Circle', icon: '🔒',
     lead: 'The foundation of StackUp Nest. Every member commits to a monthly contribution amount that builds into a shared pool — disciplined, transparent, and fully automated.',
     features: [
       { icon: '📊', title: 'Real-Time Tracking', desc: 'Every contribution is logged the moment it\'s made. Your dashboard updates instantly — no waiting, no guessing.' },
@@ -1004,12 +961,10 @@ const modalData = [
       { icon: '💰', title: 'Year-End Cashout', desc: 'At cycle end, every active member receives their full contribution balance, calculated transparently.' },
     ],
     stats: [{ val: 'GHS 125K', label: 'Pool Size' }, { val: '55', label: 'Members' }, { val: '100%', label: 'Transparency' }],
-    cta: 'https://forms.gle/Uy8imKhmj8cfbnUx6'
+    cta: '#apply'
   },
   {
-    num: 'Division 02',
-    title: 'Loan Services',
-    icon: '⚡',
+    num: 'Division 02', title: 'Loan Services', icon: '⚡',
     lead: 'Active members in good standing can access loans backed by their own contribution history — fast approval, automatic tracking, and zero paper forms.',
     features: [
       { icon: '⚡', title: '24-Hour Approval', desc: 'Loan applications submitted through the Member Portal are reviewed and decided within 24 hours.' },
@@ -1018,12 +973,10 @@ const modalData = [
       { icon: '🔐', title: 'Standing-Based Access', desc: 'Loans are available to members with consistent contribution history and no outstanding penalties.' },
     ],
     stats: [{ val: '39', label: 'Loans Disbursed' }, { val: '< 24h', label: 'Approval Time' }, { val: '80%', label: 'Max LTV' }],
-    cta: 'https://forms.gle/Uy8imKhmj8cfbnUx6'
+    cta: '#apply'
   },
   {
-    num: 'Division 03',
-    title: 'Trading & Commerce',
-    icon: '🌍',
+    num: 'Division 03', title: 'Trading & Commerce', icon: '🌍',
     lead: 'StackUp Nest\'s trading arm handles import, export, wholesale distribution, and commodity trading across Ghana — with members getting priority access to every deal.',
     features: [
       { icon: '🚢', title: 'Import & Export', desc: 'Access cross-border trade deals facilitated through StackUp Nest\'s established trade networks across Ghana.' },
@@ -1032,26 +985,21 @@ const modalData = [
       { icon: '🧠', title: 'Advisory Services', desc: 'Professional advisory for businesses and consumers looking to navigate Ghana\'s trade landscape.' },
     ],
     stats: [{ val: 'GHS 240K', label: 'Trade Volume' }, { val: '3', label: 'Trade Verticals' }, { val: 'Priority', label: 'Member Access' }],
-    cta: 'https://forms.gle/Uy8imKhmj8cfbnUx6'
+    cta: '#apply'
   }
 ];
 
 function openModal(i) {
   const d = modalData[i];
-  const el = document.getElementById('modal-content');
-  el.innerHTML = `
+  document.getElementById('modal-content').innerHTML = `
     <div class="modal-eyebrow">${d.num} — ${d.icon}</div>
     <div class="modal-title">${d.title}</div>
     <div class="modal-lead">${d.lead}</div>
-    <div class="modal-stat-row">
-      ${d.stats.map(s => `<div class="modal-stat"><div class="modal-stat-val">${s.val}</div><div class="modal-stat-label">${s.label}</div></div>`).join('')}
-    </div>
+    <div class="modal-stat-row">${d.stats.map(s => `<div class="modal-stat"><div class="modal-stat-val">${s.val}</div><div class="modal-stat-label">${s.label}</div></div>`).join('')}</div>
     <div class="modal-divider"></div>
-    <div class="modal-features">
-      ${d.features.map(f => `<div class="modal-feature"><div class="modal-feature-icon">${f.icon}</div><h4>${f.title}</h4><p>${f.desc}</p></div>`).join('')}
-    </div>
+    <div class="modal-features">${d.features.map(f => `<div class="modal-feature"><div class="modal-feature-icon">${f.icon}</div><h4>${f.title}</h4><p>${f.desc}</p></div>`).join('')}</div>
     <div class="modal-cta">
-      <a href="${d.cta}" class="btn-primary">Join StackUp Nest →</a>
+      <button class="btn-primary" onclick="closeModal();openApplyModal();" style="border:none;cursor:none">Apply to Join →</button>
       <a href="https://wa.me/233540281796" target="_blank" class="btn-ghost">Ask on WhatsApp</a>
     </div>`;
   document.getElementById('modal-overlay').classList.add('open');
@@ -1063,8 +1011,6 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
 // ============================================================
 // HOW IT WORKS — scroll-driven SVG path + card reveal
 // ============================================================
@@ -1073,39 +1019,26 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
   const path2 = document.getElementById('howPath2');
   const cards = document.querySelectorAll('.how-card');
   const howSection = document.getElementById('how');
-
-  // Animate SVG paths with scroll like the CodePen inspiration
   const len1 = path1 ? path1.getTotalLength() : 2400;
   const len2 = path2 ? path2.getTotalLength() : 2400;
   if (path1) { path1.style.strokeDasharray = len1; path1.style.strokeDashoffset = len1; }
   if (path2) { path2.style.strokeDasharray = len2; path2.style.strokeDashoffset = len2; }
-
   function updateHow() {
     if (!howSection) return;
     const rect = howSection.getBoundingClientRect();
     const winH = window.innerHeight;
-    // progress 0 → 1 as section scrolls through viewport
     const progress = Math.max(0, Math.min(1, (-rect.top) / (rect.height - winH + 200)));
-
     if (path1) path1.style.strokeDashoffset = len1 * (1 - progress);
     if (path2) path2.style.strokeDashoffset = len2 * (1 - Math.min(1, progress * 1.2));
-
-    // Reveal cards sequentially as user scrolls
-    cards.forEach((card, i) => {
-      const triggerAt = i / (cards.length + 0.5);
-      if (progress >= triggerAt) card.classList.add('visible');
-    });
+    cards.forEach((card, i) => { if (progress >= i / (cards.length + 0.5)) card.classList.add('visible'); });
   }
-
   window.addEventListener('scroll', updateHow, { passive: true });
   window.addEventListener('resize', updateHow);
-  // Initial call for above-fold state
   setTimeout(updateHow, 100);
 })();
 
-
 // ============================================================
-// SVG CHART (proper)
+// SVG CHART
 // ============================================================
 const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const chartData = [18000, 21000, 22000, 25000, 28000, 31000, 25000, 25000, 25000, 25000, 25000, 25000];
@@ -1118,54 +1051,35 @@ function buildChart() {
   const max = 32000;
   const pts = chartData.map((v,i) => [pad.l + (i/(months.length-1))*(W-pad.l-pad.r), H - pad.b - (v/max)*(H-pad.t-pad.b)]);
   const tpts = targetData.map((v,i) => [pad.l + (i/(months.length-1))*(W-pad.l-pad.r), H - pad.b - (v/max)*(H-pad.t-pad.b)]);
-
   const pathD = pts.map((p,i) => (i===0?`M${p[0]},${p[1]}`:`C${pts[i-1][0]+20},${pts[i-1][1]} ${p[0]-20},${p[1]} ${p[0]},${p[1]}`)).join(' ');
   const areaD = pathD + ` L${pts[pts.length-1][0]},${H-pad.b} L${pts[0][0]},${H-pad.b} Z`;
   const tpathD = tpts.map((p,i) => (i===0?`M${p[0]},${p[1]}`:`C${tpts[i-1][0]+20},${tpts[i-1][1]} ${p[0]-20},${p[1]} ${p[0]},${p[1]}`)).join(' ');
-
   const svg = `<svg class="chart-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
-    <defs>
-      <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#00C46A" stop-opacity="0.4"/>
-        <stop offset="100%" stop-color="#00C46A" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
+    <defs><linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00C46A" stop-opacity="0.4"/><stop offset="100%" stop-color="#00C46A" stop-opacity="0"/></linearGradient></defs>
     <path d="${areaD}" class="chart-area-path"/>
     <path d="${tpathD}" class="chart-line-path2"/>
     <path d="${pathD}" class="chart-line-path"/>
     ${pts.map((p,i) => `<circle class="chart-dot" cx="${p[0]}" cy="${p[1]}" r="3" data-i="${i}"/>`).join('')}
   </svg>`;
   area.insertAdjacentHTML('afterbegin', svg);
-
-  // X labels
   const labelsEl = document.getElementById('chartXLabels');
   months.forEach(m => { labelsEl.innerHTML += `<div class="chart-x-label">${m}</div>`; });
-
-  // Tooltip
   const tooltip = document.getElementById('chartTooltip');
   area.querySelectorAll('.chart-dot').forEach(dot => {
     dot.addEventListener('mouseenter', e => {
       const i = parseInt(dot.dataset.i);
       const r = area.getBoundingClientRect();
-      const cx = parseFloat(dot.getAttribute('cx')), cy2 = parseFloat(dot.getAttribute('cy'));
+      const ccx = parseFloat(dot.getAttribute('cx')), cy2 = parseFloat(dot.getAttribute('cy'));
       tooltip.innerHTML = `<strong>GHS ${chartData[i].toLocaleString('en-GH')}</strong>${months[i]} 2026`;
-      tooltip.style.opacity = '1';
-      tooltip.style.left = Math.min(cx - 40, W - 130) + 'px';
-      tooltip.style.top = (cy2 - 55) + 'px';
+      tooltip.style.opacity = '1'; tooltip.style.left = Math.min(ccx - 40, W - 130) + 'px'; tooltip.style.top = (cy2 - 55) + 'px';
     });
     dot.addEventListener('mouseleave', () => { tooltip.style.opacity = '0'; });
   });
-
-  // Animate line on scroll
   const path = area.querySelector('.chart-line-path');
   const len = path.getTotalLength();
-  path.style.strokeDasharray = len;
-  path.style.strokeDashoffset = len;
+  path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
   new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) {
-      path.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(.23,1,.32,1)';
-      path.style.strokeDashoffset = '0';
-    }
+    if (entries[0].isIntersecting) { path.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(.23,1,.32,1)'; path.style.strokeDashoffset = '0'; }
   }, { threshold: .3 }).observe(area);
 }
 buildChart();
@@ -1174,8 +1088,7 @@ buildChart();
 // NUMBER COUNTERS
 // ============================================================
 function animateCounter(el) {
-  const target = parseInt(el.dataset.target);
-  const prefix = el.dataset.prefix || '';
+  const target = parseInt(el.dataset.target), prefix = el.dataset.prefix || '';
   const dur = 2000, start = performance.now();
   function update(now) {
     const ease = 1 - Math.pow(1 - Math.min((now-start)/dur,1), 4);
@@ -1188,14 +1101,11 @@ function animateCounter(el) {
 }
 let countersGone = false;
 new IntersectionObserver(e => {
-  if (e[0].isIntersecting && !countersGone) {
-    countersGone = true;
-    document.querySelectorAll('.dash-value[data-target]').forEach(animateCounter);
-  }
+  if (e[0].isIntersecting && !countersGone) { countersGone = true; document.querySelectorAll('.dash-value[data-target]').forEach(animateCounter); }
 }, { threshold: .4 }).observe(document.querySelector('#dashboard'));
 
 // ============================================================
-// TESTIMONIALS — dual-track infinite scroll
+// TESTIMONIALS
 // ============================================================
 const testiData = [
   { q:'The Member Portal makes it so easy to track everything. Every contribution I\'ve made and my loan balance in one place — very professional.', name:'Kofi Asante', role:'Member since 2025', i:'KA' },
@@ -1205,32 +1115,21 @@ const testiData = [
   { q:'Love that every transaction is logged and visible. No surprises, no excuses. The transparency here is unmatched compared to other groups I\'ve been in.', name:'Kweku Darkwa', role:'Member since 2025', i:'KD' },
   { q:'Getting activated was fast and the welcome email was detailed. I knew exactly what to expect from day one. That level of organization is rare.', name:'Esi Adjei', role:'Member since 2025', i:'EA' },
 ];
-
 function makeCard(d) {
   return `<div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"${d.q}"</blockquote><div class="testi-author"><div class="testi-avatar">${d.i}</div><div><div class="testi-name">${d.name}</div><div class="testi-role">${d.role}</div></div></div></div>`;
 }
-
 const tracksEl = document.getElementById('testiTracks');
-// Row 1 — forward (first 4 + first 4 for loop)
 const row1 = document.createElement('div'); row1.className = 'testi-track testi-track-fwd';
-const row1cards = [...testiData.slice(0,4), ...testiData.slice(0,4)];
-row1.innerHTML = row1cards.map(makeCard).join('');
-// Row 2 — reverse (last 4 + last 4)
+row1.innerHTML = [...testiData.slice(0,4), ...testiData.slice(0,4)].map(makeCard).join('');
 const row2 = document.createElement('div'); row2.className = 'testi-track testi-track-rev';
-const row2cards = [...testiData.slice(2), ...testiData.slice(2)];
-row2.innerHTML = row2cards.map(makeCard).join('');
-tracksEl.appendChild(row1);
-tracksEl.appendChild(row2);
+row2.innerHTML = [...testiData.slice(2), ...testiData.slice(2)].map(makeCard).join('');
+tracksEl.appendChild(row1); tracksEl.appendChild(row2);
 
 // ============================================================
 // SCROLL REVEAL
 // ============================================================
-new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-}, { threshold: .1 }).observe && document.querySelectorAll('.reveal').forEach(el => {
-  new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) { el.classList.add('visible'); }
-  }, { threshold: .1 }).observe(el);
+document.querySelectorAll('.reveal').forEach(el => {
+  new IntersectionObserver(entries => { if (entries[0].isIntersecting) el.classList.add('visible'); }, { threshold: .1 }).observe(el);
 });
 
 // ============================================================
@@ -1249,6 +1148,78 @@ function toggleFaq(el) {
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); }, { passive:true });
 function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeApplyModal(); } });
+
+// ============================================================
+// APPLY NOW MODAL
+// ============================================================
+var APPLY_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbxL7tR86AawPZ-2rQXOCQG8tPCGOYECjZS5ySM24pPIdd-waxgeXAAruzcgSISQfamh/exec';
+var _applyFormLoadedAt = null;
+
+function openApplyModal() {
+  document.getElementById('apply-modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('apply-form-state').style.display = '';
+  document.getElementById('apply-success-state').classList.remove('show');
+  document.getElementById('apply-form').reset();
+  document.getElementById('apply-msg').classList.remove('show', 'error', 'success');
+  _applyFormLoadedAt = Date.now();
+}
+
+function closeApplyModal() {
+  document.getElementById('apply-modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function submitApplyForm(event) {
+  event.preventDefault();
+  var btn = document.getElementById('apply-submit-btn');
+  var msgEl = document.getElementById('apply-msg');
+  msgEl.classList.remove('show', 'error', 'success');
+  var payload = {
+    action:       'submitMemberApplication',
+    name:         document.getElementById('apply-name').value.trim(),
+    phone:        document.getElementById('apply-phone').value.trim(),
+    whatsapp:     document.getElementById('apply-whatsapp').value.trim(),
+    email:        document.getElementById('apply-email').value.trim(),
+    ghanaCard:    document.getElementById('apply-ghana-card').value.trim(),
+    website:      document.getElementById('apply-website').value,
+    formLoadedAt: _applyFormLoadedAt
+  };
+  if (!payload.name || !payload.phone || !payload.email) {
+    msgEl.textContent = 'Please fill in your name, phone number, and email.';
+    msgEl.classList.add('show', 'error');
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+  fetch(APPLY_ENDPOINT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload)
+  })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      btn.disabled = false;
+      btn.textContent = 'Submit Application →';
+      if (data.success) {
+        document.getElementById('apply-form-state').style.display = 'none';
+        document.getElementById('apply-success-state').classList.add('show');
+      } else {
+        msgEl.textContent = data.error || 'Something went wrong. Please try again.';
+        msgEl.classList.add('show', 'error');
+      }
+    })
+    .catch(function() {
+      btn.disabled = false;
+      btn.textContent = 'Submit Application →';
+      msgEl.textContent = 'Could not reach the server. Please check your connection and try again, or contact us on WhatsApp.';
+      msgEl.classList.add('show', 'error');
+    });
+}
 </script>
 </body>
 </html>
+HTMLEOF
+echo "Done: $(wc -c < /mnt/user-data/outputs/stackupnest.html) bytes"
+Output
