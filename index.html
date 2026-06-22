@@ -260,31 +260,87 @@ nav.scrolled{background:rgba(5,8,22,0.88);backdrop-filter:blur(30px);-webkit-bac
 .apply-sub{font-size:1rem;color:var(--muted);max-width:520px;margin:0 auto 44px;line-height:1.85}
 
 /* ── APPLY MODAL ── */
-#apply-modal-overlay{position:fixed;inset:0;z-index:2100;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .4s}
+#apply-modal-overlay{position:fixed;inset:0;z-index:2100;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .4s}
 #apply-modal-overlay.open{opacity:1;pointer-events:all}
 #apply-modal-bg{position:absolute;inset:0;background:rgba(5,8,22,0.92);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px)}
-#apply-modal-box{position:relative;z-index:1;background:#0a1228;border:1px solid rgba(0,196,106,0.15);border-radius:32px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;transform:scale(0.92) translateY(30px);transition:transform .45s cubic-bezier(.23,1,.32,1);padding:48px 44px}
+#apply-modal-box{position:relative;z-index:1;background:#0a1228;border:1px solid rgba(0,196,106,0.15);border-radius:28px;width:100%;max-width:560px;max-height:92vh;overflow-y:auto;transform:scale(0.92) translateY(30px);transition:transform .45s cubic-bezier(.23,1,.32,1);padding:40px 36px 36px}
 #apply-modal-overlay.open #apply-modal-box{transform:scale(1) translateY(0)}
+@media(max-width:600px){#apply-modal-box{padding:28px 20px 24px;border-radius:22px}}
 
-.apply-field{margin-bottom:18px;text-align:left}
-.apply-field label{display:block;font-size:12px;font-weight:600;color:rgba(255,255,255,0.5);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:8px}
-.apply-field input{width:100%;background:var(--glass);border:1px solid var(--glass-border);border-radius:12px;padding:14px 16px;color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:14px;transition:border-color .2s,background .2s}
-.apply-field input:focus{outline:none;border-color:rgba(0,196,106,0.4);background:rgba(0,196,106,0.04)}
-.apply-field input::placeholder{color:rgba(255,255,255,0.22)}
-.apply-field-hint{font-size:11px;color:rgba(255,255,255,0.3);margin-top:6px}
+/* Progress bar */
+.apply-progress{display:flex;align-items:center;gap:0;margin-bottom:28px}
+.apply-progress-step{display:flex;align-items:center;gap:8px;flex:1}
+.apply-progress-circle{width:28px;height:28px;border-radius:50%;background:var(--glass);border:1.5px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:rgba(255,255,255,0.35);flex-shrink:0;transition:all .35s}
+.apply-progress-circle.active{background:rgba(0,196,106,0.15);border-color:var(--emerald);color:var(--emerald)}
+.apply-progress-circle.done{background:var(--emerald);border-color:var(--emerald);color:#050816}
+.apply-progress-label{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.3);transition:color .35s}
+.apply-progress-label.active{color:var(--emerald)}
+.apply-progress-label.done{color:rgba(255,255,255,0.5)}
+.apply-progress-line{flex:1;height:1px;background:var(--glass-border);margin:0 8px;transition:background .35s}
+.apply-progress-line.done{background:var(--emerald)}
+
+/* Fields */
+.apply-field{margin-bottom:14px;text-align:left}
+.apply-field label{display:block;font-size:11px;font-weight:600;color:rgba(255,255,255,0.45);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px}
+.apply-field input,.apply-field select,.apply-field textarea{width:100%;background:var(--glass);border:1px solid var(--glass-border);border-radius:12px;padding:12px 14px;color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:14px;transition:border-color .2s,background .2s;appearance:none;-webkit-appearance:none}
+.apply-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.3)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+.apply-field select option{background:#0a1228;color:#fff}
+.apply-field textarea{resize:none;min-height:72px}
+.apply-field input:focus,.apply-field select:focus,.apply-field textarea:focus{outline:none;border-color:rgba(0,196,106,0.4);background:rgba(0,196,106,0.04)}
+.apply-field input::placeholder,.apply-field textarea::placeholder{color:rgba(255,255,255,0.2)}
+.apply-field-hint{font-size:11px;color:rgba(255,255,255,0.28);margin-top:5px;line-height:1.5}
+.apply-field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.apply-field-row{grid-template-columns:1fr}}
 .apply-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;overflow:hidden}
-.apply-submit-row{margin-top:8px}
-.apply-submit-row .btn-primary{width:100%;justify-content:center}
-.apply-submit-row .btn-primary:disabled{opacity:0.55;cursor:not-allowed;transform:none;box-shadow:none}
-.apply-msg{margin-top:16px;font-size:13px;line-height:1.6;text-align:left;display:none}
+
+/* Radio / checkbox groups */
+.apply-radio-group{display:flex;gap:10px;flex-wrap:wrap}
+.apply-radio-option{display:flex;align-items:center;gap:8px;background:var(--glass);border:1.5px solid var(--glass-border);border-radius:10px;padding:10px 14px;cursor:pointer;transition:all .2s;font-size:13px;color:rgba(255,255,255,0.6);user-select:none}
+.apply-radio-option input{width:14px;height:14px;accent-color:var(--emerald);cursor:pointer;flex-shrink:0}
+.apply-radio-option:has(input:checked){border-color:rgba(0,196,106,0.45);background:rgba(0,196,106,0.07);color:var(--white)}
+.apply-checkbox-option{display:flex;align-items:flex-start;gap:10px;background:var(--glass);border:1.5px solid var(--glass-border);border-radius:10px;padding:12px 14px;cursor:pointer;transition:all .2s;font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5;user-select:none}
+.apply-checkbox-option input{width:15px;height:15px;accent-color:var(--emerald);cursor:pointer;flex-shrink:0;margin-top:1px}
+.apply-checkbox-option:has(input:checked){border-color:rgba(0,196,106,0.45);background:rgba(0,196,106,0.07);color:var(--white)}
+
+/* File upload */
+.apply-upload-zone{border:1.5px dashed rgba(255,255,255,0.15);border-radius:14px;padding:18px 16px;text-align:center;cursor:pointer;transition:all .25s;background:rgba(255,255,255,0.02)}
+.apply-upload-zone:hover,.apply-upload-zone.dragover{border-color:rgba(0,196,106,0.4);background:rgba(0,196,106,0.04)}
+.apply-upload-zone.has-file{border-color:rgba(0,196,106,0.35);background:rgba(0,196,106,0.06)}
+.apply-upload-icon{font-size:22px;margin-bottom:6px}
+.apply-upload-label{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.5}
+.apply-upload-label strong{color:var(--emerald)}
+.apply-upload-preview{display:flex;align-items:center;gap:10px;background:rgba(0,196,106,0.08);border-radius:10px;padding:8px 12px;margin-top:8px;text-align:left}
+.apply-upload-preview img{width:36px;height:36px;border-radius:6px;object-fit:cover}
+.apply-upload-preview-info{flex:1;min-width:0}
+.apply-upload-preview-name{font-size:12px;color:var(--white);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.apply-upload-preview-size{font-size:11px;color:var(--muted)}
+.apply-upload-remove{background:none;border:none;color:rgba(255,255,255,0.4);font-size:16px;cursor:pointer;padding:0 4px;line-height:1;flex-shrink:0}
+.apply-upload-remove:hover{color:#ff8a87}
+.apply-camera-row{display:flex;gap:8px;margin-top:8px}
+.apply-camera-btn{flex:1;background:var(--glass);border:1px solid var(--glass-border);border-radius:10px;padding:9px 12px;color:rgba(255,255,255,0.5);font-size:12px;font-family:'Space Grotesk',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s}
+.apply-camera-btn:hover{background:rgba(0,196,106,0.08);border-color:rgba(0,196,106,0.3);color:var(--emerald)}
+
+/* Contrib amount preview */
+.apply-amount-preview{font-size:11px;color:var(--emerald);margin-top:5px;font-family:'DM Mono',monospace;min-height:16px}
+
+/* Nav buttons */
+.apply-nav-row{display:flex;gap:12px;margin-top:20px}
+.apply-nav-row .btn-primary{flex:1;justify-content:center;border:none;cursor:pointer}
+.apply-nav-row .btn-ghost{border:1px solid var(--glass-border);cursor:pointer}
+.apply-nav-row .btn-primary:disabled{opacity:0.55;cursor:not-allowed;transform:none;box-shadow:none}
+.apply-msg{margin-top:12px;font-size:13px;line-height:1.6;text-align:left;display:none;padding:10px 14px;border-radius:10px;background:rgba(255,138,135,0.07);border:1px solid rgba(255,138,135,0.15)}
 .apply-msg.show{display:block}
 .apply-msg.error{color:#ff8a87}
-.apply-msg.success{color:var(--emerald)}
+.apply-msg.success{color:var(--emerald);background:rgba(0,196,106,0.07);border-color:rgba(0,196,106,0.2)}
+
+/* Success state */
 .apply-success-state{display:none;text-align:center;padding:20px 0}
 .apply-success-state.show{display:block}
 .apply-success-icon{width:64px;height:64px;border-radius:50%;background:rgba(0,196,106,0.1);border:1px solid rgba(0,196,106,0.25);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 24px}
 .apply-success-state h3{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:12px;letter-spacing:-0.02em}
 .apply-success-state p{font-size:0.92rem;color:var(--muted);line-height:1.75;margin-bottom:28px}
+.apply-uploading-notice{font-size:12px;color:var(--emerald);margin-top:8px;display:none}
+.apply-uploading-notice.show{display:block}
 
 /* ── FOOTER ── */
 footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:rgba(5,8,22,0.8)}
@@ -689,56 +745,278 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   </div>
 </section>
 
-<!-- APPLY MODAL -->
+<!-- APPLY MODAL (two-step) -->
 <div id="apply-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="apply-modal-title">
   <div id="apply-modal-bg" onclick="closeApplyModal()"></div>
   <div id="apply-modal-box">
-    <button class="modal-close" onclick="closeApplyModal()" style="top:20px;right:20px;">✕</button>
+    <button class="modal-close" onclick="closeApplyModal()" style="top:16px;right:16px;">✕</button>
+
+    <!-- ── Form state ── -->
     <div id="apply-form-state">
-      <div class="modal-eyebrow">Member Application</div>
-      <div class="modal-title" id="apply-modal-title" style="font-size:1.8rem;margin-bottom:8px;">Apply to StackUp Nest</div>
-      <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:28px;">Fields marked * are required. We'll email you once your application is reviewed.</p>
-      <form id="apply-form" onsubmit="submitApplyForm(event)">
-        <div class="apply-field apply-hp" aria-hidden="true">
-          <label for="apply-website">Website</label>
-          <input type="text" id="apply-website" name="website" tabindex="-1" autocomplete="off"/>
+
+      <!-- Progress indicator -->
+      <div class="apply-progress" id="apply-progress" aria-label="Application progress">
+        <div class="apply-progress-step">
+          <div class="apply-progress-circle active" id="prog-circle-1">1</div>
+          <div class="apply-progress-label active" id="prog-label-1">Personal Info</div>
         </div>
-        <div class="apply-field">
-          <label for="apply-name">Full Name *</label>
-          <input type="text" id="apply-name" required autocomplete="name" placeholder="e.g. Kwame Mensah"/>
+        <div class="apply-progress-line" id="prog-line-1"></div>
+        <div class="apply-progress-step">
+          <div class="apply-progress-circle" id="prog-circle-2">2</div>
+          <div class="apply-progress-label" id="prog-label-2">Membership</div>
         </div>
-        <div class="apply-field">
-          <label for="apply-phone">Phone Number *</label>
-          <input type="tel" id="apply-phone" required autocomplete="tel" placeholder="e.g. 024 123 4567"/>
+      </div>
+
+      <!-- Honeypot (hidden from real users, caught server-side) -->
+      <div class="apply-field apply-hp" aria-hidden="true">
+        <label for="apply-website">Website</label>
+        <input type="text" id="apply-website" name="website" tabindex="-1" autocomplete="off"/>
+      </div>
+
+      <!-- ════════════════════════════════════════════════════
+           STEP 1 — Personal Information
+           ════════════════════════════════════════════════════ -->
+      <div id="apply-step-1">
+        <div class="modal-eyebrow">Step 1 of 2</div>
+        <div class="modal-title" id="apply-modal-title" style="font-size:1.55rem;margin-bottom:6px;">Personal Information</div>
+        <p style="font-size:0.85rem;color:var(--muted);line-height:1.65;margin-bottom:22px;">Fields marked * are required.</p>
+
+        <div class="apply-field-row">
+          <div class="apply-field">
+            <label for="apply-name">Full Name *</label>
+            <input type="text" id="apply-name" autocomplete="name" placeholder="e.g. Kwame Mensah"/>
+          </div>
+          <div class="apply-field">
+            <label for="apply-dob">Date of Birth</label>
+            <input type="date" id="apply-dob" autocomplete="bday"/>
+          </div>
         </div>
-        <div class="apply-field">
-          <label for="apply-whatsapp">WhatsApp Number</label>
-          <input type="tel" id="apply-whatsapp" autocomplete="tel" placeholder="Same as phone, or different"/>
-          <div class="apply-field-hint">Leave blank if it's the same as your phone number.</div>
+
+        <div class="apply-field-row">
+          <div class="apply-field">
+            <label for="apply-gender">Gender</label>
+            <select id="apply-gender">
+              <option value="">Select…</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+          </div>
+          <div class="apply-field">
+            <label for="apply-location">Location (City/Town)</label>
+            <input type="text" id="apply-location" placeholder="e.g. Accra"/>
+          </div>
         </div>
+
+        <div class="apply-field-row">
+          <div class="apply-field">
+            <label for="apply-phone">Phone Number *</label>
+            <input type="tel" id="apply-phone" autocomplete="tel" placeholder="024 123 4567"/>
+          </div>
+          <div class="apply-field">
+            <label for="apply-whatsapp">WhatsApp Number</label>
+            <input type="tel" id="apply-whatsapp" autocomplete="tel" placeholder="Same as phone, or different"/>
+          </div>
+        </div>
+
         <div class="apply-field">
           <label for="apply-email">Email Address *</label>
-          <input type="email" id="apply-email" required autocomplete="email" placeholder="you@example.com"/>
+          <input type="email" id="apply-email" autocomplete="email" placeholder="you@example.com"/>
         </div>
+
+        <div class="apply-field">
+          <label for="apply-occupation">Occupation</label>
+          <input type="text" id="apply-occupation" placeholder="e.g. Teacher, Trader, Nurse"/>
+        </div>
+
+        <div class="apply-field-row">
+          <div class="apply-field">
+            <label for="apply-nok-name">Next of Kin Name</label>
+            <input type="text" id="apply-nok-name" placeholder="Full name"/>
+          </div>
+          <div class="apply-field">
+            <label for="apply-nok-phone">Next of Kin Phone</label>
+            <input type="tel" id="apply-nok-phone" placeholder="Phone number"/>
+          </div>
+        </div>
+
+        <div class="apply-field">
+          <label for="apply-how-heard">How did you hear about us?</label>
+          <select id="apply-how-heard">
+            <option value="">Select…</option>
+            <option value="Friend / Family">Friend / Family</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Social Media">Social Media</option>
+            <option value="Existing Member">Existing Member</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="apply-msg" id="apply-msg-1"></div>
+        <div class="apply-nav-row">
+          <button type="button" class="btn-primary" id="apply-next-btn" onclick="applyGoStep2()">
+            Next: Membership Setup →
+          </button>
+        </div>
+      </div><!-- /step-1 -->
+
+      <!-- ════════════════════════════════════════════════════
+           STEP 2 — Membership Setup
+           ════════════════════════════════════════════════════ -->
+      <div id="apply-step-2" style="display:none">
+        <div class="modal-eyebrow">Step 2 of 2</div>
+        <div class="modal-title" style="font-size:1.55rem;margin-bottom:6px;">Membership Setup</div>
+        <p style="font-size:0.85rem;color:var(--muted);line-height:1.65;margin-bottom:22px;">Tell us about your savings preferences and upload your documents.</p>
+
+        <!-- Profile photo upload -->
+        <div class="apply-field">
+          <label>Profile Photo</label>
+          <div class="apply-upload-zone" id="photo-zone" onclick="document.getElementById('apply-photo-input').click()">
+            <div class="apply-upload-icon">📷</div>
+            <div class="apply-upload-label">Tap to upload or <strong>take a photo</strong></div>
+          </div>
+          <div id="photo-preview" style="display:none" class="apply-upload-preview">
+            <img id="photo-thumb" src="" alt=""/>
+            <div class="apply-upload-preview-info">
+              <div class="apply-upload-preview-name" id="photo-name"></div>
+              <div class="apply-upload-preview-size" id="photo-size"></div>
+            </div>
+            <button type="button" class="apply-upload-remove" onclick="clearUpload('photo')" aria-label="Remove photo">×</button>
+          </div>
+          <div class="apply-camera-row">
+            <button type="button" class="apply-camera-btn" onclick="triggerCapture('apply-photo-input','user')">📷 Use Camera</button>
+            <button type="button" class="apply-camera-btn" onclick="triggerGallery('apply-photo-input')">🖼 Choose from Gallery</button>
+          </div>
+          <input type="file" id="apply-photo-input" accept="image/*" style="display:none" onchange="handleUpload(this,'photo')"/>
+          <div class="apply-field-hint">Optional. JPG or PNG, max 5MB.</div>
+        </div>
+
+        <!-- Ghana Card number + image -->
         <div class="apply-field">
           <label for="apply-ghana-card">Ghana Card Number</label>
           <input type="text" id="apply-ghana-card" placeholder="GHA-000000000-0" autocomplete="off"/>
-          <div class="apply-field-hint">Optional for now — speeds up future loan processing if provided.</div>
+          <div class="apply-field-hint">Optional — speeds up future loan processing if provided.</div>
         </div>
-        <div class="apply-submit-row">
-          <button type="submit" class="btn-primary" id="apply-submit-btn">Submit Application →</button>
+
+        <div class="apply-field">
+          <label>Ghana Card Image</label>
+          <div class="apply-upload-zone" id="card-zone" onclick="document.getElementById('apply-card-input').click()">
+            <div class="apply-upload-icon">🪪</div>
+            <div class="apply-upload-label">Tap to upload your <strong>Ghana Card</strong></div>
+          </div>
+          <div id="card-preview" style="display:none" class="apply-upload-preview">
+            <img id="card-thumb" src="" alt=""/>
+            <div class="apply-upload-preview-info">
+              <div class="apply-upload-preview-name" id="card-name"></div>
+              <div class="apply-upload-preview-size" id="card-size"></div>
+            </div>
+            <button type="button" class="apply-upload-remove" onclick="clearUpload('card')" aria-label="Remove card image">×</button>
+          </div>
+          <div class="apply-camera-row">
+            <button type="button" class="apply-camera-btn" onclick="triggerCapture('apply-card-input','environment')">📷 Scan with Camera</button>
+            <button type="button" class="apply-camera-btn" onclick="triggerGallery('apply-card-input')">🖼 Upload Image</button>
+          </div>
+          <input type="file" id="apply-card-input" accept="image/*" style="display:none" onchange="handleUpload(this,'card')"/>
+          <div class="apply-field-hint">Optional. Front of Ghana Card. JPG or PNG, max 5MB.</div>
         </div>
-        <div class="apply-msg" id="apply-msg"></div>
-      </form>
-    </div>
+
+        <!-- Contribution type -->
+        <div class="apply-field">
+          <label>Preferred Contribution Type *</label>
+          <div class="apply-radio-group">
+            <label class="apply-radio-option">
+              <input type="radio" name="apply-contrib-type" value="Weekly" onchange="updateAmountPreview()"/>
+              Weekly
+            </label>
+            <label class="apply-radio-option">
+              <input type="radio" name="apply-contrib-type" value="Monthly" onchange="updateAmountPreview()"/>
+              Monthly
+            </label>
+          </div>
+        </div>
+
+        <!-- Contribution amount -->
+        <div class="apply-field">
+          <label for="apply-contrib-amount">Fixed Contribution Amount (GHS) *</label>
+          <input type="number" id="apply-contrib-amount" min="1" step="0.01" placeholder="e.g. 200" oninput="updateAmountPreview()"/>
+          <div class="apply-amount-preview" id="apply-amount-preview"></div>
+          <div class="apply-field-hint">This is what you commit to saving each cycle. Reductions may not go below 70% of this amount per group rules.</div>
+        </div>
+
+        <!-- Cashout method -->
+        <div class="apply-field">
+          <label for="apply-cashout-method">Preferred Cashout Method</label>
+          <select id="apply-cashout-method">
+            <option value="">Select…</option>
+            <option value="MTN Mobile Money">MTN Mobile Money</option>
+            <option value="Vodafone Cash">Vodafone Cash</option>
+            <option value="AirtelTigo Money">AirtelTigo Money</option>
+            <option value="Bank Transfer">Bank Transfer</option>
+          </select>
+        </div>
+
+        <!-- Loan interest -->
+        <div class="apply-field">
+          <label>Are you interested in loan services?</label>
+          <div class="apply-radio-group">
+            <label class="apply-radio-option"><input type="radio" name="apply-loan-interest" value="Yes"/> Yes</label>
+            <label class="apply-radio-option"><input type="radio" name="apply-loan-interest" value="Maybe in the future"/> Maybe later</label>
+            <label class="apply-radio-option"><input type="radio" name="apply-loan-interest" value="No"/> No</label>
+          </div>
+        </div>
+
+        <!-- 70% rule acknowledgement -->
+        <div class="apply-field">
+          <label class="apply-checkbox-option">
+            <input type="checkbox" id="apply-ack-70"/>
+            I understand that if I reduce my contribution, it cannot go below 70% of my fixed amount.
+          </label>
+        </div>
+
+        <!-- Rules agreement -->
+        <div class="apply-field">
+          <label class="apply-checkbox-option">
+            <input type="checkbox" id="apply-ack-rules"/>
+            I have read and agree to abide by the FutureFund Group Rules &amp; Guidelines (V1.0). *
+          </label>
+        </div>
+
+        <!-- Commitment statement -->
+        <div class="apply-field">
+          <label class="apply-checkbox-option">
+            <input type="checkbox" id="apply-ack-commit"/>
+            I am committed to saving consistently and participating seriously. *
+          </label>
+        </div>
+
+        <!-- Anything else -->
+        <div class="apply-field">
+          <label for="apply-extra">Anything you'd like us to know?</label>
+          <textarea id="apply-extra" placeholder="Optional — questions, notes, referral details…"></textarea>
+        </div>
+
+        <div class="apply-msg" id="apply-msg-2"></div>
+        <div class="apply-uploading-notice" id="apply-uploading-notice">⬆ Uploading your documents…</div>
+        <div class="apply-nav-row">
+          <button type="button" class="btn-ghost" onclick="applyGoStep1()" style="padding:14px 20px">← Back</button>
+          <button type="button" class="btn-primary" id="apply-submit-btn" onclick="submitApplyForm()">
+            Submit Application →
+          </button>
+        </div>
+      </div><!-- /step-2 -->
+
+    </div><!-- /apply-form-state -->
+
+    <!-- ── Success state ── -->
     <div class="apply-success-state" id="apply-success-state">
       <div class="apply-success-icon">✓</div>
       <h3>Application Received</h3>
       <p>Thanks for applying to StackUp Nest. We typically review applications within 24 hours — you'll get an email either way, so keep an eye on your inbox.</p>
       <button class="btn-ghost" onclick="closeApplyModal()" style="cursor:none">Close</button>
     </div>
-  </div>
-</div>
+
+  </div><!-- /apply-modal-box -->
+</div><!-- /apply-modal-overlay -->
 
 <!-- FOOTER -->
 <footer>
@@ -1151,18 +1429,24 @@ function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeApplyModal(); } });
 
 // ============================================================
-// APPLY NOW MODAL
+// APPLY NOW MODAL — Two-step registration with file upload
 // ============================================================
 var APPLY_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbxL7tR86AawPZ-2rQXOCQG8tPCGOYECjZS5ySM24pPIdd-waxgeXAAruzcgSISQfamh/exec';
 var _applyFormLoadedAt = null;
 
+// ── File state ────────────────────────────────────────────────
+// We store the File objects here so we can read them as
+// Base64 at submission time without re-reading the input.
+var _photoFile = null;
+var _cardFile  = null;
+
+// ── Modal open / close ────────────────────────────────────────
 function openApplyModal() {
   document.getElementById('apply-modal-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
   document.getElementById('apply-form-state').style.display = '';
   document.getElementById('apply-success-state').classList.remove('show');
-  document.getElementById('apply-form').reset();
-  document.getElementById('apply-msg').classList.remove('show', 'error', 'success');
+  _resetApplyModal();
   _applyFormLoadedAt = Date.now();
 }
 
@@ -1171,51 +1455,271 @@ function closeApplyModal() {
   document.body.style.overflow = '';
 }
 
-function submitApplyForm(event) {
-  event.preventDefault();
-  var btn = document.getElementById('apply-submit-btn');
-  var msgEl = document.getElementById('apply-msg');
-  msgEl.classList.remove('show', 'error', 'success');
-  var payload = {
-    action:       'submitMemberApplication',
-    name:         document.getElementById('apply-name').value.trim(),
-    phone:        document.getElementById('apply-phone').value.trim(),
-    whatsapp:     document.getElementById('apply-whatsapp').value.trim(),
-    email:        document.getElementById('apply-email').value.trim(),
-    ghanaCard:    document.getElementById('apply-ghana-card').value.trim(),
-    website:      document.getElementById('apply-website').value,
-    formLoadedAt: _applyFormLoadedAt
-  };
-  if (!payload.name || !payload.phone || !payload.email) {
-    msgEl.textContent = 'Please fill in your name, phone number, and email.';
-    msgEl.classList.add('show', 'error');
+function _resetApplyModal() {
+  // Clear all inputs
+  ['apply-name','apply-dob','apply-gender','apply-location',
+   'apply-phone','apply-whatsapp','apply-email','apply-occupation',
+   'apply-nok-name','apply-nok-phone','apply-how-heard',
+   'apply-ghana-card','apply-contrib-amount','apply-cashout-method',
+   'apply-extra','apply-website'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.querySelectorAll('input[name="apply-contrib-type"]').forEach(function(r){ r.checked = false; });
+  document.querySelectorAll('input[name="apply-loan-interest"]').forEach(function(r){ r.checked = false; });
+  ['apply-ack-70','apply-ack-rules','apply-ack-commit'].forEach(function(id){
+    var el = document.getElementById(id); if (el) el.checked = false;
+  });
+  clearUpload('photo');
+  clearUpload('card');
+  document.getElementById('apply-amount-preview').textContent = '';
+  _showMsg('apply-msg-1', '', '');
+  _showMsg('apply-msg-2', '', '');
+  document.getElementById('apply-uploading-notice').classList.remove('show');
+  _applyGoStep(1);
+}
+
+// ── Step navigation ───────────────────────────────────────────
+function _applyGoStep(step) {
+  document.getElementById('apply-step-1').style.display = step === 1 ? '' : 'none';
+  document.getElementById('apply-step-2').style.display = step === 2 ? '' : 'none';
+  // Update progress circles
+  var c1 = document.getElementById('prog-circle-1');
+  var c2 = document.getElementById('prog-circle-2');
+  var l1 = document.getElementById('prog-label-1');
+  var l2 = document.getElementById('prog-label-2');
+  var line = document.getElementById('prog-line-1');
+  if (step === 1) {
+    c1.className = 'apply-progress-circle active'; l1.className = 'apply-progress-label active';
+    c2.className = 'apply-progress-circle';        l2.className = 'apply-progress-label';
+    line.className = 'apply-progress-line';
+    c1.textContent = '1';
+  } else {
+    c1.className = 'apply-progress-circle done'; l1.className = 'apply-progress-label done';
+    c2.className = 'apply-progress-circle active'; l2.className = 'apply-progress-label active';
+    line.className = 'apply-progress-line done';
+    c1.textContent = '✓';
+  }
+  // Scroll modal to top
+  var box = document.getElementById('apply-modal-box');
+  if (box) box.scrollTop = 0;
+}
+
+function applyGoStep1() { _applyGoStep(1); }
+
+function applyGoStep2() {
+  _showMsg('apply-msg-1', '', '');
+  var name  = document.getElementById('apply-name').value.trim();
+  var phone = document.getElementById('apply-phone').value.trim();
+  var email = document.getElementById('apply-email').value.trim();
+  if (!name)  { _showMsg('apply-msg-1', 'Full name is required.', 'error'); return; }
+  if (!phone) { _showMsg('apply-msg-1', 'Phone number is required.', 'error'); return; }
+  if (!email || email.indexOf('@') === -1) { _showMsg('apply-msg-1', 'A valid email address is required.', 'error'); return; }
+  _applyGoStep(2);
+}
+
+// ── File upload helpers ───────────────────────────────────────
+function triggerCapture(inputId, facingMode) {
+  var el = document.getElementById(inputId);
+  el.removeAttribute('capture');
+  el.setAttribute('capture', facingMode === 'environment' ? 'environment' : 'user');
+  el.click();
+}
+function triggerGallery(inputId) {
+  var el = document.getElementById(inputId);
+  el.removeAttribute('capture');
+  el.click();
+}
+
+function handleUpload(input, which) {
+  var file = input.files && input.files[0];
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) {
+    _showMsg('apply-msg-2', 'File is too large. Maximum size is 5MB.', 'error');
+    input.value = '';
     return;
   }
+  if (which === 'photo') { _photoFile = file; _showPreview('photo', file); }
+  else                   { _cardFile  = file; _showPreview('card', file); }
+}
+
+function _showPreview(which, file) {
+  var zone    = document.getElementById(which + '-zone');
+  var preview = document.getElementById(which + '-preview');
+  var thumb   = document.getElementById(which + '-thumb');
+  var nameEl  = document.getElementById(which + '-name');
+  var sizeEl  = document.getElementById(which + '-size');
+  zone.classList.add('has-file');
+  preview.style.display = 'flex';
+  nameEl.textContent = file.name;
+  sizeEl.textContent = (file.size / 1024).toFixed(1) + ' KB';
+  var reader = new FileReader();
+  reader.onload = function(e) { thumb.src = e.target.result; };
+  reader.readAsDataURL(file);
+}
+
+function clearUpload(which) {
+  if (which === 'photo') { _photoFile = null; document.getElementById('apply-photo-input').value = ''; }
+  else                   { _cardFile  = null; document.getElementById('apply-card-input').value = ''; }
+  var zone = document.getElementById(which + '-zone');
+  var preview = document.getElementById(which + '-preview');
+  var thumb   = document.getElementById(which + '-thumb');
+  if (zone)    zone.classList.remove('has-file');
+  if (preview) preview.style.display = 'none';
+  if (thumb)   thumb.src = '';
+}
+
+// ── Contribution amount preview ───────────────────────────────
+function updateAmountPreview() {
+  var typeEl = document.querySelector('input[name="apply-contrib-type"]:checked');
+  var amtEl  = document.getElementById('apply-contrib-amount');
+  var previewEl = document.getElementById('apply-amount-preview');
+  var type = typeEl ? typeEl.value : '';
+  var amt  = parseFloat(amtEl.value) || 0;
+  if (!type || !amt) { previewEl.textContent = ''; return; }
+  var monthly = type === 'Weekly' ? amt * 4 : amt;
+  var yearly  = monthly * 12;
+  previewEl.textContent = '≈ GHS ' + monthly.toLocaleString('en-GH', {minimumFractionDigits:2}) +
+    '/month · GHS ' + yearly.toLocaleString('en-GH', {minimumFractionDigits:2}) + '/year';
+}
+
+// ── Message helper ────────────────────────────────────────────
+function _showMsg(id, text, type) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = text;
+  el.className = 'apply-msg' + (text ? ' show' : '') + (type ? ' ' + type : '');
+}
+
+// ── File → Base64 ─────────────────────────────────────────────
+function _fileToBase64(file) {
+  return new Promise(function(resolve, reject) {
+    if (!file) { resolve(null); return; }
+    var reader = new FileReader();
+    reader.onload  = function(e) {
+      // result is "data:image/jpeg;base64,XXXXX" — we only want the XXXXX part
+      var b64 = e.target.result.split(',')[1];
+      resolve(b64);
+    };
+    reader.onerror = function() { reject(new Error('Could not read file.')); };
+    reader.readAsDataURL(file);
+  });
+}
+
+// ── Main submit ───────────────────────────────────────────────
+function submitApplyForm() {
+  _showMsg('apply-msg-2', '', '');
+  var btn = document.getElementById('apply-submit-btn');
+
+  // ── Step 2 validation ──
+  var contribTypeEl = document.querySelector('input[name="apply-contrib-type"]:checked');
+  var contribType   = contribTypeEl ? contribTypeEl.value : '';
+  var contribAmount = document.getElementById('apply-contrib-amount').value.trim();
+  if (!contribType)   { _showMsg('apply-msg-2', 'Please select a contribution type (Weekly or Monthly).', 'error'); return; }
+  if (!contribAmount || parseFloat(contribAmount) <= 0) { _showMsg('apply-msg-2', 'Please enter a valid contribution amount.', 'error'); return; }
+  if (!document.getElementById('apply-ack-rules').checked)  { _showMsg('apply-msg-2', 'You must agree to the group Rules & Guidelines to apply.', 'error'); return; }
+  if (!document.getElementById('apply-ack-commit').checked) { _showMsg('apply-msg-2', 'Please confirm your commitment statement to apply.', 'error'); return; }
+
+  var loanInterestEl = document.querySelector('input[name="apply-loan-interest"]:checked');
+
   btn.disabled = true;
   btn.textContent = 'Submitting…';
+
+  var payload = {
+    action:        'submitMemberApplication',
+    website:       document.getElementById('apply-website').value,
+    formLoadedAt:  _applyFormLoadedAt,
+    // Step 1 fields
+    name:          document.getElementById('apply-name').value.trim(),
+    phone:         document.getElementById('apply-phone').value.trim(),
+    email:         document.getElementById('apply-email').value.trim(),
+    whatsapp:      document.getElementById('apply-whatsapp').value.trim(),
+    dob:           document.getElementById('apply-dob').value.trim(),
+    gender:        document.getElementById('apply-gender').value,
+    location:      document.getElementById('apply-location').value.trim(),
+    occupation:    document.getElementById('apply-occupation').value.trim(),
+    nokName:       document.getElementById('apply-nok-name').value.trim(),
+    nokPhone:      document.getElementById('apply-nok-phone').value.trim(),
+    howHeard:      document.getElementById('apply-how-heard').value,
+    // Step 2 fields
+    ghanaCard:     document.getElementById('apply-ghana-card').value.trim(),
+    contribType:   contribType,
+    contribAmount: contribAmount,
+    cashoutMethod: document.getElementById('apply-cashout-method').value,
+    loanInterest:  loanInterestEl ? loanInterestEl.value : '',
+    extra:         document.getElementById('apply-extra').value.trim()
+  };
+
+  // ── POST text data first ──
   fetch(APPLY_ENDPOINT_URL, {
-    method: 'POST',
+    method:  'POST',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(payload)
+    body:    JSON.stringify(payload)
   })
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    if (!data.success) {
       btn.disabled = false;
       btn.textContent = 'Submit Application →';
-      if (data.success) {
-        document.getElementById('apply-form-state').style.display = 'none';
-        document.getElementById('apply-success-state').classList.add('show');
-      } else {
-        msgEl.textContent = data.error || 'Something went wrong. Please try again.';
-        msgEl.classList.add('show', 'error');
-      }
+      _showMsg('apply-msg-2', data.error || 'Something went wrong. Please try again.', 'error');
+      return;
+    }
+
+    var appId = data.appId;
+
+    // ── If no files, show success immediately ──
+    if (!_photoFile && !_cardFile) {
+      _applyShowSuccess();
+      return;
+    }
+
+    // ── Upload files as a second request ──
+    btn.textContent = 'Uploading documents…';
+    document.getElementById('apply-uploading-notice').classList.add('show');
+
+    Promise.all([
+      _fileToBase64(_photoFile),
+      _fileToBase64(_cardFile)
+    ]).then(function(results) {
+      var photoB64 = results[0];
+      var cardB64  = results[1];
+      var filePayload = {
+        action:              'uploadApplicationFiles',
+        appId:               appId,
+        profilePhotoBase64:  photoB64  || null,
+        profilePhotoMime:    _photoFile ? _photoFile.type : null,
+        ghanaCardBase64:     cardB64   || null,
+        ghanaCardMime:       _cardFile  ? _cardFile.type  : null
+      };
+      return fetch(APPLY_ENDPOINT_URL, {
+        method:  'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body:    JSON.stringify(filePayload)
+      });
+    })
+    .then(function(res) { return res.json(); })
+    .then(function() {
+      // Whether or not the file upload succeeded, the application
+      // text was already saved. Show success regardless.
+      _applyShowSuccess();
     })
     .catch(function() {
-      btn.disabled = false;
-      btn.textContent = 'Submit Application →';
-      msgEl.textContent = 'Could not reach the server. Please check your connection and try again, or contact us on WhatsApp.';
-      msgEl.classList.add('show', 'error');
+      // File upload failed but the text data is already safe.
+      // Show success — the admin will see the application, and
+      // can request documents separately if needed.
+      _applyShowSuccess();
     });
+  })
+  .catch(function() {
+    btn.disabled = false;
+    btn.textContent = 'Submit Application →';
+    _showMsg('apply-msg-2', 'Could not reach the server. Please check your connection and try again, or contact us on WhatsApp.', 'error');
+  });
+}
+
+function _applyShowSuccess() {
+  document.getElementById('apply-form-state').style.display = 'none';
+  document.getElementById('apply-success-state').classList.add('show');
 }
 </script>
 </body>
