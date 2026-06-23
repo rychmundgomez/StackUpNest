@@ -1534,13 +1534,44 @@ function triggerGallery(inputId) {
 function handleUpload(input, which) {
   var file = input.files && input.files[0];
   if (!file) return;
-  if (file.size > 5 * 1024 * 1024) {
-    _showMsg('apply-msg-2', 'File is too large. Maximum size is 5MB.', 'error');
+  if (file.size > 10 * 1024 * 1024) {
+    _showMsg('apply-msg-2', 'File is too large. Maximum size is 10MB.', 'error');
     input.value = '';
     return;
   }
-  if (which === 'photo') { _photoFile = file; _showPreview('photo', file); }
-  else                   { _cardFile  = file; _showPreview('card', file); }
+  // Compress all images client-side before storing.
+  // Profile photos are resized to 400px max and compressed at 0.82 quality.
+  // Ghana Card scans need more detail so they get 1200px max at 0.88 quality.
+  // This typically brings a 3-8MB phone camera shot down to 80-200KB,
+  // which makes the second POST fast even on mobile data.
+  var maxPx    = (which === 'photo') ? 400  : 1200;
+  var quality  = (which === 'photo') ? 0.82 : 0.88;
+  _compressImage(file, maxPx, quality, function(compressedFile) {
+    if (which === 'photo') { _photoFile = compressedFile; _showPreview('photo', compressedFile); }
+    else                   { _cardFile  = compressedFile; _showPreview('card',  compressedFile); }
+  });
+}
+
+function _compressImage(file, maxPx, quality, callback) {
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var img = new Image();
+    img.onload = function() {
+      var w = img.width, h = img.height;
+      if (w > h) { if (w > maxPx) { h = Math.round(h * maxPx / w); w = maxPx; } }
+      else        { if (h > maxPx) { w = Math.round(w * maxPx / h); h = maxPx; } }
+      var canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      canvas.toBlob(function(blob) {
+        // Wrap the blob in a File object so _fileToBase64 and _showPreview work
+        var compressed = new File([blob], file.name.replace(/\.[^.]+$/, '.jpg'), { type: 'image/jpeg' });
+        callback(compressed);
+      }, 'image/jpeg', quality);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
 }
 
 function _showPreview(which, file) {
