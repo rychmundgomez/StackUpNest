@@ -260,87 +260,187 @@ nav.scrolled{background:rgba(5,8,22,0.88);backdrop-filter:blur(30px);-webkit-bac
 .apply-sub{font-size:1rem;color:var(--muted);max-width:520px;margin:0 auto 44px;line-height:1.85}
 
 /* ── APPLY MODAL ── */
-#apply-modal-overlay{position:fixed;inset:0;z-index:2100;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .4s}
+#apply-modal-overlay{position:fixed;inset:0;z-index:2100;display:flex;align-items:flex-start;justify-content:center;padding:0;opacity:0;pointer-events:none;transition:opacity .35s}
 #apply-modal-overlay.open{opacity:1;pointer-events:all}
-#apply-modal-bg{position:absolute;inset:0;background:rgba(5,8,22,0.92);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px)}
-#apply-modal-box{position:relative;z-index:1;background:#0a1228;border:1px solid rgba(0,196,106,0.15);border-radius:28px;width:100%;max-width:560px;max-height:92vh;overflow-y:auto;transform:scale(0.92) translateY(30px);transition:transform .45s cubic-bezier(.23,1,.32,1);padding:40px 36px 36px}
-#apply-modal-overlay.open #apply-modal-box{transform:scale(1) translateY(0)}
-@media(max-width:600px){#apply-modal-box{padding:28px 20px 24px;border-radius:22px}}
+#apply-modal-bg{position:absolute;inset:0;background:rgba(3,6,16,0.94);backdrop-filter:blur(48px);-webkit-backdrop-filter:blur(48px)}
+#apply-modal-box{position:relative;z-index:1;background:linear-gradient(160deg,#0b1429 0%,#080e1f 100%);border:1px solid rgba(0,196,106,0.12);border-radius:0 0 28px 28px;width:100%;max-width:580px;height:100vh;max-height:100vh;overflow-y:auto;overflow-x:hidden;transform:translateY(-24px);transition:transform .45s cubic-bezier(.23,1,.32,1);display:flex;flex-direction:column;margin:0 auto;scrollbar-width:thin;scrollbar-color:rgba(0,196,106,0.15) transparent}
+#apply-modal-box::-webkit-scrollbar{width:3px}
+#apply-modal-box::-webkit-scrollbar-thumb{background:rgba(0,196,106,0.2);border-radius:2px}
+#apply-modal-overlay.open #apply-modal-box{transform:translateY(0)}
+@media(max-width:580px){#apply-modal-box{border-radius:0;max-width:100%}}
 
-/* Progress bar */
-.apply-progress{display:flex;align-items:center;gap:0;margin-bottom:28px}
-.apply-progress-step{display:flex;align-items:center;gap:8px;flex:1}
-.apply-progress-circle{width:28px;height:28px;border-radius:50%;background:var(--glass);border:1.5px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:rgba(255,255,255,0.35);flex-shrink:0;transition:all .35s}
-.apply-progress-circle.active{background:rgba(0,196,106,0.15);border-color:var(--emerald);color:var(--emerald)}
-.apply-progress-circle.done{background:var(--emerald);border-color:var(--emerald);color:#050816}
-.apply-progress-label{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.3);transition:color .35s}
-.apply-progress-label.active{color:var(--emerald)}
-.apply-progress-label.done{color:rgba(255,255,255,0.5)}
-.apply-progress-line{flex:1;height:1px;background:var(--glass-border);margin:0 8px;transition:background .35s}
-.apply-progress-line.done{background:var(--emerald)}
+/* Progress stepper */
+.om-stepper{display:flex;align-items:center;padding:20px 28px 0;gap:0;position:sticky;top:0;z-index:10;background:linear-gradient(160deg,#0b1429 0%,#080e1f 100%);border-bottom:1px solid rgba(255,255,255,0.04);margin-bottom:0}
+.om-step{display:flex;align-items:center;gap:10px;flex:1}
+.om-step-num{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:rgba(255,255,255,0.25);flex-shrink:0;transition:all .4s cubic-bezier(.23,1,.32,1)}
+.om-step-num.active{background:rgba(0,196,106,0.12);border-color:var(--emerald);color:var(--emerald);box-shadow:0 0 16px rgba(0,196,106,0.2)}
+.om-step-num.done{background:var(--emerald);border-color:var(--emerald);color:#050816;font-size:11px}
+.om-step-label{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.2);transition:color .3s;white-space:nowrap}
+.om-step-label.active{color:var(--emerald)}
+.om-step-label.done{color:rgba(255,255,255,0.4)}
+.om-step-line{flex:1;height:1px;background:rgba(255,255,255,0.06);margin:0 12px;transition:background .4s}
+.om-step-line.done{background:rgba(0,196,106,0.4)}
+.om-close-btn{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;margin-left:12px}
+.om-close-btn:hover{background:rgba(255,255,255,0.08);color:var(--white)}
 
-/* Fields */
-.apply-field{margin-bottom:14px;text-align:left}
-.apply-field label{display:block;font-size:11px;font-weight:600;color:rgba(255,255,255,0.45);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px}
-.apply-field input,.apply-field select,.apply-field textarea{width:100%;background:var(--glass);border:1px solid var(--glass-border);border-radius:12px;padding:12px 14px;color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:14px;transition:border-color .2s,background .2s;appearance:none;-webkit-appearance:none}
-.apply-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.3)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
-.apply-field select option{background:#0a1228;color:#fff}
-.apply-field textarea{resize:none;min-height:72px}
-.apply-field input:focus,.apply-field select:focus,.apply-field textarea:focus{outline:none;border-color:rgba(0,196,106,0.4);background:rgba(0,196,106,0.04)}
-.apply-field input::placeholder,.apply-field textarea::placeholder{color:rgba(255,255,255,0.2)}
-.apply-field-hint{font-size:11px;color:rgba(255,255,255,0.28);margin-top:5px;line-height:1.5}
-.apply-field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:480px){.apply-field-row{grid-template-columns:1fr}}
-.apply-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;overflow:hidden}
+/* Step container */
+.om-step-body{flex:1;padding:32px 28px 28px;display:none}
+.om-step-body.active{display:block}
+@media(max-width:480px){.om-step-body{padding:24px 20px 20px}.om-stepper{padding:16px 20px 0}}
 
-/* Radio / checkbox groups */
-.apply-radio-group{display:flex;gap:10px;flex-wrap:wrap}
-.apply-radio-option{display:flex;align-items:center;gap:8px;background:var(--glass);border:1.5px solid var(--glass-border);border-radius:10px;padding:10px 14px;cursor:pointer;transition:all .2s;font-size:13px;color:rgba(255,255,255,0.6);user-select:none}
-.apply-radio-option input{width:14px;height:14px;accent-color:var(--emerald);cursor:pointer;flex-shrink:0}
-.apply-radio-option:has(input:checked){border-color:rgba(0,196,106,0.45);background:rgba(0,196,106,0.07);color:var(--white)}
-.apply-checkbox-option{display:flex;align-items:flex-start;gap:10px;background:var(--glass);border:1.5px solid var(--glass-border);border-radius:10px;padding:12px 14px;cursor:pointer;transition:all .2s;font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5;user-select:none}
-.apply-checkbox-option input{width:15px;height:15px;accent-color:var(--emerald);cursor:pointer;flex-shrink:0;margin-top:1px}
-.apply-checkbox-option:has(input:checked){border-color:rgba(0,196,106,0.45);background:rgba(0,196,106,0.07);color:var(--white)}
+/* Section header */
+.om-step-eyebrow{font-family:'DM Mono',monospace;font-size:10px;color:var(--emerald);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px;opacity:0.8}
+.om-step-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-0.025em;line-height:1.1;color:var(--white);margin-bottom:6px}
+.om-step-sub{font-size:12.5px;color:rgba(255,255,255,0.35);line-height:1.6;margin-bottom:28px}
 
-/* File upload */
-.apply-upload-zone{border:1.5px dashed rgba(255,255,255,0.15);border-radius:14px;padding:18px 16px;text-align:center;cursor:pointer;transition:all .25s;background:rgba(255,255,255,0.02)}
-.apply-upload-zone:hover,.apply-upload-zone.dragover{border-color:rgba(0,196,106,0.4);background:rgba(0,196,106,0.04)}
-.apply-upload-zone.has-file{border-color:rgba(0,196,106,0.35);background:rgba(0,196,106,0.06)}
-.apply-upload-icon{font-size:22px;margin-bottom:6px}
-.apply-upload-label{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.5}
-.apply-upload-label strong{color:var(--emerald)}
-.apply-upload-preview{display:flex;align-items:center;gap:10px;background:rgba(0,196,106,0.08);border-radius:10px;padding:8px 12px;margin-top:8px;text-align:left}
-.apply-upload-preview img{width:36px;height:36px;border-radius:6px;object-fit:cover}
-.apply-upload-preview-info{flex:1;min-width:0}
-.apply-upload-preview-name{font-size:12px;color:var(--white);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.apply-upload-preview-size{font-size:11px;color:var(--muted)}
-.apply-upload-remove{background:none;border:none;color:rgba(255,255,255,0.4);font-size:16px;cursor:pointer;padding:0 4px;line-height:1;flex-shrink:0}
-.apply-upload-remove:hover{color:#ff8a87}
-.apply-camera-row{display:flex;gap:8px;margin-top:8px}
-.apply-camera-btn{flex:1;background:var(--glass);border:1px solid var(--glass-border);border-radius:10px;padding:9px 12px;color:rgba(255,255,255,0.5);font-size:12px;font-family:'Space Grotesk',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s}
-.apply-camera-btn:hover{background:rgba(0,196,106,0.08);border-color:rgba(0,196,106,0.3);color:var(--emerald)}
+/* Section cards */
+.om-card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:20px;margin-bottom:14px;transition:border-color .2s}
+.om-card:focus-within{border-color:rgba(0,196,106,0.2)}
+.om-card-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.om-card-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.05)}
 
-/* Contrib amount preview */
-.apply-amount-preview{font-size:11px;color:var(--emerald);margin-top:5px;font-family:'DM Mono',monospace;min-height:16px}
+/* Input fields */
+.om-field{margin-bottom:14px}
+.om-field:last-child{margin-bottom:0}
+.om-label{display:block;font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:6px}
+.om-input{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:13px 16px;color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:14px;transition:all .2s;appearance:none;-webkit-appearance:none;outline:none}
+.om-input:focus{border-color:rgba(0,196,106,0.35);background:rgba(0,196,106,0.03);box-shadow:0 0 0 3px rgba(0,196,106,0.06)}
+.om-input::placeholder{color:rgba(255,255,255,0.18)}
+.om-input.error{border-color:rgba(255,100,100,0.4);background:rgba(255,100,100,0.03)}
+.om-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='rgba(255,255,255,0.25)' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;cursor:pointer}
+.om-select option{background:#0a1228;color:#fff}
+.om-hint{font-size:11px;color:rgba(255,255,255,0.22);margin-top:5px;line-height:1.5}
+.om-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:420px){.om-row{grid-template-columns:1fr}}
+
+/* Upload card — premium single-tap */
+.om-upload-card{border:1.5px dashed rgba(255,255,255,0.1);border-radius:16px;overflow:hidden;transition:all .25s;cursor:pointer;background:rgba(255,255,255,0.015)}
+.om-upload-card:hover{border-color:rgba(0,196,106,0.3);background:rgba(0,196,106,0.03)}
+.om-upload-card.has-file{border-style:solid;border-color:rgba(0,196,106,0.25);background:rgba(0,196,106,0.04);cursor:default}
+.om-upload-empty{padding:22px 16px;text-align:center;pointer-events:none}
+.om-upload-empty-icon{width:44px;height:44px;border-radius:12px;background:rgba(0,196,106,0.08);border:1px solid rgba(0,196,106,0.15);display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 12px}
+.om-upload-empty-title{font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:4px}
+.om-upload-empty-sub{font-size:11px;color:rgba(255,255,255,0.28);line-height:1.5}
+.om-upload-empty-sub strong{color:var(--emerald);font-weight:600}
+.om-upload-filled{display:none;align-items:center;gap:14px;padding:14px 16px}
+.om-upload-card.has-file .om-upload-empty{display:none}
+.om-upload-card.has-file .om-upload-filled{display:flex}
+.om-upload-thumb{width:52px;height:52px;border-radius:10px;object-fit:cover;background:rgba(0,196,106,0.08);flex-shrink:0}
+.om-upload-thumb-placeholder{width:52px;height:52px;border-radius:10px;background:rgba(0,196,106,0.08);border:1px solid rgba(0,196,106,0.15);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.om-upload-meta{flex:1;min-width:0}
+.om-upload-meta-name{font-size:13px;font-weight:600;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.om-upload-meta-status{font-size:11px;color:var(--emerald);margin-top:2px;display:flex;align-items:center;gap:5px}
+.om-upload-meta-status::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--emerald);flex-shrink:0}
+.om-upload-change{font-size:11px;color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.05);border:none;border-radius:8px;padding:5px 10px;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:'Space Grotesk',sans-serif;transition:all .2s}
+.om-upload-change:hover{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6)}
+
+/* Photo upload — circular avatar style */
+.om-photo-upload{display:flex;align-items:center;gap:18px;padding:18px}
+.om-photo-circle{width:72px;height:72px;border-radius:50%;background:rgba(0,196,106,0.06);border:2px dashed rgba(0,196,106,0.2);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;overflow:hidden;transition:all .25s;cursor:pointer}
+.om-photo-circle.has-photo{border-style:solid;border-color:rgba(0,196,106,0.3)}
+.om-photo-circle img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.om-photo-info{flex:1}
+.om-photo-info-title{font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px}
+.om-photo-info-sub{font-size:11px;color:rgba(255,255,255,0.28);line-height:1.5;margin-bottom:10px}
+.om-photo-btn{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--emerald);background:rgba(0,196,106,0.08);border:1px solid rgba(0,196,106,0.18);border-radius:8px;padding:6px 12px;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:all .2s}
+.om-photo-btn:hover{background:rgba(0,196,106,0.14);border-color:rgba(0,196,106,0.3)}
+
+/* Segmented control for Weekly/Monthly */
+.om-segment{display:flex;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:4px;gap:4px}
+.om-segment-btn{flex:1;padding:10px 8px;border-radius:9px;border:none;background:transparent;color:rgba(255,255,255,0.4);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .25s;letter-spacing:0.01em}
+.om-segment-btn.active{background:rgba(0,196,106,0.15);color:var(--emerald);box-shadow:0 1px 8px rgba(0,196,106,0.15)}
+
+/* Amount input — large prominent style */
+.om-amount-wrap{position:relative}
+.om-amount-currency{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-family:'DM Mono',monospace;font-size:15px;font-weight:500;color:var(--emerald);pointer-events:none}
+.om-amount-input{padding-left:52px;font-family:'DM Mono',monospace;font-size:18px;font-weight:500;letter-spacing:0.02em}
+.om-amount-preview{margin-top:8px;padding:10px 14px;background:rgba(0,196,106,0.06);border-radius:10px;display:none;align-items:center;justify-content:space-between}
+.om-amount-preview.show{display:flex}
+.om-amount-preview-item{text-align:center}
+.om-amount-preview-val{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--emerald)}
+.om-amount-preview-label{font-size:9px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px}
+.om-amount-divider{width:1px;height:28px;background:rgba(0,196,106,0.15)}
+
+/* Loan interest selectable cards */
+.om-loan-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.om-loan-card{background:rgba(255,255,255,0.025);border:1.5px solid rgba(255,255,255,0.07);border-radius:14px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .25s;user-select:none}
+.om-loan-card:hover{border-color:rgba(0,196,106,0.2);background:rgba(0,196,106,0.03)}
+.om-loan-card.selected{border-color:rgba(0,196,106,0.4);background:rgba(0,196,106,0.08)}
+.om-loan-card-icon{font-size:20px;margin-bottom:7px}
+.om-loan-card-label{font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);line-height:1.3}
+.om-loan-card.selected .om-loan-card-label{color:var(--emerald)}
+
+/* Master agreement card */
+.om-agreement-card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;margin-bottom:14px}
+.om-agreement-points{padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.om-agreement-point{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:rgba(255,255,255,0.45);line-height:1.5}
+.om-agreement-point::before{content:'';width:16px;height:16px;border-radius:50%;background:rgba(0,196,106,0.1);border:1px solid rgba(0,196,106,0.2);flex-shrink:0;margin-top:1px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8l2.8 3L12 5' stroke='rgba(0,196,106,0.7)' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center}
+.om-agreement-footer{border-top:1px solid rgba(255,255,255,0.05);padding:14px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:background .2s}
+.om-agreement-footer:hover{background:rgba(255,255,255,0.02)}
+.om-agreement-checkbox{width:20px;height:20px;border-radius:6px;background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;cursor:pointer}
+.om-agreement-checkbox.checked{background:var(--emerald);border-color:var(--emerald)}
+.om-agreement-checkbox.checked::after{content:'✓';font-size:11px;color:#050816;font-weight:700}
+.om-agreement-text{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5;flex:1}
+.om-agreement-text a{color:var(--emerald);text-decoration:none}
+.om-agreement-text a:hover{text-decoration:underline}
+
+/* Notes textarea */
+.om-textarea{min-height:68px;resize:none;line-height:1.6}
 
 /* Nav buttons */
-.apply-nav-row{display:flex;gap:12px;margin-top:20px}
-.apply-nav-row .btn-primary{flex:1;justify-content:center;border:none;cursor:pointer}
-.apply-nav-row .btn-ghost{border:1px solid var(--glass-border);cursor:pointer}
-.apply-nav-row .btn-primary:disabled{opacity:0.55;cursor:not-allowed;transform:none;box-shadow:none}
-.apply-msg{margin-top:12px;font-size:13px;line-height:1.6;text-align:left;display:none;padding:10px 14px;border-radius:10px;background:rgba(255,138,135,0.07);border:1px solid rgba(255,138,135,0.15)}
-.apply-msg.show{display:block}
-.apply-msg.error{color:#ff8a87}
-.apply-msg.success{color:var(--emerald);background:rgba(0,196,106,0.07);border-color:rgba(0,196,106,0.2)}
+.om-nav{padding:0 28px 28px;display:flex;gap:10px;flex-shrink:0}
+.om-nav-back{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:14px 22px;color:rgba(255,255,255,0.5);font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap}
+.om-nav-back:hover{background:rgba(255,255,255,0.07);color:var(--white)}
+.om-nav-next{flex:1;background:linear-gradient(135deg,var(--emerald),#00a856);color:#050816;border:none;border-radius:100px;padding:15px 24px;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .25s;box-shadow:0 4px 24px rgba(0,196,106,0.25);letter-spacing:0.01em}
+.om-nav-next:hover{transform:translateY(-1px);box-shadow:0 8px 32px rgba(0,196,106,0.4)}
+.om-nav-next:disabled{opacity:0.45;cursor:not-allowed;transform:none;box-shadow:none}
+.om-msg{margin:0 28px 14px;font-size:12.5px;line-height:1.6;display:none;padding:10px 14px;border-radius:10px}
+.om-msg.show{display:block}
+.om-msg.error{background:rgba(255,100,100,0.06);border:1px solid rgba(255,100,100,0.15);color:#ff8a87}
+.om-msg.info{background:rgba(0,196,106,0.06);border:1px solid rgba(0,196,106,0.15);color:var(--emerald)}
+.om-uploading{display:none;align-items:center;gap:8px;font-size:12px;color:var(--emerald);margin:0 28px 12px}
+.om-uploading.show{display:flex}
+.om-uploading-dot{width:6px;height:6px;border-radius:50%;background:var(--emerald);animation:om-pulse 1.2s ease-in-out infinite}
+.om-uploading-dot:nth-child(2){animation-delay:.2s}
+.om-uploading-dot:nth-child(3){animation-delay:.4s}
+@keyframes om-pulse{0%,100%{opacity:0.3;transform:scale(0.8)}50%{opacity:1;transform:scale(1)}}
 
-/* Success state */
-.apply-success-state{display:none;text-align:center;padding:20px 0}
-.apply-success-state.show{display:block}
-.apply-success-icon{width:64px;height:64px;border-radius:50%;background:rgba(0,196,106,0.1);border:1px solid rgba(0,196,106,0.25);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 24px}
-.apply-success-state h3{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:12px;letter-spacing:-0.02em}
-.apply-success-state p{font-size:0.92rem;color:var(--muted);line-height:1.75;margin-bottom:28px}
-.apply-uploading-notice{font-size:12px;color:var(--emerald);margin-top:8px;display:none}
-.apply-uploading-notice.show{display:block}
+/* About Me section on the website */
+#about{padding:140px 5%}
+.about-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-visual{position:relative}
+.about-card-stack{position:relative;height:380px}
+.about-card-back{position:absolute;top:24px;left:24px;right:-24px;bottom:-24px;background:rgba(0,196,106,0.04);border:1px solid rgba(0,196,106,0.1);border-radius:28px}
+.about-card-main{position:absolute;inset:0;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:36px;overflow:hidden}
+.about-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+.about-stat-item{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;text-align:center}
+.about-stat-val{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--emerald);line-height:1}
+.about-stat-label{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.06em;text-transform:uppercase;margin-top:6px}
+.about-trust-row{display:flex;align-items:center;gap:12px;background:rgba(0,196,106,0.05);border:1px solid rgba(0,196,106,0.12);border-radius:14px;padding:16px}
+.about-trust-icon{width:36px;height:36px;border-radius:10px;background:rgba(0,196,106,0.12);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.about-trust-text{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6}
+.about-trust-text strong{color:var(--white);display:block;font-size:13px;margin-bottom:2px}
+.about-glow{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,196,106,0.06),transparent);top:-60px;left:-60px;pointer-events:none}
+.about-content{}
+.about-content .section-sub{margin-bottom:32px}
+.about-pillars{display:flex;flex-direction:column;gap:14px;margin-bottom:36px}
+.about-pillar{display:flex;align-items:flex-start;gap:16px}
+.about-pillar-icon{width:40px;height:40px;border-radius:12px;background:rgba(0,196,106,0.08);border:1px solid rgba(0,196,106,0.15);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;margin-top:2px}
+.about-pillar h4{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:4px;letter-spacing:-0.01em}
+.about-pillar p{font-size:0.88rem;color:var(--muted);line-height:1.7}
+@media(max-width:900px){.about-inner{grid-template-columns:1fr;gap:48px}.about-card-stack{height:300px}}
+@media(max-width:480px){.about-inner{gap:36px}.about-card-stack{height:260px}.about-card-main{padding:24px}.about-stat-val{font-size:1.4rem}}
+
+/* Success */
+.om-success{display:none;text-align:center;padding:48px 28px;flex-direction:column;align-items:center}
+.om-success.active{display:flex}
+.om-success-ring{width:80px;height:80px;border-radius:50%;border:2px solid rgba(0,196,106,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;background:rgba(0,196,106,0.08);position:relative}
+.om-success-ring::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(0,196,106,0.1)}
+.om-success-checkmark{font-size:32px}
+.om-success h3{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:12px}
+.om-success p{font-size:13.5px;color:rgba(255,255,255,0.45);line-height:1.75;max-width:320px;margin-bottom:28px}
+.om-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;overflow:hidden}
+
 
 /* ── FOOTER ── */
 footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:rgba(5,8,22,0.8)}
@@ -445,6 +545,7 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
     StackUp Nest
   </a>
   <div class="nav-links">
+    <a href="#about">About</a>
     <a href="#divisions">Divisions</a>
     <a href="#how">How It Works</a>
     <a href="#why">Why Us</a>
@@ -458,6 +559,7 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
 
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#about" onclick="toggleMenu()">About</a>
   <a href="#divisions" onclick="toggleMenu()">Divisions</a>
   <a href="#how" onclick="toggleMenu()">How It Works</a>
   <a href="#why" onclick="toggleMenu()">Why Us</a>
@@ -675,6 +777,78 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   </div>
 </section>
 
+
+<!-- ABOUT ME -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-visual">
+      <div class="about-glow"></div>
+      <div class="about-card-stack">
+        <div class="about-card-back"></div>
+        <div class="about-card-main">
+          <div class="about-stat-grid">
+            <div class="about-stat-item">
+              <div class="about-stat-val">GHS 500+</div>
+              <div class="about-stat-label">Avg Monthly Target</div>
+            </div>
+            <div class="about-stat-item">
+              <div class="about-stat-val">24hrs</div>
+              <div class="about-stat-label">Activation Time</div>
+            </div>
+            <div class="about-stat-item">
+              <div class="about-stat-val">3</div>
+              <div class="about-stat-label">Revenue Streams</div>
+            </div>
+            <div class="about-stat-item">
+              <div class="about-stat-val">100%</div>
+              <div class="about-stat-label">Digital Records</div>
+            </div>
+          </div>
+          <div class="about-trust-row">
+            <div class="about-trust-icon">🏛️</div>
+            <div class="about-trust-text">
+              <strong>Formally Registered</strong>
+              Registered with Ghana's Registrar General's Department under the Commerce/Trading sector.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about-content">
+      <div class="section-eyebrow reveal">About StackUp Nest</div>
+      <h2 class="section-title reveal">Ghana's most organised<br/>savings circle.</h2>
+      <p class="section-sub reveal">StackUp Nest is a formally registered savings and investment circle built for ambitious Ghanaians. We combine disciplined group savings, smart loan access, and active trading — all managed through a secure digital platform that gives every member full visibility.</p>
+      <div class="about-pillars">
+        <div class="about-pillar reveal">
+          <div class="about-pillar-icon">💰</div>
+          <div>
+            <h4>Group Savings Circle</h4>
+            <p>Members commit to fixed weekly or monthly contributions that build a powerful collective fund. Consistent savers build towards a full year-end cashout of everything they've put in.</p>
+          </div>
+        </div>
+        <div class="about-pillar reveal reveal-delay-1">
+          <div class="about-pillar-icon">🏦</div>
+          <div>
+            <h4>Member Loan Access</h4>
+            <p>Active members in good standing can access loans of up to 80% of their total contributions directly through the Member Portal — reviewed and disbursed within 24 hours.</p>
+          </div>
+        </div>
+        <div class="about-pillar reveal reveal-delay-2">
+          <div class="about-pillar-icon">📊</div>
+          <div>
+            <h4>Trading & Commerce</h4>
+            <p>Our trading arm handles import/export, wholesale distribution, and commodities across Ghana. Members get priority access to trade deals and investment opportunities.</p>
+          </div>
+        </div>
+      </div>
+      <div class="hero-btns reveal">
+        <button class="btn-primary" onclick="openApplyModal()" style="border:none;cursor:none">Join Now →</button>
+        <a href="#divisions" class="btn-ghost">Explore Divisions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- WHY -->
 <section id="why">
   <div class="why-inner">
@@ -745,274 +919,307 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   </div>
 </section>
 
-<!-- APPLY MODAL (two-step) -->
-<div id="apply-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="apply-modal-title">
+<!-- APPLY MODAL — Premium two-step onboarding -->
+<div id="apply-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="om-title">
   <div id="apply-modal-bg" onclick="closeApplyModal()"></div>
   <div id="apply-modal-box">
-    <button class="modal-close" onclick="closeApplyModal()" style="top:16px;right:16px;">✕</button>
 
-    <!-- ── Form state ── -->
-    <div id="apply-form-state">
-
-      <!-- Progress indicator -->
-      <div class="apply-progress" id="apply-progress" aria-label="Application progress">
-        <div class="apply-progress-step">
-          <div class="apply-progress-circle active" id="prog-circle-1">1</div>
-          <div class="apply-progress-label active" id="prog-label-1">Personal Info</div>
-        </div>
-        <div class="apply-progress-line" id="prog-line-1"></div>
-        <div class="apply-progress-step">
-          <div class="apply-progress-circle" id="prog-circle-2">2</div>
-          <div class="apply-progress-label" id="prog-label-2">Membership</div>
-        </div>
+    <!-- ── Stepper header (sticky) ── -->
+    <div class="om-stepper">
+      <div class="om-step">
+        <div class="om-step-num active" id="om-num-1">1</div>
+        <span class="om-step-label active" id="om-lbl-1">About You</span>
       </div>
-
-      <!-- Honeypot (hidden from real users, caught server-side) -->
-      <div class="apply-field apply-hp" aria-hidden="true">
-        <label for="apply-website">Website</label>
-        <input type="text" id="apply-website" name="website" tabindex="-1" autocomplete="off"/>
+      <div class="om-step-line" id="om-line-1"></div>
+      <div class="om-step">
+        <div class="om-step-num" id="om-num-2">2</div>
+        <span class="om-step-label" id="om-lbl-2">Membership</span>
       </div>
+      <button class="om-close-btn" onclick="closeApplyModal()" aria-label="Close">✕</button>
+    </div>
 
-      <!-- ════════════════════════════════════════════════════
-           STEP 1 — Personal Information
-           ════════════════════════════════════════════════════ -->
-      <div id="apply-step-1">
-        <div class="modal-eyebrow">Step 1 of 2</div>
-        <div class="modal-title" id="apply-modal-title" style="font-size:1.55rem;margin-bottom:6px;">Personal Information</div>
-        <p style="font-size:0.85rem;color:var(--muted);line-height:1.65;margin-bottom:22px;">Fields marked * are required.</p>
+    <!-- Honeypot -->
+    <div class="om-hp" aria-hidden="true"><input type="text" id="apply-website" tabindex="-1" autocomplete="off"/></div>
 
-        <div class="apply-field-row">
-          <div class="apply-field">
-            <label for="apply-name">Full Name *</label>
-            <input type="text" id="apply-name" autocomplete="name" placeholder="e.g. Kwame Mensah"/>
-          </div>
-          <div class="apply-field">
-            <label for="apply-dob">Date of Birth</label>
-            <input type="date" id="apply-dob" autocomplete="bday"/>
-          </div>
+    <!-- ════════════════════════════════════════
+         STEP 1 — About You (Personal Information)
+         ════════════════════════════════════════ -->
+    <div class="om-step-body active" id="om-body-1">
+      <div class="om-step-eyebrow">Step 1 of 2</div>
+      <h2 class="om-step-title" id="om-title">Tell us about yourself</h2>
+      <p class="om-step-sub">Your details are encrypted and only used to manage your membership.</p>
+
+      <!-- Identity card -->
+      <div class="om-card">
+        <div class="om-card-label">Identity</div>
+        <div class="om-field">
+          <label class="om-label">Full Name <span style="color:var(--emerald)">*</span></label>
+          <input class="om-input" type="text" id="apply-name" autocomplete="name" placeholder="e.g. Kwame Mensah"/>
         </div>
-
-        <div class="apply-field-row">
-          <div class="apply-field">
-            <label for="apply-gender">Gender</label>
-            <select id="apply-gender">
+        <div class="om-row">
+          <div class="om-field">
+            <label class="om-label">Date of Birth</label>
+            <input class="om-input" type="date" id="apply-dob" autocomplete="bday"/>
+          </div>
+          <div class="om-field">
+            <label class="om-label">Gender</label>
+            <select class="om-input om-select" id="apply-gender">
               <option value="">Select…</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Prefer not to say">Prefer not to say</option>
             </select>
           </div>
-          <div class="apply-field">
-            <label for="apply-location">Location (City/Town)</label>
-            <input type="text" id="apply-location" placeholder="e.g. Accra"/>
+        </div>
+      </div>
+
+      <!-- Contact card -->
+      <div class="om-card">
+        <div class="om-card-label">Contact</div>
+        <div class="om-field">
+          <label class="om-label">Phone Number <span style="color:var(--emerald)">*</span></label>
+          <input class="om-input" type="tel" id="apply-phone" autocomplete="tel" placeholder="024 123 4567"/>
+        </div>
+        <div class="om-row">
+          <div class="om-field">
+            <label class="om-label">WhatsApp</label>
+            <input class="om-input" type="tel" id="apply-whatsapp" autocomplete="tel" placeholder="Same or different"/>
+          </div>
+          <div class="om-field">
+            <label class="om-label">Email <span style="color:var(--emerald)">*</span></label>
+            <input class="om-input" type="email" id="apply-email" autocomplete="email" placeholder="you@example.com"/>
           </div>
         </div>
-
-        <div class="apply-field-row">
-          <div class="apply-field">
-            <label for="apply-phone">Phone Number *</label>
-            <input type="tel" id="apply-phone" autocomplete="tel" placeholder="024 123 4567"/>
-          </div>
-          <div class="apply-field">
-            <label for="apply-whatsapp">WhatsApp Number</label>
-            <input type="tel" id="apply-whatsapp" autocomplete="tel" placeholder="Same as phone, or different"/>
-          </div>
+        <div class="om-field">
+          <label class="om-label">Location</label>
+          <input class="om-input" type="text" id="apply-location" placeholder="City or Town, e.g. Accra"/>
         </div>
+      </div>
 
-        <div class="apply-field">
-          <label for="apply-email">Email Address *</label>
-          <input type="email" id="apply-email" autocomplete="email" placeholder="you@example.com"/>
+      <!-- Background card -->
+      <div class="om-card">
+        <div class="om-card-label">Background</div>
+        <div class="om-field">
+          <label class="om-label">Occupation</label>
+          <input class="om-input" type="text" id="apply-occupation" placeholder="e.g. Teacher, Trader, Engineer"/>
         </div>
-
-        <div class="apply-field">
-          <label for="apply-occupation">Occupation</label>
-          <input type="text" id="apply-occupation" placeholder="e.g. Teacher, Trader, Nurse"/>
-        </div>
-
-        <div class="apply-field-row">
-          <div class="apply-field">
-            <label for="apply-nok-name">Next of Kin Name</label>
-            <input type="text" id="apply-nok-name" placeholder="Full name"/>
+        <div class="om-row">
+          <div class="om-field">
+            <label class="om-label">Next of Kin Name</label>
+            <input class="om-input" type="text" id="apply-nok-name" placeholder="Full name"/>
           </div>
-          <div class="apply-field">
-            <label for="apply-nok-phone">Next of Kin Phone</label>
-            <input type="tel" id="apply-nok-phone" placeholder="Phone number"/>
+          <div class="om-field">
+            <label class="om-label">Next of Kin Phone</label>
+            <input class="om-input" type="tel" id="apply-nok-phone" placeholder="Phone number"/>
           </div>
         </div>
-
-        <div class="apply-field">
-          <label for="apply-how-heard">How did you hear about us?</label>
-          <select id="apply-how-heard">
+        <div class="om-field">
+          <label class="om-label">How did you hear about us?</label>
+          <select class="om-input om-select" id="apply-how-heard">
             <option value="">Select…</option>
-            <option value="Friend / Family">Friend / Family</option>
+            <option value="Friend / Family">Friend or Family</option>
+            <option value="Existing Member">Existing Member</option>
             <option value="WhatsApp">WhatsApp</option>
             <option value="Social Media">Social Media</option>
-            <option value="Existing Member">Existing Member</option>
             <option value="Other">Other</option>
           </select>
         </div>
+      </div>
 
-        <div class="apply-msg" id="apply-msg-1"></div>
-        <div class="apply-nav-row">
-          <button type="button" class="btn-primary" id="apply-next-btn" onclick="applyGoStep2()">
-            Next: Membership Setup →
-          </button>
-        </div>
-      </div><!-- /step-1 -->
+      <div class="om-msg" id="om-msg-1"></div>
+    </div><!-- /step 1 body -->
 
-      <!-- ════════════════════════════════════════════════════
-           STEP 2 — Membership Setup
-           ════════════════════════════════════════════════════ -->
-      <div id="apply-step-2" style="display:none">
-        <div class="modal-eyebrow">Step 2 of 2</div>
-        <div class="modal-title" style="font-size:1.55rem;margin-bottom:6px;">Membership Setup</div>
-        <p style="font-size:0.85rem;color:var(--muted);line-height:1.65;margin-bottom:22px;">Tell us about your savings preferences and upload your documents.</p>
+    <!-- Step 1 nav -->
+    <div class="om-nav" id="om-nav-1">
+      <button class="om-nav-next" onclick="omGoStep2()">Continue →</button>
+    </div>
 
-        <!-- Profile photo upload -->
-        <div class="apply-field">
-          <label>Profile Photo</label>
-          <div class="apply-upload-zone" id="photo-zone" onclick="document.getElementById('apply-photo-input').click()">
-            <div class="apply-upload-icon">📷</div>
-            <div class="apply-upload-label">Tap to upload or <strong>take a photo</strong></div>
-          </div>
-          <div id="photo-preview" style="display:none" class="apply-upload-preview">
-            <img id="photo-thumb" src="" alt=""/>
-            <div class="apply-upload-preview-info">
-              <div class="apply-upload-preview-name" id="photo-name"></div>
-              <div class="apply-upload-preview-size" id="photo-size"></div>
+    <!-- ════════════════════════════════════════
+         STEP 2 — Membership Setup
+         ════════════════════════════════════════ -->
+    <div class="om-step-body" id="om-body-2">
+      <div class="om-step-eyebrow">Step 2 of 2</div>
+      <h2 class="om-step-title">Set up your membership</h2>
+      <p class="om-step-sub">Define your savings commitment and verify your identity.</p>
+
+      <!-- Identity verification card -->
+      <div class="om-card">
+        <div class="om-card-label">Identity Verification</div>
+
+        <!-- Profile photo — avatar style -->
+        <div style="margin-bottom:14px">
+          <div class="om-label" style="margin-bottom:8px">Profile Photo</div>
+          <div class="om-upload-card" id="photo-card" onclick="omPhotoCardClick()">
+            <div class="om-photo-upload">
+              <div class="om-photo-circle" id="photo-circle">📷</div>
+              <div class="om-photo-info">
+                <div class="om-photo-info-title">Add a profile photo</div>
+                <div class="om-photo-info-sub">Optional — helps the admin identify you</div>
+                <button type="button" class="om-photo-btn" onclick="event.stopPropagation();omPhotoCardClick()">
+                  <span>↑</span> Upload or Take Photo
+                </button>
+              </div>
             </div>
-            <button type="button" class="apply-upload-remove" onclick="clearUpload('photo')" aria-label="Remove photo">×</button>
-          </div>
-          <div class="apply-camera-row">
-            <button type="button" class="apply-camera-btn" onclick="triggerCapture('apply-photo-input','user')">📷 Use Camera</button>
-            <button type="button" class="apply-camera-btn" onclick="triggerGallery('apply-photo-input')">🖼 Choose from Gallery</button>
+            <div class="om-upload-filled">
+              <div class="om-photo-circle has-photo" id="photo-circle-filled" style="width:52px;height:52px"><img id="photo-thumb" src="" alt=""/></div>
+              <div class="om-upload-meta">
+                <div class="om-upload-meta-name" id="photo-name"></div>
+                <div class="om-upload-meta-status">Photo ready to upload</div>
+              </div>
+              <button type="button" class="om-upload-change" onclick="event.stopPropagation();clearUpload('photo')">Change</button>
+            </div>
           </div>
           <input type="file" id="apply-photo-input" accept="image/*" style="display:none" onchange="handleUpload(this,'photo')"/>
-          <div class="apply-field-hint">Optional. JPG or PNG, max 5MB.</div>
         </div>
 
-        <!-- Ghana Card number + image -->
-        <div class="apply-field">
-          <label for="apply-ghana-card">Ghana Card Number</label>
-          <input type="text" id="apply-ghana-card" placeholder="GHA-000000000-0" autocomplete="off"/>
-          <div class="apply-field-hint">Optional — speeds up future loan processing if provided.</div>
-        </div>
-
-        <div class="apply-field">
-          <label>Ghana Card Image</label>
-          <div class="apply-upload-zone" id="card-zone" onclick="document.getElementById('apply-card-input').click()">
-            <div class="apply-upload-icon">🪪</div>
-            <div class="apply-upload-label">Tap to upload your <strong>Ghana Card</strong></div>
-          </div>
-          <div id="card-preview" style="display:none" class="apply-upload-preview">
-            <img id="card-thumb" src="" alt=""/>
-            <div class="apply-upload-preview-info">
-              <div class="apply-upload-preview-name" id="card-name"></div>
-              <div class="apply-upload-preview-size" id="card-size"></div>
+        <!-- Ghana Card -->
+        <div>
+          <div class="om-label" style="margin-bottom:6px">Ghana Card</div>
+          <div class="om-row" style="margin-bottom:10px">
+            <div class="om-field" style="margin-bottom:0">
+              <input class="om-input" type="text" id="apply-ghana-card" placeholder="GHA-000000000-0" autocomplete="off"/>
+              <div class="om-hint">Card number (optional)</div>
             </div>
-            <button type="button" class="apply-upload-remove" onclick="clearUpload('card')" aria-label="Remove card image">×</button>
           </div>
-          <div class="apply-camera-row">
-            <button type="button" class="apply-camera-btn" onclick="triggerCapture('apply-card-input','environment')">📷 Scan with Camera</button>
-            <button type="button" class="apply-camera-btn" onclick="triggerGallery('apply-card-input')">🖼 Upload Image</button>
+          <div class="om-upload-card" id="card-card" onclick="omCardClick()">
+            <div class="om-upload-empty">
+              <div class="om-upload-empty-icon">🪪</div>
+              <div class="om-upload-empty-title">Upload Ghana Card</div>
+              <div class="om-upload-empty-sub">Tap to <strong>take a photo</strong> or upload from gallery · Optional</div>
+            </div>
+            <div class="om-upload-filled">
+              <img class="om-upload-thumb" id="card-thumb" src="" alt=""/>
+              <div class="om-upload-meta">
+                <div class="om-upload-meta-name" id="card-name"></div>
+                <div class="om-upload-meta-status">ID ready to upload</div>
+              </div>
+              <button type="button" class="om-upload-change" onclick="event.stopPropagation();clearUpload('card')">Change</button>
+            </div>
           </div>
           <input type="file" id="apply-card-input" accept="image/*" style="display:none" onchange="handleUpload(this,'card')"/>
-          <div class="apply-field-hint">Optional. Front of Ghana Card. JPG or PNG, max 5MB.</div>
         </div>
+      </div>
 
-        <!-- Contribution type -->
-        <div class="apply-field">
-          <label>Preferred Contribution Type *</label>
-          <div class="apply-radio-group">
-            <label class="apply-radio-option">
-              <input type="radio" name="apply-contrib-type" value="Weekly" onchange="updateAmountPreview()"/>
-              Weekly
-            </label>
-            <label class="apply-radio-option">
-              <input type="radio" name="apply-contrib-type" value="Monthly" onchange="updateAmountPreview()"/>
-              Monthly
-            </label>
+      <!-- Savings preferences card -->
+      <div class="om-card">
+        <div class="om-card-label">Savings Preferences</div>
+
+        <!-- Segmented control for type -->
+        <div class="om-field">
+          <label class="om-label">Contribution Schedule <span style="color:var(--emerald)">*</span></label>
+          <div class="om-segment" role="group">
+            <button type="button" class="om-segment-btn" id="seg-weekly" onclick="omSetContribType('Weekly')">📅 Weekly</button>
+            <button type="button" class="om-segment-btn" id="seg-monthly" onclick="omSetContribType('Monthly')">🗓 Monthly</button>
           </div>
+          <input type="hidden" id="apply-contrib-type" value=""/>
         </div>
 
-        <!-- Contribution amount -->
-        <div class="apply-field">
-          <label for="apply-contrib-amount">Fixed Contribution Amount (GHS) *</label>
-          <input type="number" id="apply-contrib-amount" min="1" step="0.01" placeholder="e.g. 200" oninput="updateAmountPreview()"/>
-          <div class="apply-amount-preview" id="apply-amount-preview"></div>
-          <div class="apply-field-hint">This is what you commit to saving each cycle. Reductions may not go below 70% of this amount per group rules.</div>
+        <!-- Amount input — prominent -->
+        <div class="om-field">
+          <label class="om-label">Fixed Amount (GHS) <span style="color:var(--emerald)">*</span></label>
+          <div class="om-amount-wrap">
+            <span class="om-amount-currency">₵</span>
+            <input class="om-input om-amount-input" type="number" id="apply-contrib-amount" min="1" step="0.01" placeholder="0.00" oninput="updateAmountPreview()"/>
+          </div>
+          <div class="om-amount-preview" id="apply-amount-preview">
+            <div class="om-amount-preview-item">
+              <div class="om-amount-preview-val" id="preview-per-cycle">—</div>
+              <div class="om-amount-preview-label">Per Cycle</div>
+            </div>
+            <div class="om-amount-divider"></div>
+            <div class="om-amount-preview-item">
+              <div class="om-amount-preview-val" id="preview-monthly">—</div>
+              <div class="om-amount-preview-label">Monthly</div>
+            </div>
+            <div class="om-amount-divider"></div>
+            <div class="om-amount-preview-item">
+              <div class="om-amount-preview-val" id="preview-annual">—</div>
+              <div class="om-amount-preview-label">Annual Target</div>
+            </div>
+          </div>
+          <div class="om-hint">You commit to saving this amount each cycle. Min reduction is 70% of this amount.</div>
         </div>
 
         <!-- Cashout method -->
-        <div class="apply-field">
-          <label for="apply-cashout-method">Preferred Cashout Method</label>
-          <select id="apply-cashout-method">
-            <option value="">Select…</option>
-            <option value="MTN Mobile Money">MTN Mobile Money</option>
-            <option value="Vodafone Cash">Vodafone Cash</option>
-            <option value="AirtelTigo Money">AirtelTigo Money</option>
-            <option value="Bank Transfer">Bank Transfer</option>
+        <div class="om-field">
+          <label class="om-label">Preferred Cashout Method</label>
+          <select class="om-input om-select" id="apply-cashout-method">
+            <option value="">Select payment method…</option>
+            <option value="MTN Mobile Money">📱 MTN Mobile Money</option>
+            <option value="Vodafone Cash">📱 Vodafone Cash</option>
+            <option value="AirtelTigo Money">📱 AirtelTigo Money</option>
+            <option value="Bank Transfer">🏦 Bank Transfer</option>
           </select>
         </div>
+      </div>
 
-        <!-- Loan interest -->
-        <div class="apply-field">
-          <label>Are you interested in loan services?</label>
-          <div class="apply-radio-group">
-            <label class="apply-radio-option"><input type="radio" name="apply-loan-interest" value="Yes"/> Yes</label>
-            <label class="apply-radio-option"><input type="radio" name="apply-loan-interest" value="Maybe in the future"/> Maybe later</label>
-            <label class="apply-radio-option"><input type="radio" name="apply-loan-interest" value="No"/> No</label>
+      <!-- Loan services — selectable cards -->
+      <div class="om-card">
+        <div class="om-card-label">Loan Services</div>
+        <div class="om-loan-cards" role="group" aria-label="Loan interest options">
+          <div class="om-loan-card" id="loan-yes"    onclick="omSetLoan('Yes','loan-yes')">
+            <div class="om-loan-card-icon">✅</div>
+            <div class="om-loan-card-label">Interested</div>
+          </div>
+          <div class="om-loan-card" id="loan-maybe"  onclick="omSetLoan('Maybe in the future','loan-maybe')">
+            <div class="om-loan-card-icon">🤔</div>
+            <div class="om-loan-card-label">Maybe Later</div>
+          </div>
+          <div class="om-loan-card" id="loan-no"     onclick="omSetLoan('No','loan-no')">
+            <div class="om-loan-card-icon">⏸</div>
+            <div class="om-loan-card-label">Not Now</div>
           </div>
         </div>
+        <input type="hidden" id="apply-loan-interest" value=""/>
+      </div>
 
-        <!-- 70% rule acknowledgement -->
-        <div class="apply-field">
-          <label class="apply-checkbox-option">
-            <input type="checkbox" id="apply-ack-70"/>
-            I understand that if I reduce my contribution, it cannot go below 70% of my fixed amount.
-          </label>
+      <!-- Master agreement card -->
+      <div class="om-agreement-card">
+        <div class="om-agreement-points">
+          <div class="om-agreement-point">Contribution reductions cannot go below 70% of your fixed amount per group rules.</div>
+          <div class="om-agreement-point">I have read and agree to abide by the FutureFund Group Rules &amp; Guidelines (V1.0).</div>
+          <div class="om-agreement-point">I am committed to saving consistently and participating seriously in the group.</div>
         </div>
-
-        <!-- Rules agreement -->
-        <div class="apply-field">
-          <label class="apply-checkbox-option">
-            <input type="checkbox" id="apply-ack-rules"/>
-            I have read and agree to abide by the FutureFund Group Rules &amp; Guidelines (V1.0). *
-          </label>
+        <div class="om-agreement-footer" onclick="omToggleAgreement()" id="om-agreement-footer">
+          <div class="om-agreement-checkbox" id="om-agree-check"></div>
+          <div class="om-agreement-text">
+            I confirm I have read and accept the Membership Agreement.
+            <a href="#" onclick="event.preventDefault()">View full rules →</a>
+          </div>
         </div>
+      </div>
+      <input type="hidden" id="apply-ack-rules" value=""/>
+      <input type="hidden" id="apply-ack-70" value=""/>
+      <input type="hidden" id="apply-ack-commit" value=""/>
 
-        <!-- Commitment statement -->
-        <div class="apply-field">
-          <label class="apply-checkbox-option">
-            <input type="checkbox" id="apply-ack-commit"/>
-            I am committed to saving consistently and participating seriously. *
-          </label>
-        </div>
+      <!-- Optional notes -->
+      <div class="om-field" style="margin-bottom:4px">
+        <label class="om-label">Anything else? <span style="color:rgba(255,255,255,0.2);font-weight:400;text-transform:none;letter-spacing:0">Optional</span></label>
+        <textarea class="om-input om-textarea" id="apply-extra" placeholder="Questions, notes, or referral details…"></textarea>
+      </div>
 
-        <!-- Anything else -->
-        <div class="apply-field">
-          <label for="apply-extra">Anything you'd like us to know?</label>
-          <textarea id="apply-extra" placeholder="Optional — questions, notes, referral details…"></textarea>
-        </div>
+      <div class="om-msg" id="om-msg-2"></div>
+    </div><!-- /step 2 body -->
 
-        <div class="apply-msg" id="apply-msg-2"></div>
-        <div class="apply-uploading-notice" id="apply-uploading-notice">⬆ Uploading your documents…</div>
-        <div class="apply-nav-row">
-          <button type="button" class="btn-ghost" onclick="applyGoStep1()" style="padding:14px 20px">← Back</button>
-          <button type="button" class="btn-primary" id="apply-submit-btn" onclick="submitApplyForm()">
-            Submit Application →
-          </button>
-        </div>
-      </div><!-- /step-2 -->
+    <div class="om-uploading" id="apply-uploading-notice">
+      <div class="om-uploading-dot"></div>
+      <div class="om-uploading-dot"></div>
+      <div class="om-uploading-dot"></div>
+      <span>Uploading your documents…</span>
+    </div>
 
-    </div><!-- /apply-form-state -->
+    <!-- Step 2 nav -->
+    <div class="om-nav" id="om-nav-2" style="display:none">
+      <button class="om-nav-back" onclick="omGoStep1()">← Back</button>
+      <button class="om-nav-next" id="apply-submit-btn" onclick="submitApplyForm()">Submit Application →</button>
+    </div>
 
     <!-- ── Success state ── -->
-    <div class="apply-success-state" id="apply-success-state">
-      <div class="apply-success-icon">✓</div>
+    <div class="om-success" id="apply-success-state">
+      <div class="om-success-ring"><div class="om-success-checkmark">✓</div></div>
       <h3>Application Received</h3>
-      <p>Thanks for applying to StackUp Nest. We typically review applications within 24 hours — you'll get an email either way, so keep an eye on your inbox.</p>
-      <button class="btn-ghost" onclick="closeApplyModal()" style="cursor:none">Close</button>
+      <p>Thanks for applying to StackUp Nest. We review applications within 24 hours — you'll hear from us either way.</p>
+      <button class="om-nav-next" onclick="closeApplyModal()" style="max-width:200px">Close</button>
     </div>
 
   </div><!-- /apply-modal-box -->
@@ -1429,329 +1636,359 @@ function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeApplyModal(); } });
 
 // ============================================================
-// APPLY NOW MODAL — Two-step registration with file upload
+// APPLY MODAL — Premium two-step onboarding
 // ============================================================
 var APPLY_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbxL7tR86AawPZ-2rQXOCQG8tPCGOYECjZS5ySM24pPIdd-waxgeXAAruzcgSISQfamh/exec';
 var _applyFormLoadedAt = null;
-
-// ── File state ────────────────────────────────────────────────
-// We store the File objects here so we can read them as
-// Base64 at submission time without re-reading the input.
 var _photoFile = null;
 var _cardFile  = null;
+var _omAgreed  = false;
+var _omLoanId  = null;
 
-// ── Modal open / close ────────────────────────────────────────
+// ── Open / Close ──────────────────────────────────────────────
 function openApplyModal() {
   document.getElementById('apply-modal-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-  document.getElementById('apply-form-state').style.display = '';
-  document.getElementById('apply-success-state').classList.remove('show');
   _resetApplyModal();
   _applyFormLoadedAt = Date.now();
 }
-
 function closeApplyModal() {
   document.getElementById('apply-modal-overlay').classList.remove('open');
   document.body.style.overflow = '';
 }
 
 function _resetApplyModal() {
-  // Clear all inputs
-  ['apply-name','apply-dob','apply-gender','apply-location',
-   'apply-phone','apply-whatsapp','apply-email','apply-occupation',
-   'apply-nok-name','apply-nok-phone','apply-how-heard',
-   'apply-ghana-card','apply-contrib-amount','apply-cashout-method',
-   'apply-extra','apply-website'].forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el) el.value = '';
+  // Text inputs
+  ['apply-name','apply-dob','apply-location','apply-phone','apply-whatsapp',
+   'apply-email','apply-occupation','apply-nok-name','apply-nok-phone',
+   'apply-ghana-card','apply-contrib-amount','apply-extra','apply-website'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.value = '';
   });
-  document.querySelectorAll('input[name="apply-contrib-type"]').forEach(function(r){ r.checked = false; });
-  document.querySelectorAll('input[name="apply-loan-interest"]').forEach(function(r){ r.checked = false; });
-  ['apply-ack-70','apply-ack-rules','apply-ack-commit'].forEach(function(id){
-    var el = document.getElementById(id); if (el) el.checked = false;
+  // Selects
+  ['apply-gender','apply-how-heard','apply-cashout-method'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.selectedIndex = 0;
   });
-  clearUpload('photo');
-  clearUpload('card');
-  document.getElementById('apply-amount-preview').textContent = '';
-  _showMsg('apply-msg-1', '', '');
-  _showMsg('apply-msg-2', '', '');
-  document.getElementById('apply-uploading-notice').classList.remove('show');
-  _applyGoStep(1);
+  // Hidden
+  ['apply-contrib-type','apply-loan-interest','apply-ack-rules','apply-ack-70','apply-ack-commit'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.value = '';
+  });
+  // Segments
+  ['seg-weekly','seg-monthly'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.classList.remove('active');
+  });
+  // Loan cards
+  ['loan-yes','loan-maybe','loan-no'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.classList.remove('selected');
+  });
+  // Agreement
+  _omAgreed = false; _omLoanId = null;
+  var chk = document.getElementById('om-agree-check');
+  if(chk) chk.classList.remove('checked');
+  // Uploads
+  clearUpload('photo'); clearUpload('card');
+  // Amount preview
+  var prev = document.getElementById('apply-amount-preview');
+  if(prev) prev.classList.remove('show');
+  // Messages
+  _omMsg(1,'',''); _omMsg(2,'','');
+  // Nav & uploading
+  var upl = document.getElementById('apply-uploading-notice');
+  if(upl) upl.classList.remove('show');
+  // Success
+  var succ = document.getElementById('apply-success-state');
+  if(succ) succ.classList.remove('active');
+  // Go to step 1
+  _omGoStep(1);
 }
 
 // ── Step navigation ───────────────────────────────────────────
-function _applyGoStep(step) {
-  document.getElementById('apply-step-1').style.display = step === 1 ? '' : 'none';
-  document.getElementById('apply-step-2').style.display = step === 2 ? '' : 'none';
-  // Update progress circles
-  var c1 = document.getElementById('prog-circle-1');
-  var c2 = document.getElementById('prog-circle-2');
-  var l1 = document.getElementById('prog-label-1');
-  var l2 = document.getElementById('prog-label-2');
-  var line = document.getElementById('prog-line-1');
-  if (step === 1) {
-    c1.className = 'apply-progress-circle active'; l1.className = 'apply-progress-label active';
-    c2.className = 'apply-progress-circle';        l2.className = 'apply-progress-label';
-    line.className = 'apply-progress-line';
-    c1.textContent = '1';
-  } else {
-    c1.className = 'apply-progress-circle done'; l1.className = 'apply-progress-label done';
-    c2.className = 'apply-progress-circle active'; l2.className = 'apply-progress-label active';
-    line.className = 'apply-progress-line done';
-    c1.textContent = '✓';
+function _omGoStep(step) {
+  var b1=document.getElementById('om-body-1'), b2=document.getElementById('om-body-2');
+  var n1=document.getElementById('om-nav-1'),  n2=document.getElementById('om-nav-2');
+  var succ=document.getElementById('apply-success-state');
+
+  b1.classList.toggle('active', step===1);
+  b2.classList.toggle('active', step===2);
+  if(n1) n1.style.display = step===1 ? '' : 'none';
+  if(n2) n2.style.display = step===2 ? '' : 'none';
+  if(succ) succ.classList.toggle('active', step===3);
+
+  // Stepper UI
+  var num1=document.getElementById('om-num-1'), lbl1=document.getElementById('om-lbl-1');
+  var num2=document.getElementById('om-num-2'), lbl2=document.getElementById('om-lbl-2');
+  var line=document.getElementById('om-line-1');
+  if(step===1){
+    num1.className='om-step-num active'; lbl1.className='om-step-label active'; num1.textContent='1';
+    num2.className='om-step-num';        lbl2.className='om-step-label';
+    if(line) line.classList.remove('done');
+  } else if(step===2){
+    num1.className='om-step-num done'; lbl1.className='om-step-label done'; num1.textContent='✓';
+    num2.className='om-step-num active'; lbl2.className='om-step-label active';
+    if(line) line.classList.add('done');
   }
-  // Scroll modal to top
-  var box = document.getElementById('apply-modal-box');
-  if (box) box.scrollTop = 0;
+  // Scroll to top of modal
+  var box=document.getElementById('apply-modal-box');
+  if(box) box.scrollTop=0;
 }
 
-function applyGoStep1() { _applyGoStep(1); }
-
-function applyGoStep2() {
-  _showMsg('apply-msg-1', '', '');
-  var name  = document.getElementById('apply-name').value.trim();
-  var phone = document.getElementById('apply-phone').value.trim();
-  var email = document.getElementById('apply-email').value.trim();
-  if (!name)  { _showMsg('apply-msg-1', 'Full name is required.', 'error'); return; }
-  if (!phone) { _showMsg('apply-msg-1', 'Phone number is required.', 'error'); return; }
-  if (!email || email.indexOf('@') === -1) { _showMsg('apply-msg-1', 'A valid email address is required.', 'error'); return; }
-  _applyGoStep(2);
+function omGoStep1() { _omGoStep(1); }
+function omGoStep2() {
+  _omMsg(1,'','');
+  var name  = (document.getElementById('apply-name').value||'').trim();
+  var phone = (document.getElementById('apply-phone').value||'').trim();
+  var email = (document.getElementById('apply-email').value||'').trim();
+  if(!name)  { _omMsg(1,'Please enter your full name.','error'); return; }
+  if(!phone) { _omMsg(1,'Please enter your phone number.','error'); return; }
+  if(!email || email.indexOf('@')===-1) { _omMsg(1,'Please enter a valid email address.','error'); return; }
+  _omGoStep(2);
 }
 
-// ── File upload helpers ───────────────────────────────────────
-function triggerCapture(inputId, facingMode) {
-  var el = document.getElementById(inputId);
-  el.removeAttribute('capture');
-  el.setAttribute('capture', facingMode === 'environment' ? 'environment' : 'user');
-  el.click();
-}
-function triggerGallery(inputId) {
-  var el = document.getElementById(inputId);
-  el.removeAttribute('capture');
-  el.click();
+// ── Segmented control ─────────────────────────────────────────
+function omSetContribType(type) {
+  document.getElementById('apply-contrib-type').value = type;
+  document.getElementById('seg-weekly').classList.toggle('active',  type==='Weekly');
+  document.getElementById('seg-monthly').classList.toggle('active', type==='Monthly');
+  updateAmountPreview();
 }
 
+// ── Loan cards ────────────────────────────────────────────────
+function omSetLoan(value, id) {
+  document.getElementById('apply-loan-interest').value = value;
+  ['loan-yes','loan-maybe','loan-no'].forEach(function(lid){
+    document.getElementById(lid).classList.toggle('selected', lid===id);
+  });
+  _omLoanId = id;
+}
+
+// ── Agreement ─────────────────────────────────────────────────
+function omToggleAgreement() {
+  _omAgreed = !_omAgreed;
+  var chk = document.getElementById('om-agree-check');
+  chk.classList.toggle('checked', _omAgreed);
+  // Keep hidden inputs in sync (backend checks these)
+  var v = _omAgreed ? 'yes' : '';
+  ['apply-ack-rules','apply-ack-70','apply-ack-commit'].forEach(function(id){
+    document.getElementById(id).value = v;
+  });
+}
+
+// ── Amount preview ────────────────────────────────────────────
+function updateAmountPreview() {
+  var type = document.getElementById('apply-contrib-type').value;
+  var amt  = parseFloat(document.getElementById('apply-contrib-amount').value) || 0;
+  var prev = document.getElementById('apply-amount-preview');
+  if(!type || !amt) { prev.classList.remove('show'); return; }
+  var monthly = type==='Weekly' ? amt*4 : amt;
+  var perCycle = type==='Weekly' ? amt : amt;
+  function fmt(n){ return '₵'+n.toLocaleString('en-GH',{minimumFractionDigits:0,maximumFractionDigits:0}); }
+  document.getElementById('preview-per-cycle').textContent = fmt(perCycle)+(type==='Weekly'?'/wk':'/mo');
+  document.getElementById('preview-monthly').textContent   = fmt(monthly);
+  document.getElementById('preview-annual').textContent    = fmt(monthly*12);
+  prev.classList.add('show');
+}
+
+// ── Upload card click handlers (single-tap open picker) ───────
+function omPhotoCardClick() {
+  if(_photoFile) return; // has file, use "Change" button instead
+  var input = document.getElementById('apply-photo-input');
+  // On mobile, show native picker which includes camera
+  input.removeAttribute('capture');
+  input.click();
+}
+function omCardClick() {
+  if(_cardFile) return;
+  var input = document.getElementById('apply-card-input');
+  input.removeAttribute('capture');
+  input.click();
+}
+
+// ── Legacy helper stubs (kept for backend compatibility) ──────
+function triggerCapture(id, face) {
+  var el=document.getElementById(id); el.setAttribute('capture',face); el.click();
+}
+function triggerGallery(id) {
+  var el=document.getElementById(id); el.removeAttribute('capture'); el.click();
+}
+
+// ── File upload & compression ─────────────────────────────────
 function handleUpload(input, which) {
   var file = input.files && input.files[0];
-  if (!file) return;
-  if (file.size > 10 * 1024 * 1024) {
-    _showMsg('apply-msg-2', 'File is too large. Maximum size is 10MB.', 'error');
-    input.value = '';
-    return;
+  if(!file) return;
+  if(file.size > 10*1024*1024) {
+    _omMsg(2,'File is too large. Maximum 10MB.','error');
+    input.value=''; return;
   }
-  // Compress all images client-side before storing.
-  // Profile photos are resized to 400px max and compressed at 0.82 quality.
-  // Ghana Card scans need more detail so they get 1200px max at 0.88 quality.
-  // This typically brings a 3-8MB phone camera shot down to 80-200KB,
-  // which makes the second POST fast even on mobile data.
-  var maxPx    = (which === 'photo') ? 400  : 1200;
-  var quality  = (which === 'photo') ? 0.82 : 0.88;
-  _compressImage(file, maxPx, quality, function(compressedFile) {
-    if (which === 'photo') { _photoFile = compressedFile; _showPreview('photo', compressedFile); }
-    else                   { _cardFile  = compressedFile; _showPreview('card',  compressedFile); }
+  var maxPx   = which==='photo' ? 400  : 1200;
+  var quality = which==='photo' ? 0.82 : 0.88;
+  _compressImage(file, maxPx, quality, function(compressed){
+    if(which==='photo'){ _photoFile=compressed; _showUploadSuccess('photo',compressed); }
+    else               { _cardFile=compressed;  _showUploadSuccess('card', compressed); }
   });
 }
 
 function _compressImage(file, maxPx, quality, callback) {
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    var img = new Image();
-    img.onload = function() {
-      var w = img.width, h = img.height;
-      if (w > h) { if (w > maxPx) { h = Math.round(h * maxPx / w); w = maxPx; } }
-      else        { if (h > maxPx) { w = Math.round(w * maxPx / h); h = maxPx; } }
-      var canvas = document.createElement('canvas');
-      canvas.width = w; canvas.height = h;
-      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      canvas.toBlob(function(blob) {
-        // Wrap the blob in a File object so _fileToBase64 and _showPreview work
-        var compressed = new File([blob], file.name.replace(/\.[^.]+$/, '.jpg'), { type: 'image/jpeg' });
-        callback(compressed);
-      }, 'image/jpeg', quality);
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var img=new Image();
+    img.onload=function(){
+      var w=img.width,h=img.height;
+      if(w>h){if(w>maxPx){h=Math.round(h*maxPx/w);w=maxPx;}}
+      else   {if(h>maxPx){w=Math.round(w*maxPx/h);h=maxPx;}}
+      var canvas=document.createElement('canvas'); canvas.width=w; canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      canvas.toBlob(function(blob){
+        callback(new File([blob], file.name.replace(/\.[^.]+$/,'.jpg'),{type:'image/jpeg'}));
+      },'image/jpeg',quality);
     };
-    img.src = e.target.result;
+    img.src=e.target.result;
   };
   reader.readAsDataURL(file);
 }
 
-function _showPreview(which, file) {
-  var zone    = document.getElementById(which + '-zone');
-  var preview = document.getElementById(which + '-preview');
-  var thumb   = document.getElementById(which + '-thumb');
-  var nameEl  = document.getElementById(which + '-name');
-  var sizeEl  = document.getElementById(which + '-size');
-  zone.classList.add('has-file');
-  preview.style.display = 'flex';
-  nameEl.textContent = file.name;
-  sizeEl.textContent = (file.size / 1024).toFixed(1) + ' KB';
-  var reader = new FileReader();
-  reader.onload = function(e) { thumb.src = e.target.result; };
-  reader.readAsDataURL(file);
+function _showUploadSuccess(which, file) {
+  var card = document.getElementById(which==='photo' ? 'photo-card' : 'card-card');
+  card.classList.add('has-file');
+  if(which==='photo') {
+    var reader=new FileReader();
+    reader.onload=function(e){
+      var circle=document.getElementById('photo-circle');
+      circle.classList.add('has-photo');
+      circle.innerHTML='<img src="'+e.target.result+'" alt=""/>';
+      var thumb=document.getElementById('photo-thumb');
+      if(thumb) thumb.src=e.target.result;
+    };
+    reader.readAsDataURL(file);
+    document.getElementById('photo-name').textContent=file.name;
+  } else {
+    var reader2=new FileReader();
+    reader2.onload=function(e){
+      document.getElementById('card-thumb').src=e.target.result;
+    };
+    reader2.readAsDataURL(file);
+    document.getElementById('card-name').textContent=file.name;
+  }
 }
 
 function clearUpload(which) {
-  if (which === 'photo') { _photoFile = null; document.getElementById('apply-photo-input').value = ''; }
-  else                   { _cardFile  = null; document.getElementById('apply-card-input').value = ''; }
-  var zone = document.getElementById(which + '-zone');
-  var preview = document.getElementById(which + '-preview');
-  var thumb   = document.getElementById(which + '-thumb');
-  if (zone)    zone.classList.remove('has-file');
-  if (preview) preview.style.display = 'none';
-  if (thumb)   thumb.src = '';
-}
-
-// ── Contribution amount preview ───────────────────────────────
-function updateAmountPreview() {
-  var typeEl = document.querySelector('input[name="apply-contrib-type"]:checked');
-  var amtEl  = document.getElementById('apply-contrib-amount');
-  var previewEl = document.getElementById('apply-amount-preview');
-  var type = typeEl ? typeEl.value : '';
-  var amt  = parseFloat(amtEl.value) || 0;
-  if (!type || !amt) { previewEl.textContent = ''; return; }
-  var monthly = type === 'Weekly' ? amt * 4 : amt;
-  var yearly  = monthly * 12;
-  previewEl.textContent = '≈ GHS ' + monthly.toLocaleString('en-GH', {minimumFractionDigits:2}) +
-    '/month · GHS ' + yearly.toLocaleString('en-GH', {minimumFractionDigits:2}) + '/year';
+  if(which==='photo'){ _photoFile=null; document.getElementById('apply-photo-input').value=''; }
+  else               { _cardFile=null;  document.getElementById('apply-card-input').value=''; }
+  var card = document.getElementById(which==='photo' ? 'photo-card' : 'card-card');
+  if(card) card.classList.remove('has-file');
+  if(which==='photo'){
+    var circle=document.getElementById('photo-circle');
+    if(circle){ circle.classList.remove('has-photo'); circle.textContent='📷'; }
+    var thumb=document.getElementById('photo-thumb');
+    if(thumb) thumb.src='';
+  } else {
+    var cthumb=document.getElementById('card-thumb');
+    if(cthumb) cthumb.src='';
+  }
 }
 
 // ── Message helper ────────────────────────────────────────────
-function _showMsg(id, text, type) {
-  var el = document.getElementById(id);
-  if (!el) return;
-  el.textContent = text;
-  el.className = 'apply-msg' + (text ? ' show' : '') + (type ? ' ' + type : '');
+function _omMsg(step, text, type) {
+  var el=document.getElementById('om-msg-'+step); if(!el) return;
+  el.textContent=text;
+  el.className='om-msg'+(text?' show':'')+(type?' '+type:'');
 }
 
-// ── File → Base64 ─────────────────────────────────────────────
+// ── File to base64 ────────────────────────────────────────────
 function _fileToBase64(file) {
-  return new Promise(function(resolve, reject) {
-    if (!file) { resolve(null); return; }
-    var reader = new FileReader();
-    reader.onload  = function(e) {
-      // result is "data:image/jpeg;base64,XXXXX" — we only want the XXXXX part
-      var b64 = e.target.result.split(',')[1];
-      resolve(b64);
-    };
-    reader.onerror = function() { reject(new Error('Could not read file.')); };
-    reader.readAsDataURL(file);
+  return new Promise(function(resolve,reject){
+    if(!file){resolve(null);return;}
+    var r=new FileReader();
+    r.onload=function(e){resolve(e.target.result.split(',')[1]);};
+    r.onerror=function(){reject(new Error('Read failed'));};
+    r.readAsDataURL(file);
   });
 }
 
-// ── Main submit ───────────────────────────────────────────────
+// ── Submit ────────────────────────────────────────────────────
 function submitApplyForm() {
-  _showMsg('apply-msg-2', '', '');
-  var btn = document.getElementById('apply-submit-btn');
+  _omMsg(2,'','');
+  var contribType  = document.getElementById('apply-contrib-type').value;
+  var contribAmount= (document.getElementById('apply-contrib-amount').value||'').trim();
+  if(!contribType)   { _omMsg(2,'Please select Weekly or Monthly contribution.','error'); return; }
+  if(!contribAmount || parseFloat(contribAmount)<=0) { _omMsg(2,'Please enter a valid contribution amount.','error'); return; }
+  if(!_omAgreed)     { _omMsg(2,'Please accept the Membership Agreement to proceed.','error'); return; }
 
-  // ── Step 2 validation ──
-  var contribTypeEl = document.querySelector('input[name="apply-contrib-type"]:checked');
-  var contribType   = contribTypeEl ? contribTypeEl.value : '';
-  var contribAmount = document.getElementById('apply-contrib-amount').value.trim();
-  if (!contribType)   { _showMsg('apply-msg-2', 'Please select a contribution type (Weekly or Monthly).', 'error'); return; }
-  if (!contribAmount || parseFloat(contribAmount) <= 0) { _showMsg('apply-msg-2', 'Please enter a valid contribution amount.', 'error'); return; }
-  if (!document.getElementById('apply-ack-rules').checked)  { _showMsg('apply-msg-2', 'You must agree to the group Rules & Guidelines to apply.', 'error'); return; }
-  if (!document.getElementById('apply-ack-commit').checked) { _showMsg('apply-msg-2', 'Please confirm your commitment statement to apply.', 'error'); return; }
+  var btn=document.getElementById('apply-submit-btn');
+  btn.disabled=true; btn.textContent='Submitting…';
 
-  var loanInterestEl = document.querySelector('input[name="apply-loan-interest"]:checked');
-
-  btn.disabled = true;
-  btn.textContent = 'Submitting…';
-
-  var payload = {
-    action:        'submitMemberApplication',
-    website:       document.getElementById('apply-website').value,
-    formLoadedAt:  _applyFormLoadedAt,
-    // Step 1 fields
-    name:          document.getElementById('apply-name').value.trim(),
-    phone:         document.getElementById('apply-phone').value.trim(),
-    email:         document.getElementById('apply-email').value.trim(),
-    whatsapp:      document.getElementById('apply-whatsapp').value.trim(),
-    dob:           document.getElementById('apply-dob').value.trim(),
-    gender:        document.getElementById('apply-gender').value,
-    location:      document.getElementById('apply-location').value.trim(),
-    occupation:    document.getElementById('apply-occupation').value.trim(),
-    nokName:       document.getElementById('apply-nok-name').value.trim(),
-    nokPhone:      document.getElementById('apply-nok-phone').value.trim(),
-    howHeard:      document.getElementById('apply-how-heard').value,
-    // Step 2 fields
-    ghanaCard:     document.getElementById('apply-ghana-card').value.trim(),
-    contribType:   contribType,
-    contribAmount: contribAmount,
-    cashoutMethod: document.getElementById('apply-cashout-method').value,
-    loanInterest:  loanInterestEl ? loanInterestEl.value : '',
-    extra:         document.getElementById('apply-extra').value.trim()
+  var payload={
+    action:'submitMemberApplication',
+    website: document.getElementById('apply-website').value,
+    formLoadedAt: _applyFormLoadedAt,
+    name:         (document.getElementById('apply-name').value||'').trim(),
+    phone:        (document.getElementById('apply-phone').value||'').trim(),
+    email:        (document.getElementById('apply-email').value||'').trim(),
+    whatsapp:     (document.getElementById('apply-whatsapp').value||'').trim(),
+    dob:          (document.getElementById('apply-dob').value||'').trim(),
+    gender:       document.getElementById('apply-gender').value,
+    location:     (document.getElementById('apply-location').value||'').trim(),
+    occupation:   (document.getElementById('apply-occupation').value||'').trim(),
+    nokName:      (document.getElementById('apply-nok-name').value||'').trim(),
+    nokPhone:     (document.getElementById('apply-nok-phone').value||'').trim(),
+    howHeard:     document.getElementById('apply-how-heard').value,
+    ghanaCard:    (document.getElementById('apply-ghana-card').value||'').trim(),
+    contribType:  contribType,
+    contribAmount:contribAmount,
+    cashoutMethod:document.getElementById('apply-cashout-method').value,
+    loanInterest: document.getElementById('apply-loan-interest').value,
+    extra:        (document.getElementById('apply-extra').value||'').trim()
   };
 
-  // ── POST text data first ──
-  fetch(APPLY_ENDPOINT_URL, {
-    method:  'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body:    JSON.stringify(payload)
-  })
-  .then(function(res) { return res.json(); })
-  .then(function(data) {
-    if (!data.success) {
-      btn.disabled = false;
-      btn.textContent = 'Submit Application →';
-      _showMsg('apply-msg-2', data.error || 'Something went wrong. Please try again.', 'error');
+  fetch(APPLY_ENDPOINT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)})
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(!data.success){
+      btn.disabled=false; btn.textContent='Submit Application →';
+      _omMsg(2,data.error||'Something went wrong. Please try again.','error');
       return;
     }
-
-    var appId = data.appId;
-
-    // ── If no files, show success immediately ──
-    if (!_photoFile && !_cardFile) {
-      _applyShowSuccess();
-      return;
-    }
-
-    // ── Upload files as a second request ──
-    btn.textContent = 'Uploading documents…';
+    var appId=data.appId;
+    if(!_photoFile && !_cardFile){ _omShowSuccess(); return; }
+    btn.textContent='Uploading documents…';
     document.getElementById('apply-uploading-notice').classList.add('show');
-
-    Promise.all([
-      _fileToBase64(_photoFile),
-      _fileToBase64(_cardFile)
-    ]).then(function(results) {
-      var photoB64 = results[0];
-      var cardB64  = results[1];
-      var filePayload = {
-        action:              'uploadApplicationFiles',
-        appId:               appId,
-        profilePhotoBase64:  photoB64  || null,
-        profilePhotoMime:    _photoFile ? _photoFile.type : null,
-        ghanaCardBase64:     cardB64   || null,
-        ghanaCardMime:       _cardFile  ? _cardFile.type  : null
-      };
-      return fetch(APPLY_ENDPOINT_URL, {
-        method:  'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body:    JSON.stringify(filePayload)
+    Promise.all([_fileToBase64(_photoFile),_fileToBase64(_cardFile)])
+    .then(function(results){
+      return fetch(APPLY_ENDPOINT_URL,{
+        method:'POST',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body:JSON.stringify({
+          action:'uploadApplicationFiles', appId:appId,
+          profilePhotoBase64:results[0]||null, profilePhotoMime:_photoFile?_photoFile.type:null,
+          ghanaCardBase64:results[1]||null,    ghanaCardMime:_cardFile?_cardFile.type:null
+        })
       });
     })
-    .then(function(res) { return res.json(); })
-    .then(function() {
-      // Whether or not the file upload succeeded, the application
-      // text was already saved. Show success regardless.
-      _applyShowSuccess();
-    })
-    .catch(function() {
-      // File upload failed but the text data is already safe.
-      // Show success — the admin will see the application, and
-      // can request documents separately if needed.
-      _applyShowSuccess();
-    });
+    .then(function(r){return r.json();})
+    .then(function(){_omShowSuccess();})
+    .catch(function(){_omShowSuccess();});
   })
-  .catch(function() {
-    btn.disabled = false;
-    btn.textContent = 'Submit Application →';
-    _showMsg('apply-msg-2', 'Could not reach the server. Please check your connection and try again, or contact us on WhatsApp.', 'error');
+  .catch(function(){
+    btn.disabled=false; btn.textContent='Submit Application →';
+    _omMsg(2,'Connection error. Please check your internet and try again.','error');
   });
 }
 
-function _applyShowSuccess() {
-  document.getElementById('apply-form-state').style.display = 'none';
-  document.getElementById('apply-success-state').classList.add('show');
+function _omShowSuccess(){
+  var box=document.getElementById('apply-modal-box');
+  var b1=document.getElementById('om-body-1'), b2=document.getElementById('om-body-2');
+  var n1=document.getElementById('om-nav-1'),  n2=document.getElementById('om-nav-2');
+  var upl=document.getElementById('apply-uploading-notice');
+  var stepper=document.querySelector('.om-stepper');
+  if(b1) b1.classList.remove('active');
+  if(b2) b2.classList.remove('active');
+  if(n1) n1.style.display='none';
+  if(n2) n2.style.display='none';
+  if(upl) upl.classList.remove('show');
+  if(stepper) stepper.style.display='none';
+  var succ=document.getElementById('apply-success-state');
+  if(succ) succ.classList.add('active');
+  if(box) box.scrollTop=0;
 }
+
 </script>
 </body>
 </html>
