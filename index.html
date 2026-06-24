@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
 <meta name="description" content="StackUp Nest — Ghana's premium savings circle, loan services, and trading group. Save together. Borrow smart. Trade and grow."/>
 <meta name="theme-color" content="#050816"/>
 <title>StackUp Nest — Save. Borrow. Trade.</title>
@@ -59,7 +59,7 @@ nav.scrolled{background:rgba(5,8,22,0.88);backdrop-filter:blur(30px);-webkit-bac
 .mobile-menu{display:none;position:fixed;inset:0;z-index:999;background:rgba(5,8,22,0.97);backdrop-filter:blur(40px);flex-direction:column;align-items:center;justify-content:center;gap:32px}
 .mobile-menu.open{display:flex}
 .mobile-close{position:absolute;top:28px;right:5%;background:none;border:none;color:var(--white);font-size:28px;cursor:none;line-height:1}
-.mobile-menu a{font-family:'Syne',sans-serif;font-size:2rem;font-weight:700;color:rgba(255,255,255,0.5);text-decoration:none;transition:color .2s}
+.mobile-menu a{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;color:rgba(255,255,255,0.5);text-decoration:none;transition:color .2s}
 .mobile-menu a:hover{color:var(--emerald)}
 
 /* ── BUTTONS ── */
@@ -388,7 +388,7 @@ nav.scrolled{background:rgba(5,8,22,0.88);backdrop-filter:blur(30px);-webkit-bac
 .om-textarea{min-height:68px;resize:none;line-height:1.6}
 
 /* Nav buttons */
-.om-nav{padding:0 28px 28px;display:flex;gap:10px;flex-shrink:0}
+.om-nav{padding:16px 28px 28px;display:flex;gap:10px;flex-shrink:0;position:sticky;bottom:0;background:linear-gradient(to top,#0b1429 75%,transparent);z-index:20;margin-top:auto}
 .om-nav-back{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:14px 22px;color:rgba(255,255,255,0.5);font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap}
 .om-nav-back:hover{background:rgba(255,255,255,0.07);color:var(--white)}
 .om-nav-next{flex:1;background:linear-gradient(135deg,var(--emerald),#00a856);color:#050816;border:none;border-radius:100px;padding:15px 24px;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .25s;box-shadow:0 4px 24px rgba(0,196,106,0.25);letter-spacing:0.01em}
@@ -406,30 +406,57 @@ nav.scrolled{background:rgba(5,8,22,0.88);backdrop-filter:blur(30px);-webkit-bac
 @keyframes om-pulse{0%,100%{opacity:0.3;transform:scale(0.8)}50%{opacity:1;transform:scale(1)}}
 
 /* About Me section on the website */
-#about{padding:140px 5%}
-.about-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-.about-visual{position:relative}
-.about-card-stack{position:relative;height:380px}
-.about-card-back{position:absolute;top:24px;left:24px;right:-24px;bottom:-24px;background:rgba(0,196,106,0.04);border:1px solid rgba(0,196,106,0.1);border-radius:28px}
-.about-card-main{position:absolute;inset:0;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:36px;overflow:hidden}
-.about-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
-.about-stat-item{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;text-align:center}
-.about-stat-val{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--emerald);line-height:1}
-.about-stat-label{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.06em;text-transform:uppercase;margin-top:6px}
-.about-trust-row{display:flex;align-items:center;gap:12px;background:rgba(0,196,106,0.05);border:1px solid rgba(0,196,106,0.12);border-radius:14px;padding:16px}
-.about-trust-icon{width:36px;height:36px;border-radius:10px;background:rgba(0,196,106,0.12);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.about-trust-text{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6}
-.about-trust-text strong{color:var(--white);display:block;font-size:13px;margin-bottom:2px}
-.about-glow{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,196,106,0.06),transparent);top:-60px;left:-60px;pointer-events:none}
-.about-content{}
-.about-content .section-sub{margin-bottom:32px}
-.about-pillars{display:flex;flex-direction:column;gap:14px;margin-bottom:36px}
-.about-pillar{display:flex;align-items:flex-start;gap:16px}
-.about-pillar-icon{width:40px;height:40px;border-radius:12px;background:rgba(0,196,106,0.08);border:1px solid rgba(0,196,106,0.15);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;margin-top:2px}
-.about-pillar h4{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:4px;letter-spacing:-0.01em}
-.about-pillar p{font-size:0.88rem;color:var(--muted);line-height:1.7}
-@media(max-width:900px){.about-inner{grid-template-columns:1fr;gap:48px}.about-card-stack{height:300px}}
-@media(max-width:480px){.about-inner{gap:36px}.about-card-stack{height:260px}.about-card-main{padding:24px}.about-stat-val{font-size:1.4rem}}
+/* ── ABOUT ── */
+#about{padding:120px 5%;position:relative;overflow:hidden}
+#about::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,196,106,0.2),transparent)}
+#about::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,196,106,0.1),transparent)}
+.about-wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:64px}
+
+/* Head */
+.about-head{text-align:center;max-width:720px}
+.about-accent{color:var(--emerald)}
+.about-lead{font-size:1.0625rem;color:var(--muted);line-height:1.85;margin:20px 0 24px}
+.about-reg-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(0,196,106,0.05);border:1px solid rgba(0,196,106,0.15);border-radius:100px;padding:8px 18px;font-size:11.5px;font-weight:500;color:rgba(255,255,255,0.45);letter-spacing:0.02em}
+.about-reg-dot{width:7px;height:7px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px rgba(0,196,106,0.6);flex-shrink:0;animation:about-pulse 2.4s ease-in-out infinite}
+@keyframes about-pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* Stat bar */
+.about-stats{display:flex;align-items:center;justify-content:center;gap:0;width:100%;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:32px 24px;flex-wrap:wrap}
+.about-stat{text-align:center;flex:1;min-width:120px;padding:8px 20px}
+.about-stat-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--emerald);letter-spacing:-0.03em;line-height:1}
+.about-stat-sup{font-size:1rem;font-weight:600;vertical-align:super;line-height:0}
+.about-stat-lbl{font-size:11px;color:rgba(255,255,255,0.32);text-transform:uppercase;letter-spacing:0.08em;margin-top:7px;font-weight:500}
+.about-stat-div{width:1px;height:44px;background:rgba(255,255,255,0.07);flex-shrink:0}
+
+/* Pillar cards */
+.about-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;width:100%}
+.about-pillar-card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:32px 28px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;display:flex;flex-direction:column;gap:0}
+.about-pillar-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,196,106,0.0),transparent);transition:background .3s}
+.about-pillar-card:hover{border-color:rgba(0,196,106,0.18);transform:translateY(-3px)}
+.about-pillar-card:hover::before{background:linear-gradient(90deg,transparent,rgba(0,196,106,0.35),transparent)}
+.about-pillar-num{font-family:'DM Mono',monospace;font-size:11px;color:rgba(0,196,106,0.4);font-weight:500;letter-spacing:0.1em;margin-bottom:18px}
+.about-pillar-icon{font-size:26px;margin-bottom:16px}
+.about-pillar-title{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:-0.015em;color:var(--white);margin-bottom:12px}
+.about-pillar-body{font-size:0.875rem;color:rgba(255,255,255,0.45);line-height:1.8;flex:1;margin-bottom:20px}
+.about-pillar-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--emerald);background:rgba(0,196,106,0.08);border:1px solid rgba(0,196,106,0.15);border-radius:100px;padding:4px 12px;margin-top:auto}
+
+/* Bottom CTA */
+.about-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center}
+
+/* Responsive */
+@media(max-width:900px){.about-pillars{grid-template-columns:1fr 1fr}.about-stat-div:last-of-type{display:none}}
+@media(max-width:640px){.about-pillars{grid-template-columns:1fr}.about-stats{padding:24px 16px}.about-stat{min-width:100px}.about-stat-div{display:none}.about-wrap{gap:44px}.about-pillar-card{padding:24px 22px}}
+@media(max-width:480px){#about{padding:80px 5%}.about-stat-num{font-size:1.6rem}.about-head .section-title{font-size:clamp(1.8rem,7vw,2.5rem)}}
+/* Why strip merged into About */
+.about-why-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;width:100%}
+.about-why-item{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:24px 20px;transition:border-color .3s,transform .3s}
+.about-why-item:hover{border-color:rgba(0,196,106,0.2);transform:translateY(-2px)}
+.about-why-icon{font-size:22px;margin-bottom:12px}
+.about-why-label{font-family:'Syne',sans-serif;font-size:0.92rem;font-weight:700;color:var(--white);margin-bottom:8px;letter-spacing:-0.01em}
+.about-why-body{font-size:0.82rem;color:rgba(255,255,255,0.4);line-height:1.7}
+@media(max-width:900px){.about-why-strip{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.about-why-strip{grid-template-columns:1fr}}
+
 
 /* Success */
 .om-success{display:none;text-align:center;padding:48px 28px;flex-direction:column;align-items:center}
@@ -548,7 +575,6 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
     <a href="#about">About</a>
     <a href="#divisions">Divisions</a>
     <a href="#how">How It Works</a>
-    <a href="#why">Why Us</a>
     <a href="#faq">FAQ</a>
   </div>
   <a href="#apply" class="nav-cta" onclick="openApplyModal();return false;">Apply Now</a>
@@ -562,7 +588,6 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   <a href="#about" onclick="toggleMenu()">About</a>
   <a href="#divisions" onclick="toggleMenu()">Divisions</a>
   <a href="#how" onclick="toggleMenu()">How It Works</a>
-  <a href="#why" onclick="toggleMenu()">Why Us</a>
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
   <a href="#apply" class="btn-primary" style="font-size:1rem;margin-top:8px" onclick="toggleMenu();openApplyModal();">Apply to StackUp Nest →</a>
 </div>
@@ -582,6 +607,103 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   </div>
   <div class="scroll-indicator"><div class="scroll-line"></div><div class="scroll-label">Scroll</div></div>
 </section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-wrap">
+
+    <!-- Top: eyebrow + headline centred -->
+    <div class="about-head">
+      <div class="section-eyebrow reveal" style="justify-content:center">About StackUp Nest</div>
+      <h2 class="section-title reveal">Built for ambitious<br/><span class="about-accent">Ghanaians.</span></h2>
+      <p class="about-lead reveal">StackUp Nest is a formally registered savings and investment circle that combines disciplined group savings, smart loan access, and an active trading arm — all managed through a secure digital platform built for transparency and growth.</p>
+      <div class="about-reg-badge reveal">
+        <span class="about-reg-dot"></span>
+        Founded Nov 2025 · Operating since 5 Jan 2026 · Registered · Ghana Registrar General's Department
+      </div>
+    </div>
+
+    <!-- Stat bar -->
+    <div class="about-stats reveal">
+      <div class="about-stat">
+        <div class="about-stat-num">GHS 500<span class="about-stat-sup">+</span></div>
+        <div class="about-stat-lbl">Avg Monthly Target</div>
+      </div>
+      <div class="about-stat-div"></div>
+      <div class="about-stat">
+        <div class="about-stat-num">24<span class="about-stat-sup">hrs</span></div>
+        <div class="about-stat-lbl">Application Review</div>
+      </div>
+      <div class="about-stat-div"></div>
+      <div class="about-stat">
+        <div class="about-stat-num">3</div>
+        <div class="about-stat-lbl">Revenue Streams</div>
+      </div>
+      <div class="about-stat-div"></div>
+      <div class="about-stat">
+        <div class="about-stat-num">100<span class="about-stat-sup">%</span></div>
+        <div class="about-stat-lbl">Digital Records</div>
+      </div>
+    </div>
+
+    <!-- Three pillar cards -->
+    <div class="about-pillars">
+      <div class="about-pillar-card reveal">
+        <div class="about-pillar-num">01</div>
+        <div class="about-pillar-icon">💰</div>
+        <h3 class="about-pillar-title">Group Savings Circle</h3>
+        <p class="about-pillar-body">Members commit to fixed weekly or monthly contributions that build a powerful collective fund. At year end, every consistent member receives a full cashout of everything they've saved — minus any outstanding balances.</p>
+        <div class="about-pillar-tag">Savings</div>
+      </div>
+      <div class="about-pillar-card reveal reveal-delay-1">
+        <div class="about-pillar-num">02</div>
+        <div class="about-pillar-icon">🏦</div>
+        <h3 class="about-pillar-title">Member Loan Access</h3>
+        <p class="about-pillar-body">Active members in good standing can borrow up to 80% of their total contributions directly through the Member Portal. Applications are reviewed and disbursed within 24 hours — no paperwork, no queues.</p>
+        <div class="about-pillar-tag">Loans</div>
+      </div>
+      <div class="about-pillar-card reveal reveal-delay-2">
+        <div class="about-pillar-num">03</div>
+        <div class="about-pillar-icon">📊</div>
+        <h3 class="about-pillar-title">Trading &amp; Commerce</h3>
+        <p class="about-pillar-body">Our trading arm handles import/export, wholesale distribution, and commodities across Ghana. Members get priority access to trade deals and commerce opportunities facilitated through the StackUp Nest network.</p>
+        <div class="about-pillar-tag">Trading</div>
+      </div>
+    </div>
+
+    <!-- Why pillars — merged from Why section -->
+    <div class="about-why-strip reveal">
+      <div class="about-why-item">
+        <div class="about-why-icon">🔐</div>
+        <div class="about-why-label">Security & Privacy</div>
+        <div class="about-why-body">All member data is encrypted and session-protected. Only verified admins can access financial records.</div>
+      </div>
+      <div class="about-why-item">
+        <div class="about-why-icon">🏛️</div>
+        <div class="about-why-label">Regulated & Registered</div>
+        <div class="about-why-body">Formally registered with Ghana's Registrar General's Department — not an informal susu, a structured institution.</div>
+      </div>
+      <div class="about-why-item">
+        <div class="about-why-icon">📊</div>
+        <div class="about-why-label">Full Transparency</div>
+        <div class="about-why-body">Every contribution, loan, and repayment is logged. Members see their own data in real time through the Member Portal.</div>
+      </div>
+      <div class="about-why-item">
+        <div class="about-why-icon">🤝</div>
+        <div class="about-why-label">Member-First Rules</div>
+        <div class="about-why-body">Contribution flexibility, fair loan terms, and a 70% reduction floor — governance rules that protect every member equally.</div>
+      </div>
+    </div>
+
+    <!-- Bottom CTA row -->
+    <div class="about-cta reveal">
+      <button class="btn-primary" onclick="openApplyModal()" style="border:none;cursor:none">Apply for Membership →</button>
+      <a href="#divisions" class="btn-ghost">Explore All Divisions</a>
+    </div>
+
+  </div>
+</section>
+
 
 <!-- DIVISIONS -->
 <section id="divisions">
@@ -750,120 +872,9 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   </div>
 </section>
 
-<!-- DASHBOARD -->
-<section id="dashboard">
-  <div class="dash-header">
-    <div class="section-eyebrow reveal">Live Metrics</div>
-    <h2 class="section-title reveal">The numbers<br/>speak clearly.</h2>
-  </div>
-  <div class="dash-grid">
-    <div class="dash-card"><div class="dash-label">Active Members</div><div class="dash-value" data-target="55" data-prefix="">0</div><div class="dash-delta">Growing every cycle</div></div>
-    <div class="dash-card"><div class="dash-label">Total Savings Pool</div><div class="dash-value" data-target="125000" data-prefix="GHS ">GHS 0</div><div class="dash-delta">Across all active members</div></div>
-    <div class="dash-card"><div class="dash-label">Total Loans Issued</div><div class="dash-value" data-target="115000" data-prefix="GHS ">GHS 0</div><div class="dash-delta">100% tracked & managed</div></div>
-    <div class="dash-card"><div class="dash-label">Interest Collected</div><div class="dash-value" data-target="11500" data-prefix="GHS ">GHS 0</div><div class="dash-delta">Returned to the pool</div></div>
-  </div>
-  <div class="dash-chart-wrap reveal">
-    <div class="dash-chart-head">
-      <div class="dash-chart-title">Monthly Contributions — 2026</div>
-      <div class="dash-chart-legend">
-        <div class="legend-item"><div class="legend-dot" style="background:var(--emerald)"></div>Savings</div>
-        <div class="legend-item"><div class="legend-dot" style="background:rgba(34,255,136,0.4)"></div>Target</div>
-      </div>
-    </div>
-    <div class="chart-area" id="chartArea">
-      <div class="chart-tooltip" id="chartTooltip"></div>
-    </div>
-    <div class="chart-x-labels" id="chartXLabels"></div>
-  </div>
-</section>
 
 
-<!-- ABOUT ME -->
-<section id="about">
-  <div class="about-inner">
-    <div class="about-visual">
-      <div class="about-glow"></div>
-      <div class="about-card-stack">
-        <div class="about-card-back"></div>
-        <div class="about-card-main">
-          <div class="about-stat-grid">
-            <div class="about-stat-item">
-              <div class="about-stat-val">GHS 500+</div>
-              <div class="about-stat-label">Avg Monthly Target</div>
-            </div>
-            <div class="about-stat-item">
-              <div class="about-stat-val">24hrs</div>
-              <div class="about-stat-label">Activation Time</div>
-            </div>
-            <div class="about-stat-item">
-              <div class="about-stat-val">3</div>
-              <div class="about-stat-label">Revenue Streams</div>
-            </div>
-            <div class="about-stat-item">
-              <div class="about-stat-val">100%</div>
-              <div class="about-stat-label">Digital Records</div>
-            </div>
-          </div>
-          <div class="about-trust-row">
-            <div class="about-trust-icon">🏛️</div>
-            <div class="about-trust-text">
-              <strong>Formally Registered</strong>
-              Registered with Ghana's Registrar General's Department under the Commerce/Trading sector.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="about-content">
-      <div class="section-eyebrow reveal">About StackUp Nest</div>
-      <h2 class="section-title reveal">Ghana's most organised<br/>savings circle.</h2>
-      <p class="section-sub reveal">StackUp Nest is a formally registered savings and investment circle built for ambitious Ghanaians. We combine disciplined group savings, smart loan access, and active trading — all managed through a secure digital platform that gives every member full visibility.</p>
-      <div class="about-pillars">
-        <div class="about-pillar reveal">
-          <div class="about-pillar-icon">💰</div>
-          <div>
-            <h4>Group Savings Circle</h4>
-            <p>Members commit to fixed weekly or monthly contributions that build a powerful collective fund. Consistent savers build towards a full year-end cashout of everything they've put in.</p>
-          </div>
-        </div>
-        <div class="about-pillar reveal reveal-delay-1">
-          <div class="about-pillar-icon">🏦</div>
-          <div>
-            <h4>Member Loan Access</h4>
-            <p>Active members in good standing can access loans of up to 80% of their total contributions directly through the Member Portal — reviewed and disbursed within 24 hours.</p>
-          </div>
-        </div>
-        <div class="about-pillar reveal reveal-delay-2">
-          <div class="about-pillar-icon">📊</div>
-          <div>
-            <h4>Trading & Commerce</h4>
-            <p>Our trading arm handles import/export, wholesale distribution, and commodities across Ghana. Members get priority access to trade deals and investment opportunities.</p>
-          </div>
-        </div>
-      </div>
-      <div class="hero-btns reveal">
-        <button class="btn-primary" onclick="openApplyModal()" style="border:none;cursor:none">Join Now →</button>
-        <a href="#divisions" class="btn-ghost">Explore Divisions</a>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- WHY -->
-<section id="why">
-  <div class="why-inner">
-    <div style="text-align:center">
-      <div class="section-eyebrow reveal">Why StackUp Nest</div>
-      <h2 class="section-title reveal">Built different.<br/>Managed right.</h2>
-    </div>
-    <div class="why-grid">
-      <div class="why-card"><div class="why-card-num">01</div><div class="why-icon-wrap">🔍</div><h3>Full Transparency</h3><p>Every transaction, every balance, every contribution — visible to you through your Member Portal in real time. No surprises. No black boxes. Just clarity.</p><div class="why-glow"></div></div>
-      <div class="why-card"><div class="why-card-num">02</div><div class="why-icon-wrap">⚙️</div><h3>Automated Operations</h3><p>Receipts sent automatically. Loan reminders triggered by schedule. Cashouts calculated algorithmically. The admin handles strategy — the system handles execution.</p><div class="why-glow"></div></div>
-      <div class="why-card"><div class="why-card-num">03</div><div class="why-icon-wrap">📈</div><h3>Three Income Streams</h3><p>Savings growth, loan interest returns, and trade participation — members benefit from three distinct wealth-building avenues inside a single group.</p><div class="why-glow"></div></div>
-      <div class="why-card"><div class="why-card-num">04</div><div class="why-icon-wrap">🤝</div><h3>Community-Driven</h3><p>This is a circle built on trust and shared progress. Every member who contributes, repays, and participates makes the whole ecosystem stronger and more valuable.</p><div class="why-glow"></div></div>
-    </div>
-  </div>
-</section>
 
 <!-- TESTIMONIALS -->
 <section id="testimonials">
@@ -906,18 +917,6 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   </div>
 </section>
 
-<!-- APPLY NOW -->
-<section id="apply">
-  <div class="apply-glow"></div>
-  <div class="apply-inner">
-    <div class="section-eyebrow reveal" style="justify-content:center">Apply Now</div>
-    <h2 class="section-title reveal">Ready to join<br/>the nest?</h2>
-    <p class="apply-sub reveal">Tell us a little about yourself. Applications are reviewed and activated within 24 hours — no paperwork, no waiting in line.</p>
-    <div class="hero-btns reveal">
-      <button class="btn-primary" onclick="openApplyModal()" style="font-size:16px;padding:18px 44px;border:none;cursor:none">Apply Now →</button>
-    </div>
-  </div>
-</section>
 
 <!-- APPLY MODAL — Premium two-step onboarding -->
 <div id="apply-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="om-title">
