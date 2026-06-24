@@ -555,6 +555,47 @@ footer{padding:60px 5% 40px;border-top:1px solid var(--glass-border);background:
   .testi-card{min-width:260px;max-width:260px;padding:24px}
   .testi-card blockquote{font-size:0.85rem}
 }
+
+/* ── CDN FALLBACKS — ensure site looks great without Three.js/GSAP ── */
+/* These override the JS-animated initial states so content is visible */
+.hero-pill{opacity:1!important;transform:none!important;animation:hero-pill-in .8s .1s ease both}
+@keyframes hero-pill-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero-title .word{opacity:1!important;transform:none!important;display:inline!important}
+.hero-title .line{overflow:visible!important}
+.hero-sub{opacity:1!important;transform:none!important;animation:hero-sub-in .8s .3s ease both}
+@keyframes hero-sub-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero-btns{opacity:1!important;transform:none!important;animation:hero-sub-in .8s .5s ease both}
+.reveal{opacity:1!important;transform:none!important;transition:none!important}
+.div-card{opacity:1!important;transform:none!important}
+.why-card{opacity:1!important;transform:none!important}
+.dash-card,.dash-chart-wrap{opacity:1!important;transform:none!important}
+.how-card{opacity:1!important;transform:none!important}
+.scroll-indicator{opacity:0.6!important;animation:none!important}
+
+/* Ambient glow behind hero to replace WebGL canvas */
+#webgl-canvas{display:none}
+#hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 40%, rgba(0,196,106,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(0,100,200,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 20%, rgba(0,196,106,0.04) 0%, transparent 60%);
+  z-index:0;
+}
+#hero{position:relative}
+.hero-pill,.hero-title,.hero-sub,.hero-btns,.scroll-indicator{position:relative;z-index:1}
+
+/* Subtle grid texture on body */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:1;
+  background-image:
+    linear-gradient(rgba(0,196,106,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,196,106,0.025) 1px, transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+}
+
 </style>
 </head>
 <body>
