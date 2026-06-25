@@ -264,7 +264,9 @@ input,select,textarea{font-family:inherit;font-size:16px}
    ============================================================ */
 #trust{background:var(--paper);padding:clamp(40px,6vw,68px) 0;border-bottom:1px solid var(--line)}
 .trust-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:28px}
-.trust-lead{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-light-faint);max-width:180px;line-height:1.5}
+.trust-lead{font-family:var(--f-mono);font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--on-light-faint);max-width:250px;line-height:1.5;display:flex;flex-direction:column;gap:6px;padding-left:15px;border-left:2px solid var(--em)}
+.trust-lead-since{color:var(--on-light-2);font-weight:500}
+.trust-lead-note{color:var(--on-light-mut)}
 .trust-stats{display:flex;flex-wrap:wrap;gap:clamp(24px,5vw,64px)}
 .trust-stat .n{font-family:var(--f-disp);font-weight:600;font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-.02em;line-height:1}
 .trust-stat .n em{font-style:normal;color:var(--em-deep);font-size:.55em;vertical-align:super}
@@ -648,6 +650,10 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
   .sc-tab{min-height:44px}
   .footer-col a{padding:9px 0}
   .footer-social{width:44px;height:44px}
+  /* trust strip: full-width statement + tidy 2x2 stats */
+  .trust-row{gap:26px}
+  .trust-lead{max-width:none;width:100%}
+  .trust-stats{display:grid;grid-template-columns:1fr 1fr;gap:22px 18px;width:100%}
 }
 @media (max-width:540px){
   .sec{padding:52px 0}
@@ -873,7 +879,10 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
 <section id="trust">
   <div class="wrap">
     <div class="trust-row">
-      <div class="trust-lead rv">Operating since 5 Jan 2026 · a registered institution, not an informal susu</div>
+      <div class="trust-lead rv">
+        <span class="trust-lead-since">Operating since 5 Jan 2026</span>
+        <span class="trust-lead-note">A registered institution, not an informal susu</span>
+      </div>
       <div class="trust-stats">
         <div class="trust-stat rv"><div class="n">GHS 500<em>+</em></div><div class="l">Avg monthly target</div></div>
         <div class="trust-stat rv d1"><div class="n">24<em>hrs</em></div><div class="l">Application review</div></div>
