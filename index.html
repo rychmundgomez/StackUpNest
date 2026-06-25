@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..600,0..1,0&display=block" rel="stylesheet"/>
 <style>
 /* ============================================================
    STACKUP NEST — EDITORIAL REDESIGN
@@ -583,6 +584,26 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
   .sc-head{flex-direction:column;align-items:flex-start}
   .sc-tabs{width:100%;overflow-x:auto}
 }
+
+/* ============================================================
+   MATERIAL SYMBOLS + iOS-26 LIQUID GLASS
+   ============================================================ */
+.mi{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;direction:ltr;-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;vertical-align:middle;user-select:none}
+.mi.fill{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+.mi-14{font-size:14px}.mi-16{font-size:16px}.mi-18{font-size:18px}.mi-20{font-size:20px}.mi-22{font-size:22px}.mi-24{font-size:24px}.mi-28{font-size:28px}
+
+/* Liquid glass — translucent, blurred, specular edge */
+.glass{position:relative;background:rgba(235,244,238,.07);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);border:1px solid rgba(235,244,238,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(0,0,0,.18),0 8px 28px -14px rgba(0,0,0,.5)}
+.glass-light{background:rgba(255,255,255,.55);backdrop-filter:blur(20px) saturate(170%);-webkit-backdrop-filter:blur(20px) saturate(170%);border:1px solid rgba(255,255,255,.7);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 10px 30px -16px rgba(11,26,19,.25)}
+/* apply glass to floating chrome */
+#navbar.scrolled{background:rgba(5,17,12,.55);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);box-shadow:inset 0 -1px 0 rgba(255,255,255,.06),0 6px 24px -14px rgba(0,0,0,.5)}
+.hero-pill{background:rgba(235,244,238,.06);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.16)}
+.sc-tabs{backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
+.app-status,.app-bell{backdrop-filter:blur(8px)}
+.cell .mi,.modal-feature-icon .mi,.om-loan-card .mi,.om-segment-btn .mi{color:var(--em-deep)}
+.sec-dark .cell .mi{color:var(--em-bright)}
+.tx .ic .mi{font-size:16px}
+.app-nav .mi,.app-bell .mi,.app-search .mi{font-size:15px}
 </style>
 </head>
 
@@ -609,7 +630,7 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" onclick="toggleMenu()" aria-label="Close menu">✕</button>
+  <button class="mobile-close" onclick="toggleMenu()" aria-label="Close menu"><span class="mi mi-22">close</span></button>
   <a href="#value" onclick="toggleMenu()">Why us</a>
   <a href="#features" onclick="toggleMenu()">Features</a>
   <a href="#showcase" onclick="toggleMenu()">Member Portal</a>
@@ -624,10 +645,9 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
   <div class="hero-rule" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-inner">
-      <span class="hero-pill rv"><span class="tag">Registered</span>OFFICE OF THE REGISTRAR OF COMPANIES, GHANA REPUBLIC</span>
+      <span class="hero-pill rv"><span class="tag">Registered</span> Ghana Registrar General's Department</span>
       <h1 class="hero-h1 rv d1">Save together.<br/>Borrow smart.<br/><em>Trade &amp; grow.</em></h1>
-      <p class="hero-sub rv d2">StackUp Nest is a registered savings and investment community that helps members build financial discipline through structured group savings, access to short-term loans, and participation in carefully selected investment opportunities. Through our secure digital platform, members enjoy full transparency, visibility into their contributions, and a supportive community focused on financial growth. Our mission is to promote responsible saving, financial inclusion, and long-term wealth creation for ambitious Ghanaians.
-</p>
+      <p class="hero-sub rv d2">StackUp Nest is a registered savings and investment community that helps members build financial discipline through structured savings, access to short-term loans, and curated investment opportunities. Through a secure and transparent digital platform, we empower members to grow their finances with confidence, accountability, and long-term wealth in mind.</p>
       <div class="hero-btns rv d2">
         <button class="btn btn-em btn-lg" onclick="openApplyModal()">Apply for membership <span class="arr">→</span></button>
         <a href="#showcase" class="btn btn-ghost btn-lg">See the portal</a>
@@ -647,7 +667,7 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
         <div class="app-dots"><i></i><i></i><i></i></div>
         <div class="app-brand"><span class="mk"><img src="https://i.ibb.co/zW1gzyZz/Stack-Up-Nest-Logo1.png" alt=""/></span>Member Portal</div>
         <div class="app-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>Search contributions, loans…</div>
-        <div class="app-bar-right"><div class="app-bell">🔔</div><div class="app-ava">KM</div></div>
+        <div class="app-bar-right"><div class="app-bell"><span class="mi">notifications</span></div><div class="app-ava">KM</div></div>
       </div>
       <div class="app-body">
         <aside class="app-side">
@@ -679,9 +699,9 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
             <div class="app-panel">
               <div class="app-panel-h"><span class="t">Recent activity</span></div>
               <div class="app-tx">
-                <div class="tx"><div class="ic">↑</div><div><div class="nm">March contribution</div><div class="dt">02 Mar · MTN MoMo</div></div><div class="amt">+GHS 500</div></div>
-                <div class="tx"><div class="ic">↑</div><div><div class="nm">February contribution</div><div class="dt">01 Feb · MTN MoMo</div></div><div class="amt">+GHS 500</div></div>
-                <div class="tx"><div class="ic" style="background:rgba(231,201,138,.18)">⚡</div><div><div class="nm">Loan repayment</div><div class="dt">28 Feb · auto-tracked</div></div><div class="amt out">−GHS 300</div></div>
+                <div class="tx"><div class="ic"><span class="mi">arrow_upward</span></div><div><div class="nm">March contribution</div><div class="dt">02 Mar · MTN MoMo</div></div><div class="amt">+GHS 500</div></div>
+                <div class="tx"><div class="ic"><span class="mi">arrow_upward</span></div><div><div class="nm">February contribution</div><div class="dt">01 Feb · MTN MoMo</div></div><div class="amt">+GHS 500</div></div>
+                <div class="tx"><div class="ic" style="background:rgba(231,201,138,.18)"><span class="mi" style="color:#9a7b2e">bolt</span></div><div><div class="nm">Loan repayment</div><div class="dt">28 Feb · auto-tracked</div></div><div class="amt out">−GHS 300</div></div>
               </div>
               <div class="app-progress">
                 <div class="bar"><div class="fill" style="width:60%"></div></div>
@@ -814,9 +834,9 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
         <h2 class="display d-lg rv d1" style="margin-top:22px;max-width:16ch">Three divisions, <em>one clear view.</em></h2>
       </div>
       <div class="sc-tabs rv d1" role="tablist">
-        <button class="sc-tab active" role="tab" onclick="scTab(0,this)">🔒 Savings</button>
-        <button class="sc-tab" role="tab" onclick="scTab(1,this)">⚡ Loans</button>
-        <button class="sc-tab" role="tab" onclick="scTab(2,this)">🌍 Trading</button>
+        <button class="sc-tab active" role="tab" onclick="scTab(0,this)"><span class="mi mi-18">savings</span> Savings</button>
+        <button class="sc-tab" role="tab" onclick="scTab(1,this)"><span class="mi mi-18">bolt</span> Loans</button>
+        <button class="sc-tab" role="tab" onclick="scTab(2,this)"><span class="mi mi-18">public</span> Trading</button>
       </div>
     </div>
 
@@ -847,9 +867,9 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
               <div class="app-panel">
                 <div class="app-panel-h"><span class="t">Contribution ledger</span><span class="dt" style="font-size:11px;color:var(--on-light-mut)">12 entries</span></div>
                 <div class="app-tx">
-                  <div class="tx"><div class="ic">↑</div><div><div class="nm">March · on time</div><div class="dt">02 Mar 2026</div></div><div class="amt">+GHS 500</div></div>
-                  <div class="tx"><div class="ic">↑</div><div><div class="nm">February · on time</div><div class="dt">01 Feb 2026</div></div><div class="amt">+GHS 500</div></div>
-                  <div class="tx"><div class="ic">↑</div><div><div class="nm">January · on time</div><div class="dt">05 Jan 2026</div></div><div class="amt">+GHS 500</div></div>
+                  <div class="tx"><div class="ic"><span class="mi">arrow_upward</span></div><div><div class="nm">March · on time</div><div class="dt">02 Mar 2026</div></div><div class="amt">+GHS 500</div></div>
+                  <div class="tx"><div class="ic"><span class="mi">arrow_upward</span></div><div><div class="nm">February · on time</div><div class="dt">01 Feb 2026</div></div><div class="amt">+GHS 500</div></div>
+                  <div class="tx"><div class="ic"><span class="mi">arrow_upward</span></div><div><div class="nm">January · on time</div><div class="dt">05 Jan 2026</div></div><div class="amt">+GHS 500</div></div>
                 </div>
               </div>
             </div>
@@ -920,9 +940,9 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
               <div class="app-panel">
                 <div class="app-panel-h"><span class="t">Open opportunities</span><span class="app-status">Members only</span></div>
                 <div class="app-tx">
-                  <div class="tx"><div class="ic">🚢</div><div><div class="nm">Import · electronics lot</div><div class="dt">Tema port · closing soon</div></div><div class="amt">Priority</div></div>
-                  <div class="tx"><div class="ic">📦</div><div><div class="nm">Wholesale · staples</div><div class="dt">Accra · distribution</div></div><div class="amt">Open</div></div>
-                  <div class="tx"><div class="ic">📈</div><div><div class="nm">Commodities · cocoa</div><div class="dt">Group position</div></div><div class="amt">Open</div></div>
+                  <div class="tx"><div class="ic"><span class="mi">directions_boat</span></div><div><div class="nm">Import · electronics lot</div><div class="dt">Tema port · closing soon</div></div><div class="amt">Priority</div></div>
+                  <div class="tx"><div class="ic"><span class="mi">inventory_2</span></div><div><div class="nm">Wholesale · staples</div><div class="dt">Accra · distribution</div></div><div class="amt">Open</div></div>
+                  <div class="tx"><div class="ic"><span class="mi">trending_up</span></div><div><div class="nm">Commodities · cocoa</div><div class="dt">Group position</div></div><div class="amt">Open</div></div>
                 </div>
               </div>
             </div>
@@ -937,7 +957,7 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
 <!-- DIVISION MODAL -->
 <div id="modal-overlay" role="dialog" aria-modal="true" aria-label="Division details">
   <div id="modal-bg" onclick="closeModal()"></div>
-  <div id="modal-box"><button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button><div id="modal-content"></div></div>
+  <div id="modal-box"><button class="modal-close" onclick="closeModal()" aria-label="Close"><span class="mi mi-20">close</span></button><div id="modal-content"></div></div>
 </div>
 
 <!-- ============ HOW IT WORKS ============ -->
@@ -1090,7 +1110,7 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
         <div class="om-step-num" id="om-num-2">2</div>
         <span class="om-step-label" id="om-lbl-2">Membership</span>
       </div>
-      <button class="om-close-btn" onclick="closeApplyModal()" aria-label="Close">✕</button>
+      <button class="om-close-btn" onclick="closeApplyModal()" aria-label="Close"><span class="mi mi-20">close</span></button>
     </div>
 
     <!-- Honeypot -->
@@ -1198,11 +1218,11 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
           <div class="om-upload-card" id="photo-card" onclick="omPhotoCardClick()"
                ondragover="omDragOver(event,this)" ondragleave="omDragLeave(this)" ondrop="omDrop(event,this,'photo')">
             <div class="om-photo-upload">
-              <div class="om-photo-circle" id="photo-circle">📷</div>
+              <div class="om-photo-circle" id="photo-circle"><span class="mi mi-24" style="color:var(--on-light-mut)">photo_camera</span></div>
               <div class="om-photo-info">
                 <div class="om-photo-info-title">Add a profile photo</div>
                 <div class="om-photo-info-sub">Drag &amp; drop, upload, or take a photo — optional</div>
-                <button type="button" class="om-photo-btn" onclick="event.stopPropagation();omPhotoCardClick()"><span>↑</span> Upload or Take Photo</button>
+                <button type="button" class="om-photo-btn" onclick="event.stopPropagation();omPhotoCardClick()"><span class="mi mi-16">upload</span> Upload or Take Photo</button>
               </div>
             </div>
             <div class="om-upload-filled">
@@ -1226,7 +1246,7 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
           <div class="om-upload-card" id="card-card" onclick="omCardClick()"
                ondragover="omDragOver(event,this)" ondragleave="omDragLeave(this)" ondrop="omDrop(event,this,'card')">
             <div class="om-upload-empty">
-              <div class="om-upload-empty-icon">🪪</div>
+              <div class="om-upload-empty-icon"><span class="mi mi-28" style="color:var(--em-deep)">id_card</span></div>
               <div class="om-upload-empty-title">Upload Ghana Card</div>
               <div class="om-upload-empty-sub">Drag &amp; drop, <strong>take a photo</strong>, or upload from gallery · Optional</div>
             </div>
@@ -1250,8 +1270,8 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
         <div class="om-field">
           <label class="om-label">Contribution Schedule <span style="color:var(--emerald)">*</span></label>
           <div class="om-segment" role="group" aria-label="Contribution schedule">
-            <button type="button" class="om-segment-btn" id="seg-weekly" onclick="omSetContribType('Weekly')">📅 Weekly</button>
-            <button type="button" class="om-segment-btn" id="seg-monthly" onclick="omSetContribType('Monthly')">🗓 Monthly</button>
+            <button type="button" class="om-segment-btn" id="seg-weekly" onclick="omSetContribType('Weekly')"><span class="mi mi-18">date_range</span> Weekly</button>
+            <button type="button" class="om-segment-btn" id="seg-monthly" onclick="omSetContribType('Monthly')"><span class="mi mi-18">calendar_month</span> Monthly</button>
           </div>
           <input type="hidden" id="apply-contrib-type" value=""/>
         </div>
@@ -1276,10 +1296,10 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
           <label class="om-label" for="apply-cashout-method">Preferred Cashout Method</label>
           <select class="om-input om-select" id="apply-cashout-method">
             <option value="">Select payment method…</option>
-            <option value="MTN Mobile Money">📱 MTN Mobile Money</option>
-            <option value="Vodafone Cash">📱 Vodafone Cash</option>
-            <option value="AirtelTigo Money">📱 AirtelTigo Money</option>
-            <option value="Bank Transfer">🏦 Bank Transfer</option>
+            <option value="MTN Mobile Money">MTN Mobile Money</option>
+            <option value="Vodafone Cash">Vodafone Cash</option>
+            <option value="AirtelTigo Money">AirtelTigo Money</option>
+            <option value="Bank Transfer">Bank Transfer</option>
           </select>
         </div>
       </div>
@@ -1289,13 +1309,13 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
         <div class="om-card-label">Loan Services</div>
         <div class="om-loan-cards" role="group" aria-label="Loan interest options">
           <div class="om-loan-card" id="loan-yes" onclick="omSetLoan('Yes','loan-yes')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')omSetLoan('Yes','loan-yes')">
-            <div class="om-loan-card-icon">✅</div><div class="om-loan-card-label">Interested</div>
+            <div class="om-loan-card-icon"><span class="mi mi-24">check_circle</span></div><div class="om-loan-card-label">Interested</div>
           </div>
           <div class="om-loan-card" id="loan-maybe" onclick="omSetLoan('Maybe in the future','loan-maybe')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')omSetLoan('Maybe in the future','loan-maybe')">
-            <div class="om-loan-card-icon">🤔</div><div class="om-loan-card-label">Maybe Later</div>
+            <div class="om-loan-card-icon"><span class="mi mi-24">schedule</span></div><div class="om-loan-card-label">Maybe Later</div>
           </div>
           <div class="om-loan-card" id="loan-no" onclick="omSetLoan('No','loan-no')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')omSetLoan('No','loan-no')">
-            <div class="om-loan-card-icon">⏸</div><div class="om-loan-card-label">Not Now</div>
+            <div class="om-loan-card-icon"><span class="mi mi-24">pause_circle</span></div><div class="om-loan-card-label">Not Now</div>
           </div>
         </div>
         <input type="hidden" id="apply-loan-interest" value=""/>
@@ -1388,31 +1408,31 @@ document.querySelectorAll('.div-card').forEach(function(card){
    DIVISION MODALS
    ============================================================ */
 var modalData = [
-  { num:'Division 01', title:'Savings Circle', icon:'🔒',
+  { num:'Division 01', title:'Savings Circle', icon:'<span class="mi mi-22">savings</span>',
     lead:'The foundation of StackUp Nest. Every member commits to a contribution amount that builds into a shared pool — disciplined, transparent, and fully automated.',
     features:[
-      { icon:'📊', title:'Real-Time Tracking', desc:'Every contribution is logged the moment it\'s made. Your dashboard updates instantly — no waiting, no guessing.' },
-      { icon:'📧', title:'Automated Receipts', desc:'A PDF receipt is emailed to you automatically after every payment. Your records are always audit-ready.' },
-      { icon:'🔔', title:'Weekly Reminders', desc:'Smart automated reminders keep you on track every week with rotating motivational messages.' },
-      { icon:'💰', title:'Year-End Cashout', desc:'At cycle end, every active member receives their full contribution balance, calculated transparently.' }
+      { icon:'<span class="mi mi-22">query_stats</span>', title:'Real-Time Tracking', desc:'Every contribution is logged the moment it\'s made. Your dashboard updates instantly — no waiting, no guessing.' },
+      { icon:'<span class="mi mi-22">mail</span>', title:'Automated Receipts', desc:'A PDF receipt is emailed to you automatically after every payment. Your records are always audit-ready.' },
+      { icon:'<span class="mi mi-22">notifications</span>', title:'Weekly Reminders', desc:'Smart automated reminders keep you on track every week with rotating motivational messages.' },
+      { icon:'<span class="mi mi-22">savings</span>', title:'Year-End Cashout', desc:'At cycle end, every active member receives their full contribution balance, calculated transparently.' }
     ],
     stats:[{val:'GHS 125K',label:'Pool Size'},{val:'55',label:'Members'},{val:'100%',label:'Transparency'}] },
-  { num:'Division 02', title:'Loan Services', icon:'⚡',
+  { num:'Division 02', title:'Loan Services', icon:'<span class="mi mi-22">bolt</span>',
     lead:'Active members in good standing can access loans backed by their own contribution history — fast approval, automatic tracking, and zero paper forms.',
     features:[
-      { icon:'⚡', title:'24-Hour Approval', desc:'Loan applications submitted through the Member Portal are reviewed and decided within 24 hours.' },
-      { icon:'📐', title:'Up to 80% of Contributions', desc:'Borrow up to 80% of your total contributions to date. The limit grows as you save more.' },
-      { icon:'📅', title:'Smart Repayment Tracking', desc:'Due dates are tracked automatically. Reminders fire as your deadline approaches — upcoming, same-day, and overdue.' },
-      { icon:'🔐', title:'Standing-Based Access', desc:'Loans are available to members with consistent contribution history and no outstanding penalties.' }
+      { icon:'<span class="mi mi-22">bolt</span>', title:'24-Hour Approval', desc:'Loan applications submitted through the Member Portal are reviewed and decided within 24 hours.' },
+      { icon:'<span class="mi mi-22">percent</span>', title:'Up to 80% of Contributions', desc:'Borrow up to 80% of your total contributions to date. The limit grows as you save more.' },
+      { icon:'<span class="mi mi-22">event</span>', title:'Smart Repayment Tracking', desc:'Due dates are tracked automatically. Reminders fire as your deadline approaches — upcoming, same-day, and overdue.' },
+      { icon:'<span class="mi mi-22">lock</span>', title:'Standing-Based Access', desc:'Loans are available to members with consistent contribution history and no outstanding penalties.' }
     ],
     stats:[{val:'39',label:'Loans Disbursed'},{val:'< 24h',label:'Approval Time'},{val:'80%',label:'Max LTV'}] },
-  { num:'Division 03', title:'Trading & Commerce', icon:'🌍',
+  { num:'Division 03', title:'Trading & Commerce', icon:'<span class="mi mi-22">public</span>',
     lead:'StackUp Nest\'s trading arm handles import, export, wholesale distribution, and commodity trading across Ghana — with members getting priority access to every deal.',
     features:[
-      { icon:'🚢', title:'Import & Export', desc:'Access cross-border trade deals facilitated through StackUp Nest\'s established trade networks across Ghana.' },
-      { icon:'📦', title:'Wholesale Distribution', desc:'Participate in bulk goods distribution and earn through the group\'s commerce operations.' },
-      { icon:'📈', title:'Commodities Trading', desc:'Get exposure to commodity markets through the group\'s collective position and trading expertise.' },
-      { icon:'🧠', title:'Advisory Services', desc:'Professional advisory for businesses and consumers looking to navigate Ghana\'s trade landscape.' }
+      { icon:'<span class="mi mi-22">directions_boat</span>', title:'Import & Export', desc:'Access cross-border trade deals facilitated through StackUp Nest\'s established trade networks across Ghana.' },
+      { icon:'<span class="mi mi-22">inventory_2</span>', title:'Wholesale Distribution', desc:'Participate in bulk goods distribution and earn through the group\'s commerce operations.' },
+      { icon:'<span class="mi mi-22">trending_up</span>', title:'Commodities Trading', desc:'Get exposure to commodity markets through the group\'s collective position and trading expertise.' },
+      { icon:'<span class="mi mi-22">psychology</span>', title:'Advisory Services', desc:'Professional advisory for businesses and consumers looking to navigate Ghana\'s trade landscape.' }
     ],
     stats:[{val:'GHS 240K',label:'Trade Volume'},{val:'3',label:'Trade Verticals'},{val:'Priority',label:'Member Access'}] }
 ];
@@ -1728,7 +1748,7 @@ function clearUpload(which){
   if(card) card.classList.remove('has-file');
   if(which==='photo'){
     var circle=document.getElementById('photo-circle');
-    if(circle){ circle.classList.remove('has-photo'); circle.textContent='📷'; }
+    if(circle){ circle.classList.remove('has-photo'); circle.innerHTML='<span class="mi mi-24" style="color:var(--on-light-mut)">photo_camera</span>'; }
     var thumb=document.getElementById('photo-thumb'); if(thumb) thumb.src='';
   } else {
     var cthumb=document.getElementById('card-thumb'); if(cthumb) cthumb.src='';
