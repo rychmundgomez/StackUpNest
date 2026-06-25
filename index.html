@@ -639,6 +639,50 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
   .hero-h1{font-size:clamp(2.1rem,9vw,2.6rem)}
   :root{--gut:16px}
 }
+
+/* ============================================================
+   APPLY MODAL — compact & mobile-optimised
+   Tighter padding/rhythm + 16px inputs (stops iOS zoom-on-focus)
+   ============================================================ */
+@media (max-width:680px){
+  #apply-modal-overlay{padding:0}
+  #apply-modal-box{max-width:none;max-height:100vh;max-height:100dvh;height:100vh;height:100dvh;border-radius:0;border:0}
+  .om-stepper{padding:13px 16px;gap:10px}
+  .om-step-num{width:28px;height:28px;font-size:13px}
+  .om-step-label{display:none}            /* avoid colliding with close btn; body shows "STEP x OF 2" */
+  .om-step{gap:0}
+  .om-close-btn{position:static;width:36px;height:36px;flex-shrink:0}
+  .om-step-body{padding:18px 16px}
+  .om-step-eyebrow{margin-bottom:7px}
+  .om-step-title{font-size:1.5rem;margin-bottom:5px}
+  .om-step-sub{font-size:13.5px;margin-bottom:16px}
+  .om-card{padding:15px;margin-bottom:12px;border-radius:14px}
+  .om-card-label{margin-bottom:12px}
+  .om-field{margin-bottom:12px}
+  .om-row{gap:11px}
+  .om-label{margin-bottom:6px}
+  .om-input{padding:12px 13px;font-size:16px}      /* >=16px prevents iOS auto-zoom */
+  .om-amount-input{font-size:17px}
+  .om-select{background-position:right 12px center;padding-right:36px}
+  .om-segment-btn{padding:11px;font-size:14px}
+  .om-nav{padding:0 16px 16px;gap:10px}
+  .om-nav-next,.om-nav-back{padding:14px 18px;font-size:15px}
+  .om-agreement-card{padding:16px}
+  .om-photo-upload{gap:13px;padding:15px}
+  .om-photo-circle{width:52px;height:52px;font-size:21px}
+  .om-upload-empty{padding:20px 16px}
+}
+@media (max-width:540px){
+  /* keep these neat & compact instead of stacking tall */
+  .om-loan-cards{grid-template-columns:repeat(3,1fr)}
+  .om-loan-card{padding:13px 6px}
+  .om-loan-card-icon{font-size:21px;margin-bottom:5px}
+  .om-loan-card-label{font-size:12px}
+  .om-amount-preview{flex-direction:row;gap:6px;padding:13px 10px}
+  .om-amount-preview-val{font-size:1rem}
+  .om-amount-preview-label{font-size:9.5px}
+  .om-amount-divider{width:1px;height:auto;align-self:stretch}
+}
 </style>
 </head>
 
@@ -680,7 +724,6 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
   <div class="hero-rule" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-inner">
-      <span class="hero-pill rv"><span class="tag">Registered</span> Ghana Registrar General's Department</span>
       <h1 class="hero-h1 rv d1">Save together.<br/>Borrow smart.<br/><em>Trade &amp; grow.</em></h1>
       <p class="hero-sub rv d2">StackUp Nest is Ghana's most disciplined savings circle — structured contributions, smart member loans, and an active trading arm, run as one transparent institution.</p>
       <div class="hero-btns rv d2">
