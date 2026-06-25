@@ -8,6 +8,21 @@
 <meta property="og:title" content="StackUp Nest — Save. Borrow. Trade."/>
 <meta property="og:description" content="Ghana's most disciplined savings, loans and trading circle — managed through a secure digital member portal."/>
 <meta property="og:type" content="website"/>
+<!-- ============ SEO / SOCIAL — update DOMAIN to your live URL ============ -->
+<link rel="canonical" href="https://stackupnest.com/"/>
+<meta property="og:url" content="https://stackupnest.com/"/>
+<meta property="og:site_name" content="StackUp Nest"/>
+<meta property="og:locale" content="en_GH"/>
+<meta property="og:image" content="https://i.ibb.co/zW1gzyZz/Stack-Up-Nest-Logo1.png"/>
+<meta property="og:image:alt" content="StackUp Nest logo"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="StackUp Nest — Save. Borrow. Trade."/>
+<meta name="twitter:description" content="Ghana's most disciplined savings, loans and trading circle — managed through a secure digital member portal."/>
+<meta name="twitter:image" content="https://i.ibb.co/zW1gzyZz/Stack-Up-Nest-Logo1.png"/>
+<meta name="robots" content="index, follow"/>
+<meta name="author" content="StackUp Nest"/>
+<link rel="icon" href="https://i.ibb.co/zW1gzyZz/Stack-Up-Nest-Logo1.png"/>
+<link rel="apple-touch-icon" href="https://i.ibb.co/zW1gzyZz/Stack-Up-Nest-Logo1.png"/>
 <title>StackUp Nest — Save. Borrow. Trade.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -649,8 +664,9 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
   #apply-modal-box{max-width:none;max-height:100vh;max-height:100dvh;height:100vh;height:100dvh;border-radius:0;border:0}
   .om-stepper{padding:13px 16px;gap:10px}
   .om-step-num{width:28px;height:28px;font-size:13px}
-  .om-step-label{font-size:12.5px}
-  .om-close-btn{width:36px;height:36px}
+  .om-step-label{display:none}            /* avoid colliding with close btn; body shows "STEP x OF 2" */
+  .om-step{gap:0}
+  .om-close-btn{position:static;width:36px;height:36px;flex-shrink:0}
   .om-step-body{padding:18px 16px}
   .om-step-eyebrow{margin-bottom:7px}
   .om-step-title{font-size:1.5rem;margin-bottom:5px}
@@ -682,7 +698,63 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
   .om-amount-preview-label{font-size:9.5px}
   .om-amount-divider{width:1px;height:auto;align-self:stretch}
 }
+/* ============================================================
+   LEGAL MODAL + a11y states
+   ============================================================ */
+#legal-overlay{position:fixed;inset:0;z-index:1100;display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+#legal-overlay.open{opacity:1;visibility:visible}
+#legal-bg{position:absolute;inset:0;background:rgba(4,14,9,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#legal-box{position:relative;z-index:1;display:flex;flex-direction:column;background:var(--surface);color:var(--on-light);border:1px solid var(--line);border-radius:var(--r-xl);width:100%;max-width:680px;max-height:90vh;overflow:hidden;transform:scale(.96) translateY(18px);transition:transform .35s cubic-bezier(.2,.85,.25,1);box-shadow:var(--sh-3)}
+#legal-overlay.open #legal-box{transform:none}
+.legal-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:20px clamp(20px,4vw,32px);border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface)}
+.legal-title{font-family:var(--f-disp);font-weight:600;font-size:clamp(1.4rem,3.5vw,1.9rem);letter-spacing:-.02em}
+.legal-head .om-close-btn{position:static}
+.legal-body{padding:clamp(20px,4vw,32px);overflow-y:auto;font-size:14.5px;line-height:1.7;color:var(--on-light-2)}
+.legal-body h3{font-family:var(--f-disp);font-weight:600;font-size:1.15rem;color:var(--on-light);margin:22px 0 8px}
+.legal-body h3:first-child{margin-top:0}
+.legal-body p{margin-bottom:12px}
+.legal-body ul{margin:0 0 12px 18px;display:flex;flex-direction:column;gap:6px}
+.legal-body .legal-meta{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--on-light-faint);margin-bottom:18px}
+.legal-body .legal-note{margin-top:22px;padding:14px 16px;border-radius:var(--r-md);background:var(--paper-2);border:1px solid var(--line);font-size:12.5px;color:var(--on-light-mut)}
+.legal-body a{color:var(--em-deep);font-weight:600}
+.footer-legal{display:flex;gap:18px;flex-wrap:wrap}
+.footer-legal a{color:var(--on-dark-mut);font-size:13px;transition:color .2s}
+.footer-legal a:hover{color:var(--em-bright)}
+/* form validation state */
+.om-input[aria-invalid="true"]{border-color:var(--danger);box-shadow:0 0 0 4px rgba(207,68,68,.14)}
+@media (max-width:680px){
+  #legal-overlay{padding:0}
+  #legal-box{max-width:none;max-height:100vh;max-height:100dvh;height:100vh;height:100dvh;border-radius:0;border:0}
+  .legal-head{padding:14px 16px}
+  .legal-body{padding:18px 16px;font-size:14px}
+}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  "name": "StackUp Nest",
+  "description": "Ghana's disciplined savings circle, smart member loans, and trading group — managed through a secure digital member portal.",
+  "url": "https://stackupnest.com/",
+  "logo": "https://i.ibb.co/zW1gzyZz/Stack-Up-Nest-Logo1.png",
+  "image": "https://i.ibb.co/zW1gzyZz/Stack-Up-Nest-Logo1.png",
+  "telephone": "+233540281796",
+  "email": "gomezrychmund244@gmail.com",
+  "areaServed": "GH",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Accra",
+    "addressCountry": "GH"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+233540281796",
+    "contactType": "customer support",
+    "areaServed": "GH",
+    "availableLanguage": ["en"]
+  }
+}
+</script>
 </head>
 
 <body>
@@ -1167,9 +1239,21 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
       <div class="footer-col"><h4>Group</h4><a href="#how">How it works</a><a href="#features">Features</a><a href="#voices">Members</a><a href="#faq">FAQ</a></div>
       <div class="footer-col"><h4>Contact</h4><a href="mailto:gomezrychmund244@gmail.com">gomezrychmund244@gmail.com</a><a href="tel:+233540281796">+233 540 281 796</a><a href="#">Accra, Ghana</a></div>
     </div>
-    <div class="footer-bottom"><p>© 2025 StackUp Nest. All rights reserved.</p><span>SAVE · BORROW · TRADE</span></div>
+    <div class="footer-bottom"><p>© 2025 StackUp Nest. All rights reserved.</p><div class="footer-legal"><a href="#" onclick="openLegal('privacy');return false;">Privacy Policy</a><a href="#" onclick="openLegal('terms');return false;">Terms of Service</a></div><span>SAVE · BORROW · TRADE</span></div>
   </div>
 </footer>
+
+<!-- ============ LEGAL MODAL (Privacy / Terms) ============ -->
+<div id="legal-overlay" role="dialog" aria-modal="true" aria-labelledby="legal-title">
+  <div id="legal-bg" onclick="closeLegal()"></div>
+  <div id="legal-box">
+    <div class="legal-head">
+      <h2 class="legal-title" id="legal-title">Legal</h2>
+      <button class="om-close-btn" onclick="closeLegal()" aria-label="Close"><span class="mi mi-20">close</span></button>
+    </div>
+    <div class="legal-body" id="legal-body"><!-- injected --></div>
+  </div>
+</div>
 
 <!-- ============ APPLY MODAL — premium two-step onboarding ============ -->
 <div id="apply-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="om-title">
@@ -1402,7 +1486,7 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
       <div class="om-agreement-card">
         <div class="om-agreement-points">
           <div class="om-agreement-point">Contribution reductions cannot go below 70% of your fixed amount per group rules.</div>
-          <div class="om-agreement-point">I have read and agree to abide by the FutureFund Group Rules &amp; Guidelines (V1.0).</div>
+          <div class="om-agreement-point">I have read and agree to abide by the StackUp Nest Group Rules &amp; Guidelines (V1.0).</div>
           <div class="om-agreement-point">I am committed to saving consistently and participating seriously in the group.</div>
         </div>
         <div class="om-agreement-footer" onclick="omToggleAgreement()" id="om-agreement-footer" role="checkbox" aria-checked="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();omToggleAgreement()}">
@@ -1688,9 +1772,9 @@ function omGoStep2(){
   var name  = (document.getElementById('apply-name').value||'').trim();
   var phone = (document.getElementById('apply-phone').value||'').trim();
   var email = (document.getElementById('apply-email').value||'').trim();
-  if(!name)  { _omMsg(1,'Please enter your full name.','error'); return; }
-  if(!phone) { _omMsg(1,'Please enter your phone number.','error'); return; }
-  if(!email || email.indexOf('@')===-1) { _omMsg(1,'Please enter a valid email address.','error'); return; }
+  if(!name)  { _omInvalid('apply-name');  _omMsg(1,'Please enter your full name.','error'); return; }
+  if(!phone) { _omInvalid('apply-phone'); _omMsg(1,'Please enter your phone number.','error'); return; }
+  if(!email || email.indexOf('@')===-1) { _omInvalid('apply-email'); _omMsg(1,'Please enter a valid email address.','error'); return; }
   _omGoStep(2);
 }
 
@@ -1853,7 +1937,7 @@ function submitApplyForm(){
   var contribType  = document.getElementById('apply-contrib-type').value;
   var contribAmount= (document.getElementById('apply-contrib-amount').value||'').trim();
   if(!contribType)   { _omMsg(2,'Please select Weekly or Monthly contribution.','error'); return; }
-  if(!contribAmount || parseFloat(contribAmount)<=0){ _omMsg(2,'Please enter a valid contribution amount.','error'); return; }
+  if(!contribAmount || parseFloat(contribAmount)<=0){ _omInvalid('apply-contrib-amount'); _omMsg(2,'Please enter a valid contribution amount.','error'); return; }
   if(!_omAgreed)     { _omMsg(2,'Please accept the Membership Agreement to proceed.','error'); return; }
 
   var btn=document.getElementById('apply-submit-btn');
@@ -1942,6 +2026,110 @@ function scTab(i, btn){
   btn.classList.add('active'); btn.setAttribute('aria-selected','true');
   document.querySelectorAll('.sc-panel').forEach(function(p,idx){ p.classList.toggle('active', idx===i); });
 }
+
+/* ============================================================
+   LEGAL MODALS (Privacy / Terms) + MODAL UX (Esc, focus trap, a11y)
+   ============================================================ */
+var LEGAL_CONTENT = {
+  privacy: {
+    title: 'Privacy Policy',
+    html: `
+      <div class="legal-meta">Last updated: June 2025 · Version 1.0</div>
+      <p>StackUp Nest ("we", "us", "our") is committed to protecting the privacy of our members and applicants. This policy explains what information we collect, how we use it, and your rights.</p>
+      <h3>1. Information we collect</h3>
+      <ul>
+        <li>Identity details you provide (name, date of birth, gender, profile photo, Ghana Card number/image).</li>
+        <li>Contact details (phone, WhatsApp, email, location).</li>
+        <li>Membership details (contribution schedule and amount, loan interest, cashout method, next of kin).</li>
+      </ul>
+      <h3>2. How we use your information</h3>
+      <p>We use your information solely to manage your membership — processing contributions, loans, payouts, communication, and meeting our record-keeping obligations.</p>
+      <h3>3. Storage &amp; security</h3>
+      <p>Your data is transmitted over an encrypted connection and stored securely. Access is restricted to authorised group administrators.</p>
+      <h3>4. Sharing</h3>
+      <p>We do not sell your data. We only share it where required to operate the group (e.g. mobile-money or bank payout) or where required by law.</p>
+      <h3>5. Your rights</h3>
+      <p>You may request access to, correction of, or deletion of your personal data by contacting us at <a href="mailto:gomezrychmund244@gmail.com">our support email</a> or +233 540 281 796.</p>
+      <h3>6. Contact</h3>
+      <p>StackUp Nest, Accra, Ghana. Email: <a href="mailto:gomezrychmund244@gmail.com">gomezrychmund244@gmail.com</a>.</p>
+      <div class="legal-note">This is a starter template provided for convenience. Please have it reviewed by a qualified legal professional before relying on it, and update the placeholders to match your actual practices.</div>`
+  },
+  terms: {
+    title: 'Terms of Service',
+    html: `
+      <div class="legal-meta">Last updated: June 2025 · Version 1.0</div>
+      <p>These Terms govern your membership and use of the StackUp Nest savings, loans and trading circle. By applying for membership you agree to these Terms and to the StackUp Nest Group Rules &amp; Guidelines (V1.0).</p>
+      <h3>1. Membership</h3>
+      <p>Membership is open to eligible applicants who complete the application and are accepted by the group. We may decline or revoke membership for breaches of the Group Rules.</p>
+      <h3>2. Contributions</h3>
+      <p>You commit to contributing your chosen fixed amount on your selected schedule (weekly or monthly). Contribution reductions cannot go below 70% of your fixed amount per the Group Rules.</p>
+      <h3>3. Loans</h3>
+      <p>Loan eligibility, limits and terms are governed by the Group Rules and are at the discretion of the group. Members borrow against their own savings history.</p>
+      <h3>4. Payouts &amp; cashout</h3>
+      <p>End-of-cycle payouts are made in full through your selected method, subject to the group's schedule and verification.</p>
+      <h3>5. Conduct</h3>
+      <p>Members agree to participate honestly and consistently. Fraud, misrepresentation or persistent default may lead to removal.</p>
+      <h3>6. Changes</h3>
+      <p>We may update these Terms and the Group Rules. Material changes will be communicated to members.</p>
+      <h3>7. Governing law</h3>
+      <p>These Terms are governed by the laws of the Republic of Ghana.</p>
+      <div class="legal-note">This is a starter template provided for convenience. Please have it reviewed by a qualified legal professional before relying on it, and update the placeholders to match your actual practices.</div>`
+  }
+};
+function openLegal(key){
+  var c = LEGAL_CONTENT[key]; if(!c) return;
+  document.getElementById('legal-title').textContent = c.title;
+  document.getElementById('legal-body').innerHTML = c.html;
+  var box = document.getElementById('legal-body'); if(box) box.scrollTop = 0;
+  document.getElementById('legal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(function(){ var b=document.querySelector('#legal-box .om-close-btn'); if(b) b.focus(); }, 60);
+}
+function closeLegal(){
+  document.getElementById('legal-overlay').classList.remove('open');
+  if(!_anyModalOpen()) document.body.style.overflow = '';
+}
+
+/* mark a field invalid for screen readers + visually; auto-clears on input */
+function _omInvalid(id){
+  var el = document.getElementById(id); if(!el) return;
+  el.setAttribute('aria-invalid','true');
+  try{ el.focus(); }catch(e){}
+  var clear = function(){ el.removeAttribute('aria-invalid'); el.removeEventListener('input', clear); };
+  el.addEventListener('input', clear);
+}
+
+/* ---- shared modal UX: Esc to close + focus trap ---- */
+function _openOverlay(){
+  var ids = ['legal-overlay','apply-modal-overlay','modal-overlay'];
+  for(var i=0;i<ids.length;i++){ var o=document.getElementById(ids[i]); if(o && o.classList.contains('open')) return o; }
+  return null;
+}
+function _anyModalOpen(){ return !!_openOverlay(); }
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    var o = _openOverlay();
+    if(o){
+      if(o.id==='legal-overlay') closeLegal();
+      else if(o.id==='apply-modal-overlay') closeApplyModal();
+      else if(o.id==='modal-overlay' && typeof closeModal==='function') closeModal();
+      return;
+    }
+    var mm = document.getElementById('mobileMenu');
+    if(mm && mm.classList.contains('open') && typeof toggleMenu==='function') toggleMenu();
+    return;
+  }
+  if(e.key === 'Tab'){
+    var ov = _openOverlay(); if(!ov) return;
+    var box = ov.querySelector('#legal-box,#apply-modal-box,#modal-box') || ov;
+    var nodes = box.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])');
+    var f = Array.prototype.filter.call(nodes, function(el){ return el.offsetParent !== null; });
+    if(!f.length) return;
+    var first = f[0], last = f[f.length-1];
+    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
+});
 
 </script>
 </body>
