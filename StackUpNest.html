@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta name="description" content="StackUp Nest — Ghana's premium savings circle, smart member loans, and trading group. Save together. Borrow smart. Trade and grow."/>
+<meta name="theme-color" content="#04140f"/>
+<meta property="og:title" content="StackUp Nest — Save. Borrow. Trade."/>
+<meta property="og:description" content="Ghana's most disciplined savings, loans and trading circle — managed through a secure digital member portal."/>
+<meta property="og:type" content="website"/>
+<title>StackUp Nest — Save. Borrow. Trade.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ============================================================
+   STACKUP NEST — PREMIUM REDESIGN
+   Design system: trust-first light fintech (Stripe / Mercury / Ramp DNA)
+   ============================================================ */
+
+/* ---- Reset ---- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+
+/* ---- Design tokens ---- */
+:root{
+  /* Brand */
+  --emerald:#00A35C;
+  --emerald-bright:#00C46A;
+  --emerald-deep:#0B6B45;
+  --emerald-ink:#063b27;
+  --grad:linear-gradient(135deg,#00C46A 0%,#00A35C 60%,#0B8A52 100%);
+  --grad-soft:linear-gradient(135deg,rgba(0,196,106,.12),rgba(0,163,92,.04));
+
+  /* Neutrals */
+  --ink:#0A1A15;
+  --ink-2:#33453f;
+  --muted:#5d6f68;
+  --faint:#8a978f;
+  --bg:#ffffff;
+  --bg-soft:#f5f8f6;
+  --bg-mute:#eef3f0;
+  --surface:#ffffff;
+  --line:rgba(10,26,21,.09);
+  --line-strong:rgba(10,26,21,.16);
+
+  /* Dark hero panel */
+  --night:#04140f;
+  --night-2:#0a2018;
+
+  /* Status */
+  --danger:#d64545;
+  --danger-bg:#fdf1f1;
+  --ok:#0e9f5e;
+
+  /* Radius */
+  --r-xs:8px; --r-sm:12px; --r-md:16px; --r-lg:22px; --r-xl:30px; --r-pill:999px;
+
+  /* Shadows — soft, layered, premium */
+  --sh-xs:0 1px 2px rgba(10,26,21,.06);
+  --sh-sm:0 2px 8px rgba(10,26,21,.06),0 1px 2px rgba(10,26,21,.04);
+  --sh-md:0 10px 30px -12px rgba(10,26,21,.18),0 4px 10px -6px rgba(10,26,21,.08);
+  --sh-lg:0 28px 70px -28px rgba(8,40,28,.35),0 10px 24px -16px rgba(10,26,21,.12);
+  --sh-em:0 14px 40px -14px rgba(0,150,84,.45);
+
+  /* Layout */
+  --maxw:1200px;
+  --gut:clamp(20px,5vw,40px);
+  --nav-h:72px;
+
+  /* Type */
+  --f-display:'Space Grotesk','Inter',system-ui,sans-serif;
+  --f-body:'Inter',system-ui,-apple-system,sans-serif;
+  --f-mono:'DM Mono',ui-monospace,monospace;
+}
+
+/* ---- Base ---- */
+body{
+  font-family:var(--f-body);
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit;font-size:16px}
+::selection{background:rgba(0,196,106,.22);color:var(--ink)}
+:focus-visible{outline:2.5px solid var(--emerald);outline-offset:2px;border-radius:6px}
+
+/* ---- Layout helpers ---- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--gut);padding-right:var(--gut)}
+.section{padding:clamp(72px,11vw,140px) 0}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--emerald-deep);
+  background:var(--grad-soft);border:1px solid rgba(0,163,92,.16);
+  padding:7px 14px;border-radius:var(--r-pill);
+}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--emerald-bright);box-shadow:0 0 0 4px rgba(0,196,106,.16)}
+.h-sec{
+  font-family:var(--f-display);font-weight:700;letter-spacing:-.025em;line-height:1.05;
+  font-size:clamp(2rem,4.6vw,3.4rem);color:var(--ink);
+}
+.sub-sec{color:var(--muted);font-size:clamp(1rem,1.6vw,1.18rem);line-height:1.65;max-width:60ch}
+.accent-text{color:var(--emerald);}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+/* ---- Buttons ---- */
+.btn{
+  --bx:0;--by:0;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:var(--f-body);font-weight:600;font-size:15px;letter-spacing:-.01em;
+  padding:14px 26px;border-radius:var(--r-pill);
+  transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .25s,color .2s,border-color .2s;
+  white-space:nowrap;will-change:transform;
+}
+.btn .arr{transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.btn:hover .arr{transform:translateX(4px)}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:var(--sh-em)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 44px -12px rgba(0,150,84,.6)}
+.btn-primary:active{transform:translateY(0)}
+.btn-ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line-strong);box-shadow:var(--sh-xs)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--emerald);color:var(--emerald-deep);box-shadow:var(--sh-sm)}
+.btn-light{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px)}
+.btn-light:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
+.btn-lg{padding:16px 32px;font-size:16px}
+
+/* ---- Reveal animation ---- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}
+.reveal.d2{transition-delay:.16s}
+.reveal.d3{transition-delay:.24s}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+#navbar{
+  position:fixed;top:0;left:0;right:0;z-index:900;height:var(--nav-h);
+  display:flex;align-items:center;
+  transition:background .3s,box-shadow .3s,border-color .3s;
+  border-bottom:1px solid transparent;
+}
+#navbar.scrolled{
+  background:rgba(255,255,255,.82);backdrop-filter:saturate(160%) blur(16px);-webkit-backdrop-filter:saturate(160%) blur(16px);
+  border-bottom-color:var(--line);box-shadow:0 1px 0 rgba(10,26,21,.02),0 8px 30px -20px rgba(10,26,21,.2);
+}
+.nav-inner{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.nav-logo{display:flex;align-items:center;gap:11px;font-family:var(--f-display);font-weight:700;font-size:18px;letter-spacing:-.02em;color:#fff;transition:color .3s}
+#navbar.scrolled .nav-logo,body.nav-light .nav-logo{color:var(--ink)}
+.nav-logo-mark{width:38px;height:38px;border-radius:11px;overflow:hidden;box-shadow:var(--sh-sm);flex-shrink:0;background:var(--night)}
+.nav-logo-mark img{width:100%;height:100%;object-fit:cover}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{
+  position:relative;font-size:14.5px;font-weight:500;color:rgba(255,255,255,.82);
+  padding:9px 14px;border-radius:var(--r-pill);transition:color .2s,background .2s;
+}
+.nav-links a:hover{color:#fff}
+#navbar.scrolled .nav-links a{color:var(--ink-2)}
+#navbar.scrolled .nav-links a:hover{color:var(--emerald-deep);background:var(--bg-soft)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-cta{
+  font-size:14.5px;font-weight:600;padding:10px 20px;border-radius:var(--r-pill);
+  background:var(--grad);color:#fff;box-shadow:var(--sh-em);transition:transform .25s,box-shadow .25s;
+}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 16px 36px -12px rgba(0,150,84,.6)}
+.hamburger{display:none;flex-direction:column;gap:5px;width:42px;height:42px;align-items:center;justify-content:center;border-radius:12px;transition:background .2s}
+.hamburger span{width:20px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+#navbar.scrolled .hamburger span{background:var(--ink)}
+
+/* Mobile menu */
+.mobile-menu{
+  position:fixed;inset:0;z-index:950;background:var(--night);
+  display:flex;flex-direction:column;justify-content:center;gap:6px;padding:40px var(--gut);
+  transform:translateX(100%);transition:transform .45s cubic-bezier(.7,0,.2,1);
+}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a{font-family:var(--f-display);font-size:1.7rem;font-weight:600;color:#fff;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.mobile-menu a.mm-cta{margin-top:20px;border:none;background:var(--grad);color:#fff;text-align:center;border-radius:var(--r-pill);font-size:1.1rem;padding:16px;box-shadow:var(--sh-em)}
+.mobile-close{position:absolute;top:22px;right:var(--gut);width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.08);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center}
+
+/* ============================================================
+   HERO — dark emerald panel for impact
+   ============================================================ */
+#hero{
+  position:relative;color:#fff;overflow:hidden;
+  background:radial-gradient(120% 120% at 80% -10%,#0c3023 0%,var(--night-2) 42%,var(--night) 100%);
+  padding:calc(var(--nav-h) + clamp(56px,11vw,110px)) 0 clamp(72px,12vw,128px);
+}
+.hero-aurora{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hero-aurora::before,.hero-aurora::after{content:"";position:absolute;border-radius:50%;filter:blur(80px);opacity:.55}
+.hero-aurora::before{width:520px;height:520px;background:radial-gradient(circle,rgba(0,196,106,.5),transparent 65%);top:-160px;right:-80px;animation:floatA 16s ease-in-out infinite}
+.hero-aurora::after{width:440px;height:440px;background:radial-gradient(circle,rgba(0,120,90,.45),transparent 65%);bottom:-180px;left:-100px;animation:floatB 20s ease-in-out infinite}
+@keyframes floatA{50%{transform:translate(-40px,40px) scale(1.1)}}
+@keyframes floatB{50%{transform:translate(50px,-30px) scale(1.08)}}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(120% 90% at 50% 0%,#000 35%,transparent 80%);-webkit-mask-image:radial-gradient(120% 90% at 50% 0%,#000 35%,transparent 80%)}
+.hero-inner{position:relative;z-index:2;text-align:center;max-width:920px;margin:0 auto}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:9px;margin-bottom:28px;
+  font-family:var(--f-mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.86);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+  padding:8px 16px;border-radius:var(--r-pill);backdrop-filter:blur(8px);
+}
+.hero-pill-dot{width:7px;height:7px;border-radius:50%;background:var(--emerald-bright);box-shadow:0 0 0 4px rgba(0,196,106,.22);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,196,106,.4)}50%{box-shadow:0 0 0 7px rgba(0,196,106,0)}}
+.hero-title{font-family:var(--f-display);font-weight:700;letter-spacing:-.035em;line-height:1.02;font-size:clamp(2.6rem,7.2vw,5.4rem);margin-bottom:26px}
+.hero-title .accent{background:linear-gradient(120deg,#22FF88,#00C46A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.6;color:rgba(255,255,255,.74);max-width:640px;margin:0 auto 38px}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.hero-trust{margin-top:46px;display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:center;align-items:center;color:rgba(255,255,255,.6);font-size:13.5px}
+.hero-trust span{display:inline-flex;align-items:center;gap:8px}
+.hero-trust svg{width:16px;height:16px;color:var(--emerald-bright)}
+
+/* Hero floating stat cards */
+.hero-cards{position:relative;z-index:2;max-width:var(--maxw);margin:clamp(50px,8vw,84px) auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.hero-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-md);padding:22px 22px;backdrop-filter:blur(10px);text-align:left;transition:transform .3s,background .3s,border-color .3s}
+.hero-stat:hover{transform:translateY(-4px);background:rgba(255,255,255,.08);border-color:rgba(0,196,106,.35)}
+.hero-stat-num{font-family:var(--f-display);font-weight:700;font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.02em;color:#fff}
+.hero-stat-num sup{color:var(--emerald-bright);font-size:.55em;font-weight:600;top:-.5em}
+.hero-stat-lbl{color:rgba(255,255,255,.6);font-size:12.5px;margin-top:6px;letter-spacing:.01em}
+
+/* wave divider */
+.hero-wave{position:relative;z-index:2;margin-top:clamp(40px,7vw,70px);height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent)}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+#about{background:var(--bg)}
+.about-head{text-align:center;max-width:760px;margin:0 auto 60px}
+.about-head .eyebrow{margin-bottom:22px}
+.about-lead{color:var(--muted);font-size:clamp(1.05rem,1.8vw,1.25rem);line-height:1.7;margin-top:22px}
+.about-reg{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:9px 18px;border-radius:var(--r-pill);background:var(--bg-soft);border:1px solid var(--line);font-size:13px;color:var(--ink-2);font-weight:500}
+.about-reg-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald);box-shadow:0 0 0 4px rgba(0,163,92,.14)}
+
+.about-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0 auto 64px;max-width:980px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-md);overflow:hidden;
+}
+.about-stat{padding:30px 24px;text-align:center;position:relative}
+.about-stat:not(:last-child)::after{content:"";position:absolute;right:0;top:22%;height:56%;width:1px;background:var(--line)}
+.about-stat-num{font-family:var(--f-display);font-weight:700;font-size:clamp(1.6rem,3.2vw,2.3rem);letter-spacing:-.02em;color:var(--ink)}
+.about-stat-num sup{color:var(--emerald);font-size:.5em;font-weight:600;top:-.7em}
+.about-stat-lbl{color:var(--muted);font-size:12.5px;margin-top:7px;letter-spacing:.02em}
+
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pillar{
+  position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:34px 30px 30px;box-shadow:var(--sh-sm);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s;overflow:hidden;
+}
+.pillar::before{content:"";position:absolute;left:0;top:0;height:3px;width:100%;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.pillar:hover{transform:translateY(-6px);box-shadow:var(--sh-lg);border-color:rgba(0,163,92,.25)}
+.pillar:hover::before{transform:scaleX(1)}
+.pillar-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.pillar-icon{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;font-size:26px;background:var(--grad-soft);border:1px solid rgba(0,163,92,.16)}
+.pillar-num{font-family:var(--f-mono);font-size:13px;color:var(--faint);letter-spacing:.05em}
+.pillar h3{font-family:var(--f-display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;margin-bottom:12px}
+.pillar p{color:var(--muted);font-size:15px;line-height:1.65}
+.pillar-tag{display:inline-block;margin-top:18px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--emerald-deep);background:var(--grad-soft);border:1px solid rgba(0,163,92,.16);padding:5px 12px;border-radius:var(--r-pill)}
+
+.why-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:30px}
+.why-item{padding:26px 22px;border-radius:var(--r-md);background:var(--bg-soft);border:1px solid var(--line);transition:transform .3s,box-shadow .3s}
+.why-item:hover{transform:translateY(-4px);box-shadow:var(--sh-sm);background:var(--surface)}
+.why-icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:20px;background:var(--surface);border:1px solid var(--line);margin-bottom:14px}
+.why-label{font-family:var(--f-display);font-weight:600;font-size:1.02rem;margin-bottom:7px}
+.why-body{color:var(--muted);font-size:13.5px;line-height:1.6}
+
+/* ============================================================
+   DIVISIONS
+   ============================================================ */
+#divisions{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sec-head{text-align:center;max-width:680px;margin:0 auto 56px}
+.sec-head .eyebrow{margin-bottom:22px}
+.sec-head .sub-sec{margin:18px auto 0}
+.div-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.div-card{
+  position:relative;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:32px 30px;box-shadow:var(--sh-sm);overflow:hidden;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s;
+}
+.div-card::after{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(0,196,106,.08),transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none}
+.div-card:hover{transform:translateY(-6px);box-shadow:var(--sh-lg);border-color:rgba(0,163,92,.28)}
+.div-card:hover::after{opacity:1}
+.div-card-num{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;color:var(--faint);text-transform:uppercase}
+.div-icon{width:60px;height:60px;border-radius:17px;display:grid;place-items:center;font-size:28px;background:var(--grad-soft);border:1px solid rgba(0,163,92,.16);margin:18px 0 20px}
+.div-card h3{font-family:var(--f-display);font-size:1.4rem;font-weight:600;letter-spacing:-.02em;margin-bottom:12px}
+.div-card p{color:var(--muted);font-size:15px;line-height:1.65;margin-bottom:22px}
+.div-open{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14.5px;color:var(--emerald-deep)}
+.div-open .arr{transition:transform .25s}
+.div-card:hover .div-open .arr{transform:translateX(5px)}
+
+/* ============================================================
+   HOW IT WORKS — clean vertical timeline
+   ============================================================ */
+#how{background:var(--bg)}
+.how-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:1000px;margin:0 auto}
+.how-step{
+  position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:30px 28px;box-shadow:var(--sh-sm);transition:transform .35s,box-shadow .35s,border-color .35s;
+}
+.how-step:hover{transform:translateY(-5px);box-shadow:var(--sh-md);border-color:rgba(0,163,92,.22)}
+.how-step-head{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.how-num{flex-shrink:0;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:1.1rem;color:#fff;background:var(--grad);box-shadow:var(--sh-em)}
+.how-badge{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--emerald-deep);background:var(--grad-soft);border:1px solid rgba(0,163,92,.16);padding:5px 12px;border-radius:var(--r-pill)}
+.how-step h3{font-family:var(--f-display);font-size:1.25rem;font-weight:600;letter-spacing:-.02em;margin-bottom:10px}
+.how-step p{color:var(--muted);font-size:14.5px;line-height:1.65;margin-bottom:18px}
+.how-feats{display:flex;flex-wrap:wrap;gap:8px}
+.how-feats span{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-2);background:var(--bg-soft);border:1px solid var(--line);padding:6px 12px;border-radius:var(--r-pill)}
+.how-feats span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--emerald)}
+
+/* ============================================================
+   PORTAL PREVIEW (dashboard) — pure SVG/CSS, presentational
+   ============================================================ */
+#portal{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 100%);border-top:1px solid var(--line)}
+.portal-layout{display:grid;grid-template-columns:.95fr 1.15fr;gap:clamp(32px,5vw,64px);align-items:center}
+.portal-copy .eyebrow{margin-bottom:22px}
+.portal-copy h2{margin-bottom:18px}
+.portal-list{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:14px}
+.portal-list li{display:flex;gap:13px;align-items:flex-start;color:var(--ink-2);font-size:15px;line-height:1.55}
+.portal-check{flex-shrink:0;width:24px;height:24px;border-radius:8px;display:grid;place-items:center;background:var(--grad-soft);border:1px solid rgba(0,163,92,.2);color:var(--emerald-deep);font-size:13px;font-weight:700;margin-top:1px}
+
+/* device mock */
+.portal-device{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--sh-lg);padding:20px;overflow:hidden}
+.portal-device::before{content:"";position:absolute;top:0;left:0;right:0;height:140px;background:radial-gradient(120% 140% at 80% -20%,rgba(0,196,106,.1),transparent 60%);pointer-events:none}
+.pd-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;position:relative}
+.pd-user{display:flex;align-items:center;gap:11px}
+.pd-avatar{width:40px;height:40px;border-radius:12px;background:var(--grad);display:grid;place-items:center;color:#fff;font-weight:700;font-family:var(--f-display);box-shadow:var(--sh-em)}
+.pd-hi{font-size:12px;color:var(--muted)}
+.pd-name{font-family:var(--f-display);font-weight:600;font-size:15px}
+.pd-badge{font-size:11px;font-family:var(--f-mono);letter-spacing:.06em;color:var(--emerald-deep);background:var(--grad-soft);border:1px solid rgba(0,163,92,.18);padding:6px 11px;border-radius:var(--r-pill)}
+.pd-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px}
+.pd-card{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--r-md);padding:16px}
+.pd-card-lbl{font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:7px;margin-bottom:8px}
+.pd-card-lbl .dot{width:7px;height:7px;border-radius:3px;background:var(--emerald)}
+.pd-card-val{font-family:var(--f-display);font-weight:700;font-size:1.5rem;letter-spacing:-.02em}
+.pd-card-sub{font-size:11.5px;color:var(--emerald-deep);margin-top:4px;font-weight:500}
+.pd-chart-wrap{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--r-md);padding:16px 14px 10px}
+.pd-chart-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.pd-chart-title{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.pd-chart-legend{display:flex;gap:12px;font-size:10.5px;color:var(--muted)}
+.pd-chart-legend span{display:inline-flex;align-items:center;gap:5px}
+.pd-chart-legend i{width:14px;height:3px;border-radius:2px;display:inline-block}
+.pd-chart-area{position:relative;width:100%;height:140px}
+.pd-chart-area svg{width:100%;height:100%;overflow:visible}
+.chart-area-path{fill:url(#pdGrad)}
+.chart-line-path{fill:none;stroke:var(--emerald);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.chart-line-path2{fill:none;stroke:var(--line-strong);stroke-width:1.5;stroke-dasharray:4 5;stroke-linecap:round}
+.chart-dot{fill:#fff;stroke:var(--emerald);stroke-width:2.5;cursor:pointer;transition:r .2s}
+.chart-dot:hover{r:5}
+.pd-x{display:flex;justify-content:space-between;margin-top:8px;padding:0 2px}
+.pd-x span{font-size:9px;color:var(--faint);font-family:var(--f-mono)}
+.pd-tooltip{position:absolute;background:var(--ink);color:#fff;padding:8px 11px;border-radius:9px;font-size:11px;pointer-events:none;opacity:0;transition:opacity .2s;white-space:nowrap;box-shadow:var(--sh-md);z-index:5}
+.pd-tooltip strong{display:block;font-size:13px;font-family:var(--f-display)}
+
+/* ============================================================
+   TESTIMONIALS — marquee
+   ============================================================ */
+#testimonials{background:var(--bg);overflow:hidden}
+.testi-head{text-align:center;margin-bottom:50px}
+.testi-head .eyebrow{margin-bottom:22px}
+.testi-tracks{display:flex;flex-direction:column;gap:18px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.testi-track{display:flex;gap:18px;width:max-content;will-change:transform}
+.testi-track-fwd{animation:marqueeF 46s linear infinite}
+.testi-track-rev{animation:marqueeR 52s linear infinite}
+.testi-tracks:hover .testi-track{animation-play-state:paused}
+@keyframes marqueeF{to{transform:translateX(-50%)}}
+@keyframes marqueeR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.testi-card{width:380px;flex-shrink:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;box-shadow:var(--sh-sm)}
+.testi-stars{color:#f5a623;font-size:14px;letter-spacing:2px;margin-bottom:14px}
+.testi-card blockquote{font-size:15px;line-height:1.65;color:var(--ink-2);margin-bottom:20px}
+.testi-author{display:flex;align-items:center;gap:13px}
+.testi-avatar{width:44px;height:44px;border-radius:13px;background:var(--grad);display:grid;place-items:center;color:#fff;font-weight:700;font-family:var(--f-display);font-size:14px;box-shadow:var(--sh-em)}
+.testi-name{font-weight:600;font-size:14.5px}
+.testi-role{font-size:12.5px;color:var(--muted)}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+#faq{background:var(--bg-soft);border-top:1px solid var(--line)}
+.faq-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,5vw,70px);align-items:start}
+.faq-intro .eyebrow{margin-bottom:22px}
+.faq-intro p{color:var(--muted);margin-top:18px;font-size:15.5px;line-height:1.65}
+.faq-list{display:flex;flex-direction:column;gap:12px}
+.faq-item{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;transition:border-color .3s,box-shadow .3s}
+.faq-item:hover{border-color:var(--line-strong)}
+.faq-item.open{border-color:rgba(0,163,92,.3);box-shadow:var(--sh-sm)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;cursor:pointer;font-family:var(--f-display);font-weight:600;font-size:1.02rem;color:var(--ink)}
+.faq-icon{flex-shrink:0;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--bg-soft);border:1px solid var(--line);font-size:18px;color:var(--emerald-deep);transition:transform .3s,background .3s}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--grad);color:#fff;border-color:transparent}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.8,.2,1);color:var(--muted);font-size:14.5px;line-height:1.7;padding:0 24px}
+.faq-item.open .faq-a{max-height:340px;padding:0 24px 22px}
+
+/* ============================================================
+   CTA
+   ============================================================ */
+#cta{padding:clamp(40px,7vw,80px) 0}
+.cta-panel{
+  position:relative;overflow:hidden;text-align:center;border-radius:var(--r-xl);
+  background:radial-gradient(120% 130% at 80% -10%,#0c3023,var(--night-2) 45%,var(--night));
+  color:#fff;padding:clamp(54px,9vw,96px) var(--gut);box-shadow:var(--sh-lg);
+}
+.cta-panel .hero-aurora::before{opacity:.4}
+.cta-panel .eyebrow{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);color:#fff;margin-bottom:24px}
+.cta-panel .eyebrow::before{background:var(--emerald-bright)}
+.cta-title{position:relative;z-index:2;font-family:var(--f-display);font-weight:700;letter-spacing:-.03em;line-height:1.05;font-size:clamp(2.2rem,5.5vw,3.6rem);margin-bottom:20px}
+.cta-sub{position:relative;z-index:2;color:rgba(255,255,255,.72);font-size:clamp(1rem,1.8vw,1.2rem);max-width:560px;margin:0 auto 36px}
+.cta-btns{position:relative;z-index:2;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{background:var(--night);color:rgba(255,255,255,.7);padding:72px 0 36px}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer-logo{display:flex;align-items:center;gap:11px;font-family:var(--f-display);font-weight:700;font-size:18px;color:#fff;margin-bottom:16px}
+.footer-mark{width:34px;height:34px;border-radius:10px;overflow:hidden}
+.footer-mark img{width:100%;height:100%;object-fit:cover}
+.footer-brand p{font-size:14px;line-height:1.6;max-width:300px;margin-bottom:20px}
+.footer-socials{display:flex;gap:10px}
+.footer-social{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.8);font-size:13px;font-weight:600;transition:.25s}
+.footer-social:hover{background:var(--grad);color:#fff;border-color:transparent;transform:translateY(-3px)}
+.footer-col h4{font-family:var(--f-display);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;margin-bottom:16px}
+.footer-col a{display:block;font-size:14px;color:rgba(255,255,255,.62);padding:6px 0;transition:color .2s}
+.footer-col a:hover{color:var(--emerald-bright)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-top:28px;font-size:13px;color:rgba(255,255,255,.5)}
+.footer-bottom span{font-family:var(--f-mono);letter-spacing:.1em}
+
+/* ============================================================
+   DIVISION MODAL
+   ============================================================ */
+#modal-overlay,#apply-modal-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+#modal-overlay.open,#apply-modal-overlay.open{opacity:1;visibility:visible}
+#modal-bg,#apply-modal-bg{position:absolute;inset:0;background:rgba(6,20,15,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+#modal-box{position:relative;z-index:1;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);width:100%;max-width:760px;max-height:90vh;overflow-y:auto;transform:scale(.95) translateY(20px);transition:transform .4s cubic-bezier(.2,.8,.2,1);box-shadow:var(--sh-lg);padding:clamp(28px,5vw,52px)}
+#modal-overlay.open #modal-box{transform:none}
+.modal-close,.om-close-btn{position:absolute;top:20px;right:20px;width:40px;height:40px;border-radius:50%;background:var(--bg-soft);border:1px solid var(--line);color:var(--muted);font-size:17px;display:flex;align-items:center;justify-content:center;transition:.2s;z-index:6}
+.modal-close:hover,.om-close-btn:hover{background:var(--danger-bg);color:var(--danger);transform:rotate(90deg)}
+.modal-eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--emerald-deep);margin-bottom:10px}
+.modal-title{font-family:var(--f-display);font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;letter-spacing:-.02em;margin-bottom:14px}
+.modal-lead{color:var(--muted);font-size:15.5px;line-height:1.7;margin-bottom:26px}
+.modal-stat-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+.modal-stat{flex:1;min-width:120px;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--r-md);padding:18px}
+.modal-stat-val{font-family:var(--f-display);font-weight:700;font-size:1.5rem;color:var(--emerald-deep);letter-spacing:-.02em}
+.modal-stat-label{font-size:12px;color:var(--muted);margin-top:4px}
+.modal-divider{height:1px;background:var(--line);margin:6px 0 26px}
+.modal-features{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:30px}
+.modal-feature{display:flex;flex-direction:column;gap:8px}
+.modal-feature-icon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:20px;background:var(--grad-soft);border:1px solid rgba(0,163,92,.16)}
+.modal-feature h4{font-family:var(--f-display);font-size:1rem;font-weight:600}
+.modal-feature p{color:var(--muted);font-size:13.5px;line-height:1.6}
+.modal-cta{display:flex;gap:13px;flex-wrap:wrap}
+
+/* ============================================================
+   APPLY MODAL — premium multi-step wizard
+   (all class hooks preserved for existing JS)
+   ============================================================ */
+#apply-modal-box{position:relative;z-index:1;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);width:100%;max-width:720px;max-height:92vh;overflow-y:auto;transform:scale(.95) translateY(20px);transition:transform .4s cubic-bezier(.2,.8,.2,1);box-shadow:var(--sh-lg);scrollbar-width:thin}
+#apply-modal-overlay.open #apply-modal-box{transform:none}
+#apply-modal-box::-webkit-scrollbar{width:8px}
+#apply-modal-box::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:8px}
+
+/* Stepper header (sticky) */
+.om-stepper{position:sticky;top:0;z-index:8;display:flex;align-items:center;gap:14px;padding:22px clamp(24px,5vw,40px);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.om-step{display:flex;align-items:center;gap:10px}
+.om-step-num{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;font-family:var(--f-display);background:var(--bg-mute);color:var(--muted);border:1px solid var(--line);transition:.3s}
+.om-step-num.active{background:var(--grad);color:#fff;border-color:transparent;box-shadow:var(--sh-em)}
+.om-step-num.done{background:rgba(0,163,92,.12);color:var(--emerald-deep);border-color:rgba(0,163,92,.3)}
+.om-step-label{font-size:13.5px;font-weight:500;color:var(--muted);transition:.3s}
+.om-step-label.active{color:var(--ink);font-weight:600}
+.om-step-label.done{color:var(--emerald-deep)}
+.om-step-line{flex:1;height:3px;border-radius:3px;background:var(--bg-mute);position:relative;overflow:hidden;min-width:24px}
+.om-step-line::after{content:"";position:absolute;inset:0;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.om-step-line.done::after{transform:scaleX(1)}
+
+/* Honeypot */
+.om-hp{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;opacity:0}
+
+/* Body */
+.om-step-body{display:none;padding:clamp(26px,5vw,40px);animation:omFade .45s cubic-bezier(.2,.8,.2,1)}
+.om-step-body.active{display:block}
+@keyframes omFade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.om-step-eyebrow{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--emerald-deep);margin-bottom:10px}
+.om-step-title{font-family:var(--f-display);font-size:clamp(1.5rem,4vw,2rem);font-weight:700;letter-spacing:-.025em;margin-bottom:8px}
+.om-step-sub{color:var(--muted);font-size:14.5px;line-height:1.6;margin-bottom:26px}
+
+/* Cards (grouped sections) */
+.om-card{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;margin-bottom:18px}
+.om-card-label{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.om-card-label::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--emerald)}
+
+/* Fields */
+.om-field{margin-bottom:16px}
+.om-field:last-child{margin-bottom:0}
+.om-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.om-label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:7px;letter-spacing:.005em}
+.om-input{
+  width:100%;padding:13px 15px;font-size:15px;color:var(--ink);
+  background:var(--surface);border:1.5px solid var(--line-strong);border-radius:var(--r-sm);
+  transition:border-color .2s,box-shadow .2s,background .2s;
+}
+.om-input::placeholder{color:var(--faint)}
+.om-input:hover{border-color:var(--muted)}
+.om-input:focus{outline:none;border-color:var(--emerald);background:#fff;box-shadow:0 0 0 4px rgba(0,196,106,.13)}
+.om-select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235d6f68' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;cursor:pointer}
+.om-textarea{min-height:90px;resize:vertical;line-height:1.55}
+.om-hint{font-size:12px;color:var(--faint);margin-top:7px;line-height:1.45}
+
+/* Messages */
+.om-msg{display:none;margin-top:14px;padding:13px 16px;border-radius:var(--r-sm);font-size:13.5px;font-weight:500;align-items:center;gap:9px}
+.om-msg.show{display:flex;animation:omShake .4s}
+.om-msg.error{background:var(--danger-bg);color:var(--danger);border:1px solid rgba(214,69,69,.2)}
+.om-msg.error::before{content:"!";flex-shrink:0;width:18px;height:18px;border-radius:50%;background:var(--danger);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700}
+@keyframes omShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+
+/* Nav */
+.om-nav{display:flex;gap:12px;padding:0 clamp(26px,5vw,40px) clamp(26px,5vw,40px)}
+.om-nav-next{flex:1;background:var(--grad);color:#fff;font-weight:600;font-size:15px;padding:15px;border-radius:var(--r-pill);box-shadow:var(--sh-em);transition:transform .25s,box-shadow .25s,opacity .2s}
+.om-nav-next:hover{transform:translateY(-2px);box-shadow:0 16px 36px -12px rgba(0,150,84,.6)}
+.om-nav-next:disabled{opacity:.65;cursor:wait;transform:none}
+.om-nav-back{padding:15px 24px;border-radius:var(--r-pill);background:var(--surface);border:1.5px solid var(--line-strong);color:var(--ink-2);font-weight:600;font-size:15px;transition:.2s}
+.om-nav-back:hover{border-color:var(--emerald);color:var(--emerald-deep)}
+
+/* Segmented control */
+.om-segment{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--bg-mute);padding:5px;border-radius:var(--r-sm);border:1px solid var(--line)}
+.om-segment-btn{padding:12px;border-radius:9px;font-weight:600;font-size:14.5px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:8px;transition:.25s}
+.om-segment-btn:hover{color:var(--ink)}
+.om-segment-btn.active{background:var(--surface);color:var(--emerald-deep);box-shadow:var(--sh-sm)}
+
+/* Amount */
+.om-amount-wrap{position:relative;display:flex;align-items:center}
+.om-amount-currency{position:absolute;left:16px;font-family:var(--f-display);font-weight:700;font-size:18px;color:var(--emerald-deep);pointer-events:none}
+.om-amount-input{padding-left:38px!important;font-family:var(--f-display);font-weight:600;font-size:18px}
+.om-amount-preview{display:none;margin-top:14px;background:var(--surface);border:1px solid rgba(0,163,92,.22);border-radius:var(--r-md);padding:16px;align-items:center;justify-content:space-around;animation:omFade .4s}
+.om-amount-preview.show{display:flex}
+.om-amount-preview-item{text-align:center;flex:1}
+.om-amount-preview-val{font-family:var(--f-display);font-weight:700;font-size:1.15rem;color:var(--ink);letter-spacing:-.02em}
+.om-amount-preview-label{font-size:11px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.05em}
+.om-amount-divider{width:1px;align-self:stretch;background:var(--line)}
+
+/* Loan radio cards */
+.om-loan-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.om-loan-card{padding:18px 12px;text-align:center;border-radius:var(--r-md);background:var(--surface);border:1.5px solid var(--line-strong);cursor:pointer;transition:.25s}
+.om-loan-card:hover{border-color:var(--emerald);transform:translateY(-2px)}
+.om-loan-card.selected{border-color:var(--emerald);background:var(--grad-soft);box-shadow:0 0 0 3px rgba(0,196,106,.12)}
+.om-loan-card-icon{font-size:24px;margin-bottom:8px}
+.om-loan-card-label{font-size:13px;font-weight:600;color:var(--ink-2)}
+.om-loan-card.selected .om-loan-card-label{color:var(--emerald-deep)}
+
+/* Agreement */
+.om-agreement-card{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;margin-bottom:18px}
+.om-agreement-points{display:flex;flex-direction:column;gap:11px;margin-bottom:18px}
+.om-agreement-point{position:relative;padding-left:26px;font-size:13.5px;color:var(--ink-2);line-height:1.55}
+.om-agreement-point::before{content:"✓";position:absolute;left:0;top:0;width:18px;height:18px;border-radius:6px;background:var(--grad-soft);border:1px solid rgba(0,163,92,.2);color:var(--emerald-deep);display:grid;place-items:center;font-size:11px;font-weight:700}
+.om-agreement-footer{display:flex;align-items:flex-start;gap:13px;padding:16px;border-radius:var(--r-md);background:var(--surface);border:1.5px solid var(--line-strong);cursor:pointer;transition:.25s}
+.om-agreement-footer:hover{border-color:var(--emerald)}
+.om-agreement-checkbox{flex-shrink:0;width:24px;height:24px;border-radius:7px;border:2px solid var(--line-strong);transition:.25s;margin-top:1px;position:relative}
+.om-agreement-checkbox.checked{background:var(--grad);border-color:transparent}
+.om-agreement-checkbox.checked::after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:14px;font-weight:700;animation:omPop .3s}
+@keyframes omPop{from{transform:scale(0)}to{transform:scale(1)}}
+.om-agreement-text{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.om-agreement-text a{color:var(--emerald-deep);font-weight:600}
+
+/* Upload zones */
+.om-upload-card{position:relative;border:2px dashed var(--line-strong);border-radius:var(--r-md);background:var(--surface);cursor:pointer;transition:.25s;overflow:hidden}
+.om-upload-card:hover{border-color:var(--emerald);background:var(--grad-soft)}
+.om-upload-card.dragover{border-color:var(--emerald);background:var(--grad-soft);box-shadow:0 0 0 4px rgba(0,196,106,.12)}
+.om-upload-card.has-file{border-style:solid;border-color:rgba(0,163,92,.3);background:var(--bg-soft)}
+.om-upload-filled{display:none;align-items:center;gap:14px;padding:16px}
+.om-upload-card.has-file .om-upload-filled{display:flex}
+.om-upload-card.has-file .om-upload-empty,.om-upload-card.has-file .om-photo-upload{display:none}
+/* photo style */
+.om-photo-upload{display:flex;align-items:center;gap:16px;padding:18px}
+.om-photo-circle{flex-shrink:0;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;font-size:24px;background:var(--bg-mute);border:1px solid var(--line);overflow:hidden}
+.om-photo-circle.has-photo{border:2px solid var(--emerald)}
+.om-photo-circle img{width:100%;height:100%;object-fit:cover}
+.om-photo-info-title{font-weight:600;font-size:14.5px;margin-bottom:3px}
+.om-photo-info-sub{font-size:12.5px;color:var(--muted)}
+.om-photo-btn{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--emerald-deep);background:var(--grad-soft);border:1px solid rgba(0,163,92,.2);padding:8px 14px;border-radius:var(--r-pill);transition:.2s}
+.om-photo-btn:hover{background:var(--surface);border-color:var(--emerald)}
+/* empty (card upload) */
+.om-upload-empty{text-align:center;padding:28px 20px}
+.om-upload-empty-icon{font-size:30px;margin-bottom:10px}
+.om-upload-empty-title{font-weight:600;font-size:15px;margin-bottom:5px}
+.om-upload-empty-sub{font-size:12.5px;color:var(--muted);line-height:1.5}
+/* filled meta */
+.om-upload-thumb{width:52px;height:52px;border-radius:10px;object-fit:cover;border:1px solid var(--line);flex-shrink:0}
+.om-upload-meta{flex:1;min-width:0}
+.om-upload-meta-name{font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.om-upload-meta-status{font-size:12px;color:var(--emerald-deep);display:flex;align-items:center;gap:6px;margin-top:3px}
+.om-upload-meta-status::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok)}
+.om-upload-change{flex-shrink:0;font-size:12.5px;font-weight:600;color:var(--muted);background:var(--bg-mute);border:1px solid var(--line);padding:7px 13px;border-radius:var(--r-pill);transition:.2s}
+.om-upload-change:hover{color:var(--danger);border-color:rgba(214,69,69,.3);background:var(--danger-bg)}
+
+/* Uploading notice */
+.om-uploading{display:none;align-items:center;justify-content:center;gap:9px;padding:14px;margin:0 clamp(26px,5vw,40px);color:var(--emerald-deep);font-size:13.5px;font-weight:500}
+.om-uploading.show{display:flex}
+.om-uploading-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald);animation:omBounce 1.2s ease-in-out infinite}
+.om-uploading-dot:nth-child(2){animation-delay:.2s}
+.om-uploading-dot:nth-child(3){animation-delay:.4s}
+@keyframes omBounce{0%,80%,100%{transform:scale(.5);opacity:.4}40%{transform:scale(1);opacity:1}}
+
+/* Success */
+.om-success{display:none;flex-direction:column;align-items:center;text-align:center;padding:clamp(40px,8vw,72px) clamp(26px,5vw,40px)}
+.om-success.active{display:flex;animation:omFade .5s}
+.om-success-ring{width:96px;height:96px;border-radius:50%;background:var(--grad-soft);border:2px solid rgba(0,163,92,.3);display:grid;place-items:center;margin-bottom:26px;animation:omRing .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes omRing{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.om-success-checkmark{width:56px;height:56px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;font-size:28px;font-weight:700;box-shadow:var(--sh-em);animation:omPop .5s .2s both}
+.om-success h3{font-family:var(--f-display);font-size:1.6rem;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
+.om-success p{color:var(--muted);font-size:15px;line-height:1.65;max-width:380px;margin-bottom:28px}
+
+/* Skeleton loader (initial paint) */
+.sk{background:linear-gradient(90deg,var(--bg-mute) 25%,var(--bg-soft) 50%,var(--bg-mute) 75%);background-size:200% 100%;animation:sk 1.4s infinite;border-radius:8px}
+@keyframes sk{to{background-position:-200% 0}}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1024px){
+  .footer-top{grid-template-columns:1fr 1fr}
+  .footer-brand{grid-column:1/-1}
+  .portal-layout{grid-template-columns:1fr;gap:40px}
+  .faq-layout{grid-template-columns:1fr;gap:36px}
+}
+@media (max-width:860px){
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .hamburger{display:flex}
+  .pillars{grid-template-columns:1fr}
+  .div-grid{grid-template-columns:1fr}
+  .how-grid{grid-template-columns:1fr}
+  .why-strip{grid-template-columns:1fr 1fr}
+  .hero-cards{grid-template-columns:1fr 1fr}
+  .about-stats{grid-template-columns:1fr 1fr}
+  .about-stat:nth-child(2)::after,.about-stat:nth-child(4)::after{display:none}
+  .about-stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .modal-features{grid-template-columns:1fr}
+}
+@media (max-width:540px){
+  :root{--gut:18px}
+  .om-row{grid-template-columns:1fr}
+  .om-loan-cards{grid-template-columns:1fr}
+  .why-strip{grid-template-columns:1fr}
+  .hero-cards{grid-template-columns:1fr 1fr}
+  .footer-top{grid-template-columns:1fr}
+  .hero-stat{padding:18px}
+  .testi-card{width:300px}
+  .om-amount-preview{flex-direction:column;gap:12px}
+  .om-amount-divider{width:60%;height:1px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============ NAV ============ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo" aria-label="StackUp Nest home">
+      <span class="nav-logo-mark"><img src="https://i.ibb.co/zW1gzyZz/Stack-Up-Nest-Logo1.png" alt="StackUp Nest logo"/></span>
+      StackUp Nest
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#divisions">Divisions</a>
+      <a href="#how">How It Works</a>
+      <a href="#portal">Member Portal</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a href="#apply" class="nav-cta" onclick="openApplyModal();return false;">Apply Now</a>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()" aria-label="Close menu">✕</button>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#divisions" onclick="toggleMenu()">Divisions</a>
+  <a href="#how" onclick="toggleMenu()">How It Works</a>
+  <a href="#portal" onclick="toggleMenu()">Member Portal</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
+  <a href="#apply" class="mm-cta" onclick="toggleMenu();openApplyModal();">Apply to StackUp Nest →</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<header id="hero">
+  <div class="hero-aurora" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <span class="hero-pill reveal"><span class="hero-pill-dot"></span>Ghana's Premier Financial Circle</span>
+      <h1 class="hero-title reveal d1">Save Together.<br/><span class="accent">Borrow Smart.</span><br/>Trade &amp; Grow.</h1>
+      <p class="hero-sub reveal d2">StackUp Nest is Ghana's most disciplined savings circle — combining structured contributions, smart member loans, and an active trading arm into one tightly run, fully transparent ecosystem.</p>
+      <div class="hero-btns reveal d3">
+        <button class="btn btn-primary btn-lg" onclick="openApplyModal()">Apply Now <span class="arr">→</span></button>
+        <a href="#divisions" class="btn btn-light btn-lg">Explore Ecosystem</a>
+      </div>
+      <div class="hero-trust reveal d3">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Registered with Ghana's Registrar General</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>24-hour application review</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Encrypted member records</span>
+      </div>
+    </div>
+
+    <div class="hero-cards">
+      <div class="hero-stat reveal"><div class="hero-stat-num">GHS 500<sup>+</sup></div><div class="hero-stat-lbl">Avg monthly target</div></div>
+      <div class="hero-stat reveal d1"><div class="hero-stat-num">24<sup>hrs</sup></div><div class="hero-stat-lbl">Application review</div></div>
+      <div class="hero-stat reveal d2"><div class="hero-stat-num">3</div><div class="hero-stat-lbl">Revenue streams</div></div>
+      <div class="hero-stat reveal d3"><div class="hero-stat-num">100<sup>%</sup></div><div class="hero-stat-lbl">Digital records</div></div>
+    </div>
+    <div class="hero-wave"></div>
+  </div>
+</header>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="section">
+  <div class="wrap">
+    <div class="about-head">
+      <span class="eyebrow reveal">About StackUp Nest</span>
+      <h2 class="h-sec reveal d1" style="margin-top:22px">Built for ambitious <span class="grad-text">Ghanaians.</span></h2>
+      <p class="about-lead reveal d2">A formally registered savings and investment circle that combines disciplined group savings, smart loan access, and an active trading arm — all managed through a secure digital platform built for transparency and growth.</p>
+      <div class="about-reg reveal d2"><span class="about-reg-dot"></span>Founded Nov 2025 · Operating since 5 Jan 2026 · Registered · Ghana Registrar General's Department</div>
+    </div>
+
+    <div class="about-stats reveal">
+      <div class="about-stat"><div class="about-stat-num">GHS 500<sup>+</sup></div><div class="about-stat-lbl">Avg Monthly Target</div></div>
+      <div class="about-stat"><div class="about-stat-num">24<sup>hrs</sup></div><div class="about-stat-lbl">Application Review</div></div>
+      <div class="about-stat"><div class="about-stat-num">3</div><div class="about-stat-lbl">Revenue Streams</div></div>
+      <div class="about-stat"><div class="about-stat-num">100<sup>%</sup></div><div class="about-stat-lbl">Digital Records</div></div>
+    </div>
+
+    <div class="pillars">
+      <article class="pillar reveal">
+        <div class="pillar-top"><div class="pillar-icon">💰</div><div class="pillar-num">01</div></div>
+        <h3>Group Savings Circle</h3>
+        <p>Members commit to fixed weekly or monthly contributions that build a powerful collective fund. At year end, every consistent member receives a full cashout of everything they've saved — minus any outstanding balances.</p>
+        <span class="pillar-tag">Savings</span>
+      </article>
+      <article class="pillar reveal d1">
+        <div class="pillar-top"><div class="pillar-icon">🏦</div><div class="pillar-num">02</div></div>
+        <h3>Member Loan Access</h3>
+        <p>Active members in good standing can borrow up to 80% of their total contributions directly through the Member Portal. Applications are reviewed and disbursed within 24 hours — no paperwork, no queues.</p>
+        <span class="pillar-tag">Loans</span>
+      </article>
+      <article class="pillar reveal d2">
+        <div class="pillar-top"><div class="pillar-icon">📊</div><div class="pillar-num">03</div></div>
+        <h3>Trading &amp; Commerce</h3>
+        <p>Our trading arm handles import/export, wholesale distribution, and commodities across Ghana. Members get priority access to trade deals and commerce opportunities facilitated through the StackUp Nest network.</p>
+        <span class="pillar-tag">Trading</span>
+      </article>
+    </div>
+
+    <div class="why-strip">
+      <div class="why-item reveal"><div class="why-icon">🔐</div><div class="why-label">Security &amp; Privacy</div><div class="why-body">All member data is encrypted and session-protected. Only verified admins can access financial records.</div></div>
+      <div class="why-item reveal d1"><div class="why-icon">🏛️</div><div class="why-label">Regulated &amp; Registered</div><div class="why-body">Formally registered with Ghana's Registrar General's Department — not an informal susu, a structured institution.</div></div>
+      <div class="why-item reveal d2"><div class="why-icon">📊</div><div class="why-label">Full Transparency</div><div class="why-body">Every contribution, loan, and repayment is logged. Members see their own data in real time through the portal.</div></div>
+      <div class="why-item reveal d3"><div class="why-icon">🤝</div><div class="why-label">Member-First Rules</div><div class="why-body">Contribution flexibility, fair loan terms, and a 70% reduction floor — governance that protects every member equally.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIVISIONS ============ -->
+<section id="divisions" class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow reveal">Three Divisions</span>
+      <h2 class="h-sec reveal d1" style="margin-top:22px">One ecosystem.<br/>Three powerful engines.</h2>
+      <p class="sub-sec reveal d2">Every division reinforces the others — your savings unlock loans, your loans build history, and your history opens trading opportunities.</p>
+    </div>
+    <div class="div-grid">
+      <div class="div-card reveal" id="dcard-0" onclick="openModal(0)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openModal(0)">
+        <div class="div-card-num">Division 01</div>
+        <div class="div-icon">🔒</div>
+        <h3>Savings Circle</h3>
+        <p>Commit monthly, track every cedi, and watch your savings compound inside a community of consistent members. Full visibility at every step.</p>
+        <span class="div-open">Explore Division <span class="arr">→</span></span>
+      </div>
+      <div class="div-card reveal d1" id="dcard-1" onclick="openModal(1)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openModal(1)">
+        <div class="div-card-num">Division 02</div>
+        <div class="div-icon">⚡</div>
+        <h3>Loan Services</h3>
+        <p>Borrow up to 80% of your total contributions — approved within 24 hours, tracked automatically, with smart reminders as due dates approach.</p>
+        <span class="div-open">Explore Division <span class="arr">→</span></span>
+      </div>
+      <div class="div-card reveal d2" id="dcard-2" onclick="openModal(2)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openModal(2)">
+        <div class="div-card-num">Division 03</div>
+        <div class="div-icon">🌍</div>
+        <h3>Trading &amp; Commerce</h3>
+        <p>Import, export, wholesale distribution, and commodity trading across Ghana. Members get priority access to trade deals and advisory services.</p>
+        <span class="div-open">Explore Division <span class="arr">→</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVISION MODAL -->
+<div id="modal-overlay" role="dialog" aria-modal="true" aria-label="Division details">
+  <div id="modal-bg" onclick="closeModal()"></div>
+  <div id="modal-box">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section id="how" class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow reveal">The Process</span>
+      <h2 class="h-sec reveal d1" style="margin-top:22px">Four steps.<br/>One destination.</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-step reveal">
+        <div class="how-step-head"><div class="how-num">01</div><span class="how-badge">Join</span></div>
+        <h3>Join StackUp Nest</h3>
+        <p>Register online with your name, WhatsApp number, and email. Reviewed and activated within 24 hours — your Member ID and portal access arrive in your inbox.</p>
+        <div class="how-feats"><span>No paperwork</span><span>24h activation</span><span>Portal access</span></div>
+      </div>
+      <div class="how-step reveal d1">
+        <div class="how-step-head"><div class="how-num">02</div><span class="how-badge">Save</span></div>
+        <h3>Save Consistently</h3>
+        <p>Contribute monthly. Every payment is logged in real time. Weekly reminders keep your discipline front of mind — automated, zero chasing.</p>
+        <div class="how-feats"><span>Real-time logging</span><span>Weekly reminders</span><span>PDF receipts</span></div>
+      </div>
+      <div class="how-step reveal d1">
+        <div class="how-step-head"><div class="how-num">03</div><span class="how-badge">Borrow &amp; Trade</span></div>
+        <h3>Access Opportunities</h3>
+        <p>Apply for a loan up to 80% of your contributions, join active trade deals, and benefit from all three divisions running in parallel.</p>
+        <div class="how-feats"><span>Loans up to 80%</span><span>24h approval</span><span>Trade access</span></div>
+      </div>
+      <div class="how-step reveal d2">
+        <div class="how-step-head"><div class="how-num">04</div><span class="how-badge">Cash Out</span></div>
+        <h3>Cash Out &amp; Grow</h3>
+        <p>Year-end payout to every active member — your total contributions minus any outstanding balance, calculated transparently and transferred in full.</p>
+        <div class="how-feats"><span>Annual payout</span><span>Zero surprises</span><span>Reinvest or withdraw</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PORTAL PREVIEW ============ -->
+<section id="portal" class="section">
+  <div class="wrap">
+    <div class="portal-layout">
+      <div class="portal-copy">
+        <span class="eyebrow reveal">Member Portal</span>
+        <h2 class="h-sec reveal d1">Your money,<br/>in <span class="grad-text">full view.</span></h2>
+        <p class="sub-sec reveal d2">Every contribution, loan, and repayment in one secure dashboard. No spreadsheets, no guessing — just real-time clarity on exactly where you stand.</p>
+        <ul class="portal-list reveal d2">
+          <li><span class="portal-check">✓</span><span>Live contribution tracking with automatic PDF receipts after every payment.</span></li>
+          <li><span class="portal-check">✓</span><span>Loan balance, due dates, and smart repayment reminders at a glance.</span></li>
+          <li><span class="portal-check">✓</span><span>Transparent year-end cashout preview, calculated to the cedi.</span></li>
+        </ul>
+      </div>
+
+      <div class="portal-device reveal d1">
+        <div class="pd-top">
+          <div class="pd-user">
+            <div class="pd-avatar">KM</div>
+            <div><div class="pd-hi">Welcome back,</div><div class="pd-name">Kwame Mensah</div></div>
+          </div>
+          <div class="pd-badge">● Active Member</div>
+        </div>
+        <div class="pd-cards">
+          <div class="pd-card"><div class="pd-card-lbl"><span class="dot"></span>Total Saved</div><div class="pd-card-val">GHS 6,000</div><div class="pd-card-sub">↑ on track for year-end</div></div>
+          <div class="pd-card"><div class="pd-card-lbl"><span class="dot"></span>Loan Available</div><div class="pd-card-val">GHS 4,800</div><div class="pd-card-sub">up to 80% of savings</div></div>
+        </div>
+        <div class="pd-chart-wrap">
+          <div class="pd-chart-head">
+            <div class="pd-chart-title">Contributions · 2026</div>
+            <div class="pd-chart-legend"><span><i style="background:var(--emerald)"></i>Actual</span><span><i style="background:var(--line-strong)"></i>Target</span></div>
+          </div>
+          <div class="pd-chart-area" id="chartArea"></div>
+          <div class="pd-x" id="chartXLabels"></div>
+          <div class="pd-tooltip" id="chartTooltip"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section id="testimonials" class="section">
+  <div class="wrap">
+    <div class="testi-head">
+      <span class="eyebrow reveal">Member Voices</span>
+      <h2 class="h-sec reveal d1" style="margin-top:22px">Real members.<br/>Real results.</h2>
+    </div>
+  </div>
+  <div class="testi-tracks" id="testiTracks"></div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="section">
+  <div class="wrap">
+    <div class="faq-layout">
+      <div class="faq-intro">
+        <span class="eyebrow reveal">FAQs</span>
+        <h2 class="h-sec reveal d1" style="margin-top:22px">Questions,<br/>answered.</h2>
+        <p class="reveal d2">Everything you need to know about membership, loans, and how StackUp Nest keeps your money transparent.</p>
+      </div>
+      <div class="faq-list reveal d1">
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)"><span>What exactly is StackUp Nest?</span><div class="faq-icon">+</div></div><div class="faq-a">StackUp Nest is Ghana's premier savings and investment circle combined with a trading and commerce group. Members save monthly, access loans, and benefit from our growing trading division — all managed through a secure digital Member Portal backed by real-time records.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)"><span>How do I become a member?</span><div class="faq-icon">+</div></div><div class="faq-a">Complete the online registration form with your name, WhatsApp number, and email. Your application is reviewed by the admin and your account is activated upon approval — typically within 24 hours. You'll receive a welcome email with your Member ID and portal access.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)"><span>How does the loan system work?</span><div class="faq-icon">+</div></div><div class="faq-a">Active members in good standing can apply for a loan of up to 80% of their total contributions directly through the Member Portal. Applications are reviewed within 24 hours. Repayments are tracked automatically and you receive alerts as your due date approaches.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)"><span>What happens at year-end cashout?</span><div class="faq-icon">+</div></div><div class="faq-a">At the end of each cycle, every active member receives a payout equal to their total yearly contributions minus any outstanding loan balance and unpaid penalties. The admin previews and confirms before disbursement — transparent from calculation to transfer.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)"><span>Is my money and data secure?</span><div class="faq-icon">+</div></div><div class="faq-a">All member data is stored securely and accessible only to you and the group admin. Every transaction is logged with full transparency. Your savings and loan records are always visible to you in real time through your personal portal.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)"><span>What is the Trading &amp; Commerce division?</span><div class="faq-icon">+</div></div><div class="faq-a">Our trading arm handles import and export, wholesale distribution, commodities trading, and professional advisory services across Ghana. Members get priority access to trade deals and can participate in commerce opportunities facilitated through StackUp Nest.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section id="cta">
+  <div class="wrap">
+    <div class="cta-panel">
+      <div class="hero-aurora" aria-hidden="true"></div>
+      <span class="eyebrow reveal">Get Started Today</span>
+      <h2 class="cta-title reveal d1">Your next stack<br/>starts <span class="accent" style="background:linear-gradient(120deg,#22FF88,#00C46A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">here.</span></h2>
+      <p class="cta-sub reveal d2">Register today, get activated, and start building wealth alongside a community of focused, consistent members across Ghana.</p>
+      <div class="cta-btns reveal d2">
+        <button class="btn btn-primary btn-lg" onclick="openApplyModal()">Apply Now <span class="arr">→</span></button>
+        <a href="https://wa.me/233540281796?text=Hello%2C%20I%20saw%20the%20StackUp%20Nest%20website%20and%20I%27d%20like%20to%20register%20as%20a%20member." target="_blank" rel="noopener" class="btn btn-light btn-lg">Chat on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#hero" class="footer-logo"><span class="footer-mark"><img src="https://i.ibb.co/zW1gzyZz/Stack-Up-Nest-Logo1.png" alt="StackUp Nest logo"/></span>StackUp Nest</a>
+        <p>Ghana's savings, loans and trading circle. Save together, borrow smart, and grow through commerce.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="X">X</a>
+          <a href="#" class="footer-social" aria-label="LinkedIn">in</a>
+          <a href="#" class="footer-social" aria-label="Instagram">ig</a>
+          <a href="#" class="footer-social" aria-label="Facebook">fb</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Divisions</h4>
+        <a href="#divisions">Savings Circle</a>
+        <a href="#divisions">Loan Services</a>
+        <a href="#divisions">Trading &amp; Commerce</a>
+      </div>
+      <div class="footer-col">
+        <h4>Group</h4>
+        <a href="#how">How It Works</a>
+        <a href="#portal">Member Portal</a>
+        <a href="#testimonials">Members</a>
+        <a href="#faq">FAQs</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:gomezrychmund244@gmail.com">gomezrychmund244@gmail.com</a>
+        <a href="tel:+233540281796">+233 540 281 796</a>
+        <a href="#">Accra, Ghana</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 StackUp Nest. All rights reserved.</p>
+      <span>SAVE · BORROW · TRADE</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ APPLY MODAL — premium two-step onboarding ============ -->
+<div id="apply-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="om-title">
+  <div id="apply-modal-bg" onclick="closeApplyModal()"></div>
+  <div id="apply-modal-box">
+
+    <!-- Stepper header (sticky) -->
+    <div class="om-stepper">
+      <div class="om-step">
+        <div class="om-step-num active" id="om-num-1">1</div>
+        <span class="om-step-label active" id="om-lbl-1">About You</span>
+      </div>
+      <div class="om-step-line" id="om-line-1"></div>
+      <div class="om-step">
+        <div class="om-step-num" id="om-num-2">2</div>
+        <span class="om-step-label" id="om-lbl-2">Membership</span>
+      </div>
+      <button class="om-close-btn" onclick="closeApplyModal()" aria-label="Close">✕</button>
+    </div>
+
+    <!-- Honeypot -->
+    <div class="om-hp" aria-hidden="true"><input type="text" id="apply-website" tabindex="-1" autocomplete="off"/></div>
+
+    <!-- ===== STEP 1 — About You ===== -->
+    <div class="om-step-body active" id="om-body-1">
+      <div class="om-step-eyebrow">Step 1 of 2</div>
+      <h2 class="om-step-title" id="om-title">Tell us about yourself</h2>
+      <p class="om-step-sub">Your details are encrypted and only used to manage your membership.</p>
+
+      <div class="om-card">
+        <div class="om-card-label">Identity</div>
+        <div class="om-field">
+          <label class="om-label" for="apply-name">Full Name <span style="color:var(--emerald)">*</span></label>
+          <input class="om-input" type="text" id="apply-name" autocomplete="name" placeholder="e.g. Kwame Mensah"/>
+        </div>
+        <div class="om-row">
+          <div class="om-field">
+            <label class="om-label" for="apply-dob">Date of Birth</label>
+            <input class="om-input" type="date" id="apply-dob" autocomplete="bday"/>
+          </div>
+          <div class="om-field">
+            <label class="om-label" for="apply-gender">Gender</label>
+            <select class="om-input om-select" id="apply-gender">
+              <option value="">Select…</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="om-card">
+        <div class="om-card-label">Contact</div>
+        <div class="om-field">
+          <label class="om-label" for="apply-phone">Phone Number <span style="color:var(--emerald)">*</span></label>
+          <input class="om-input" type="tel" id="apply-phone" autocomplete="tel" placeholder="024 123 4567"/>
+        </div>
+        <div class="om-row">
+          <div class="om-field">
+            <label class="om-label" for="apply-whatsapp">WhatsApp</label>
+            <input class="om-input" type="tel" id="apply-whatsapp" autocomplete="tel" placeholder="Same or different"/>
+          </div>
+          <div class="om-field">
+            <label class="om-label" for="apply-email">Email <span style="color:var(--emerald)">*</span></label>
+            <input class="om-input" type="email" id="apply-email" autocomplete="email" placeholder="you@example.com"/>
+          </div>
+        </div>
+        <div class="om-field">
+          <label class="om-label" for="apply-location">Location</label>
+          <input class="om-input" type="text" id="apply-location" placeholder="City or Town, e.g. Accra"/>
+        </div>
+      </div>
+
+      <div class="om-card">
+        <div class="om-card-label">Background</div>
+        <div class="om-field">
+          <label class="om-label" for="apply-occupation">Occupation</label>
+          <input class="om-input" type="text" id="apply-occupation" placeholder="e.g. Teacher, Trader, Engineer"/>
+        </div>
+        <div class="om-row">
+          <div class="om-field">
+            <label class="om-label" for="apply-nok-name">Next of Kin Name</label>
+            <input class="om-input" type="text" id="apply-nok-name" placeholder="Full name"/>
+          </div>
+          <div class="om-field">
+            <label class="om-label" for="apply-nok-phone">Next of Kin Phone</label>
+            <input class="om-input" type="tel" id="apply-nok-phone" placeholder="Phone number"/>
+          </div>
+        </div>
+        <div class="om-field">
+          <label class="om-label" for="apply-how-heard">How did you hear about us?</label>
+          <select class="om-input om-select" id="apply-how-heard">
+            <option value="">Select…</option>
+            <option value="Friend / Family">Friend or Family</option>
+            <option value="Existing Member">Existing Member</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Social Media">Social Media</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="om-msg" id="om-msg-1"></div>
+    </div>
+
+    <div class="om-nav" id="om-nav-1">
+      <button class="om-nav-next" onclick="omGoStep2()">Continue →</button>
+    </div>
+
+    <!-- ===== STEP 2 — Membership Setup ===== -->
+    <div class="om-step-body" id="om-body-2">
+      <div class="om-step-eyebrow">Step 2 of 2</div>
+      <h2 class="om-step-title">Set up your membership</h2>
+      <p class="om-step-sub">Define your savings commitment and verify your identity.</p>
+
+      <!-- Identity verification -->
+      <div class="om-card">
+        <div class="om-card-label">Identity Verification</div>
+
+        <div style="margin-bottom:16px">
+          <div class="om-label" style="margin-bottom:8px">Profile Photo</div>
+          <div class="om-upload-card" id="photo-card" onclick="omPhotoCardClick()"
+               ondragover="omDragOver(event,this)" ondragleave="omDragLeave(this)" ondrop="omDrop(event,this,'photo')">
+            <div class="om-photo-upload">
+              <div class="om-photo-circle" id="photo-circle">📷</div>
+              <div class="om-photo-info">
+                <div class="om-photo-info-title">Add a profile photo</div>
+                <div class="om-photo-info-sub">Drag &amp; drop, upload, or take a photo — optional</div>
+                <button type="button" class="om-photo-btn" onclick="event.stopPropagation();omPhotoCardClick()"><span>↑</span> Upload or Take Photo</button>
+              </div>
+            </div>
+            <div class="om-upload-filled">
+              <div class="om-photo-circle has-photo" id="photo-circle-filled" style="width:52px;height:52px"><img id="photo-thumb" src="" alt=""/></div>
+              <div class="om-upload-meta">
+                <div class="om-upload-meta-name" id="photo-name"></div>
+                <div class="om-upload-meta-status">Photo ready to upload</div>
+              </div>
+              <button type="button" class="om-upload-change" onclick="event.stopPropagation();clearUpload('photo')">Change</button>
+            </div>
+          </div>
+          <input type="file" id="apply-photo-input" accept="image/*" style="display:none" onchange="handleUpload(this,'photo')"/>
+        </div>
+
+        <div>
+          <div class="om-label" style="margin-bottom:6px">Ghana Card</div>
+          <div class="om-field" style="margin-bottom:10px">
+            <input class="om-input" type="text" id="apply-ghana-card" placeholder="GHA-000000000-0" autocomplete="off"/>
+            <div class="om-hint">Card number (optional)</div>
+          </div>
+          <div class="om-upload-card" id="card-card" onclick="omCardClick()"
+               ondragover="omDragOver(event,this)" ondragleave="omDragLeave(this)" ondrop="omDrop(event,this,'card')">
+            <div class="om-upload-empty">
+              <div class="om-upload-empty-icon">🪪</div>
+              <div class="om-upload-empty-title">Upload Ghana Card</div>
+              <div class="om-upload-empty-sub">Drag &amp; drop, <strong>take a photo</strong>, or upload from gallery · Optional</div>
+            </div>
+            <div class="om-upload-filled">
+              <img class="om-upload-thumb" id="card-thumb" src="" alt=""/>
+              <div class="om-upload-meta">
+                <div class="om-upload-meta-name" id="card-name"></div>
+                <div class="om-upload-meta-status">ID ready to upload</div>
+              </div>
+              <button type="button" class="om-upload-change" onclick="event.stopPropagation();clearUpload('card')">Change</button>
+            </div>
+          </div>
+          <input type="file" id="apply-card-input" accept="image/*" style="display:none" onchange="handleUpload(this,'card')"/>
+        </div>
+      </div>
+
+      <!-- Savings preferences -->
+      <div class="om-card">
+        <div class="om-card-label">Savings Preferences</div>
+
+        <div class="om-field">
+          <label class="om-label">Contribution Schedule <span style="color:var(--emerald)">*</span></label>
+          <div class="om-segment" role="group" aria-label="Contribution schedule">
+            <button type="button" class="om-segment-btn" id="seg-weekly" onclick="omSetContribType('Weekly')">📅 Weekly</button>
+            <button type="button" class="om-segment-btn" id="seg-monthly" onclick="omSetContribType('Monthly')">🗓 Monthly</button>
+          </div>
+          <input type="hidden" id="apply-contrib-type" value=""/>
+        </div>
+
+        <div class="om-field">
+          <label class="om-label" for="apply-contrib-amount">Fixed Amount (GHS) <span style="color:var(--emerald)">*</span></label>
+          <div class="om-amount-wrap">
+            <span class="om-amount-currency">₵</span>
+            <input class="om-input om-amount-input" type="number" id="apply-contrib-amount" min="1" step="0.01" placeholder="0.00" oninput="updateAmountPreview()"/>
+          </div>
+          <div class="om-amount-preview" id="apply-amount-preview">
+            <div class="om-amount-preview-item"><div class="om-amount-preview-val" id="preview-per-cycle">—</div><div class="om-amount-preview-label">Per Cycle</div></div>
+            <div class="om-amount-divider"></div>
+            <div class="om-amount-preview-item"><div class="om-amount-preview-val" id="preview-monthly">—</div><div class="om-amount-preview-label">Monthly</div></div>
+            <div class="om-amount-divider"></div>
+            <div class="om-amount-preview-item"><div class="om-amount-preview-val" id="preview-annual">—</div><div class="om-amount-preview-label">Annual Target</div></div>
+          </div>
+          <div class="om-hint">You commit to saving this amount each cycle. Minimum reduction is 70% of this amount.</div>
+        </div>
+
+        <div class="om-field">
+          <label class="om-label" for="apply-cashout-method">Preferred Cashout Method</label>
+          <select class="om-input om-select" id="apply-cashout-method">
+            <option value="">Select payment method…</option>
+            <option value="MTN Mobile Money">📱 MTN Mobile Money</option>
+            <option value="Vodafone Cash">📱 Vodafone Cash</option>
+            <option value="AirtelTigo Money">📱 AirtelTigo Money</option>
+            <option value="Bank Transfer">🏦 Bank Transfer</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Loan services -->
+      <div class="om-card">
+        <div class="om-card-label">Loan Services</div>
+        <div class="om-loan-cards" role="group" aria-label="Loan interest options">
+          <div class="om-loan-card" id="loan-yes" onclick="omSetLoan('Yes','loan-yes')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')omSetLoan('Yes','loan-yes')">
+            <div class="om-loan-card-icon">✅</div><div class="om-loan-card-label">Interested</div>
+          </div>
+          <div class="om-loan-card" id="loan-maybe" onclick="omSetLoan('Maybe in the future','loan-maybe')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')omSetLoan('Maybe in the future','loan-maybe')">
+            <div class="om-loan-card-icon">🤔</div><div class="om-loan-card-label">Maybe Later</div>
+          </div>
+          <div class="om-loan-card" id="loan-no" onclick="omSetLoan('No','loan-no')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')omSetLoan('No','loan-no')">
+            <div class="om-loan-card-icon">⏸</div><div class="om-loan-card-label">Not Now</div>
+          </div>
+        </div>
+        <input type="hidden" id="apply-loan-interest" value=""/>
+      </div>
+
+      <!-- Agreement -->
+      <div class="om-agreement-card">
+        <div class="om-agreement-points">
+          <div class="om-agreement-point">Contribution reductions cannot go below 70% of your fixed amount per group rules.</div>
+          <div class="om-agreement-point">I have read and agree to abide by the FutureFund Group Rules &amp; Guidelines (V1.0).</div>
+          <div class="om-agreement-point">I am committed to saving consistently and participating seriously in the group.</div>
+        </div>
+        <div class="om-agreement-footer" onclick="omToggleAgreement()" id="om-agreement-footer" role="checkbox" aria-checked="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();omToggleAgreement()}">
+          <div class="om-agreement-checkbox" id="om-agree-check"></div>
+          <div class="om-agreement-text">I confirm I have read and accept the Membership Agreement.
+            <a href="#" onclick="event.preventDefault()">View full rules →</a>
+          </div>
+        </div>
+      </div>
+      <input type="hidden" id="apply-ack-rules" value=""/>
+      <input type="hidden" id="apply-ack-70" value=""/>
+      <input type="hidden" id="apply-ack-commit" value=""/>
+
+      <div class="om-field" style="margin-bottom:4px">
+        <label class="om-label" for="apply-extra">Anything else? <span style="color:var(--faint);font-weight:400;text-transform:none;letter-spacing:0">Optional</span></label>
+        <textarea class="om-input om-textarea" id="apply-extra" placeholder="Questions, notes, or referral details…"></textarea>
+      </div>
+
+      <div class="om-msg" id="om-msg-2"></div>
+    </div>
+
+    <div class="om-uploading" id="apply-uploading-notice">
+      <div class="om-uploading-dot"></div><div class="om-uploading-dot"></div><div class="om-uploading-dot"></div>
+      <span>Uploading your documents…</span>
+    </div>
+
+    <div class="om-nav" id="om-nav-2" style="display:none">
+      <button class="om-nav-back" onclick="omGoStep1()">← Back</button>
+      <button class="om-nav-next" id="apply-submit-btn" onclick="submitApplyForm()">Submit Application →</button>
+    </div>
+
+    <!-- Success -->
+    <div class="om-success" id="apply-success-state">
+      <div class="om-success-ring"><div class="om-success-checkmark">✓</div></div>
+      <h3>Application Received</h3>
+      <p>Thanks for applying to StackUp Nest. We review applications within 24 hours — you'll hear from us either way.</p>
+      <button class="om-nav-next" onclick="closeApplyModal()" style="max-width:200px">Close</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   NAV
+   ============================================================ */
+var navbar = document.getElementById('navbar');
+window.addEventListener('scroll', function(){ navbar.classList.toggle('scrolled', window.scrollY > 40); }, { passive:true });
+function toggleMenu(){
+  var m = document.getElementById('mobileMenu');
+  var open = m.classList.toggle('open');
+  document.body.style.overflow = open ? 'hidden' : '';
+  var h = document.querySelector('.hamburger'); if(h) h.setAttribute('aria-expanded', open);
+}
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeModal(); closeApplyModal(); var m=document.getElementById('mobileMenu'); if(m.classList.contains('open')) toggleMenu(); } });
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+(function(){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target); } });
+  }, { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+})();
+
+/* ============================================================
+   DIVISION CARD CURSOR GLOW
+   ============================================================ */
+document.querySelectorAll('.div-card').forEach(function(card){
+  card.addEventListener('mousemove', function(e){
+    var r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX - r.left)/r.width*100)+'%');
+    card.style.setProperty('--my', ((e.clientY - r.top)/r.height*100)+'%');
+  });
+});
+
+/* ============================================================
+   DIVISION MODALS
+   ============================================================ */
+var modalData = [
+  { num:'Division 01', title:'Savings Circle', icon:'🔒',
+    lead:'The foundation of StackUp Nest. Every member commits to a contribution amount that builds into a shared pool — disciplined, transparent, and fully automated.',
+    features:[
+      { icon:'📊', title:'Real-Time Tracking', desc:'Every contribution is logged the moment it\'s made. Your dashboard updates instantly — no waiting, no guessing.' },
+      { icon:'📧', title:'Automated Receipts', desc:'A PDF receipt is emailed to you automatically after every payment. Your records are always audit-ready.' },
+      { icon:'🔔', title:'Weekly Reminders', desc:'Smart automated reminders keep you on track every week with rotating motivational messages.' },
+      { icon:'💰', title:'Year-End Cashout', desc:'At cycle end, every active member receives their full contribution balance, calculated transparently.' }
+    ],
+    stats:[{val:'GHS 125K',label:'Pool Size'},{val:'55',label:'Members'},{val:'100%',label:'Transparency'}] },
+  { num:'Division 02', title:'Loan Services', icon:'⚡',
+    lead:'Active members in good standing can access loans backed by their own contribution history — fast approval, automatic tracking, and zero paper forms.',
+    features:[
+      { icon:'⚡', title:'24-Hour Approval', desc:'Loan applications submitted through the Member Portal are reviewed and decided within 24 hours.' },
+      { icon:'📐', title:'Up to 80% of Contributions', desc:'Borrow up to 80% of your total contributions to date. The limit grows as you save more.' },
+      { icon:'📅', title:'Smart Repayment Tracking', desc:'Due dates are tracked automatically. Reminders fire as your deadline approaches — upcoming, same-day, and overdue.' },
+      { icon:'🔐', title:'Standing-Based Access', desc:'Loans are available to members with consistent contribution history and no outstanding penalties.' }
+    ],
+    stats:[{val:'39',label:'Loans Disbursed'},{val:'< 24h',label:'Approval Time'},{val:'80%',label:'Max LTV'}] },
+  { num:'Division 03', title:'Trading & Commerce', icon:'🌍',
+    lead:'StackUp Nest\'s trading arm handles import, export, wholesale distribution, and commodity trading across Ghana — with members getting priority access to every deal.',
+    features:[
+      { icon:'🚢', title:'Import & Export', desc:'Access cross-border trade deals facilitated through StackUp Nest\'s established trade networks across Ghana.' },
+      { icon:'📦', title:'Wholesale Distribution', desc:'Participate in bulk goods distribution and earn through the group\'s commerce operations.' },
+      { icon:'📈', title:'Commodities Trading', desc:'Get exposure to commodity markets through the group\'s collective position and trading expertise.' },
+      { icon:'🧠', title:'Advisory Services', desc:'Professional advisory for businesses and consumers looking to navigate Ghana\'s trade landscape.' }
+    ],
+    stats:[{val:'GHS 240K',label:'Trade Volume'},{val:'3',label:'Trade Verticals'},{val:'Priority',label:'Member Access'}] }
+];
+function openModal(i){
+  var d = modalData[i];
+  document.getElementById('modal-content').innerHTML =
+    '<div class="modal-eyebrow">'+d.num+' — '+d.icon+'</div>'+
+    '<div class="modal-title">'+d.title+'</div>'+
+    '<div class="modal-lead">'+d.lead+'</div>'+
+    '<div class="modal-stat-row">'+d.stats.map(function(s){return '<div class="modal-stat"><div class="modal-stat-val">'+s.val+'</div><div class="modal-stat-label">'+s.label+'</div></div>';}).join('')+'</div>'+
+    '<div class="modal-divider"></div>'+
+    '<div class="modal-features">'+d.features.map(function(f){return '<div class="modal-feature"><div class="modal-feature-icon">'+f.icon+'</div><h4>'+f.title+'</h4><p>'+f.desc+'</p></div>';}).join('')+'</div>'+
+    '<div class="modal-cta"><button class="btn btn-primary" onclick="closeModal();openApplyModal();">Apply to Join →</button><a href="https://wa.me/233540281796" target="_blank" rel="noopener" class="btn btn-ghost">Ask on WhatsApp</a></div>';
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){ document.getElementById('modal-overlay').classList.remove('open'); document.body.style.overflow = ''; }
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+var testiData = [
+  { q:'The Member Portal makes it so easy to track everything. Every contribution I\'ve made and my loan balance in one place — very professional.', name:'Kofi Asante', role:'Member since 2025', i:'KA' },
+  { q:'I applied for a loan through the portal and it was approved the next day. The whole process was smooth and repayment tracking is completely clear.', name:'Abena Boateng', role:'Member since 2025', i:'AB' },
+  { q:'The weekly reminders genuinely help me stay disciplined. Year-end cashout was exactly what was promised. Already recommending to friends.', name:'Emmanuel Owusu', role:'Member since 2025', i:'EO' },
+  { q:'Three income streams in one group is something I didn\'t think was possible. StackUp Nest is run like a proper business — not a casual circle.', name:'Akosua Mensah', role:'Member since 2025', i:'AM' },
+  { q:'Love that every transaction is logged and visible. No surprises, no excuses. The transparency here is unmatched compared to other groups.', name:'Kweku Darkwa', role:'Member since 2025', i:'KD' },
+  { q:'Getting activated was fast and the welcome email was detailed. I knew exactly what to expect from day one. That level of organization is rare.', name:'Esi Adjei', role:'Member since 2025', i:'EA' }
+];
+function makeCard(d){
+  return '<div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"'+d.q+'"</blockquote><div class="testi-author"><div class="testi-avatar">'+d.i+'</div><div><div class="testi-name">'+d.name+'</div><div class="testi-role">'+d.role+'</div></div></div></div>';
+}
+(function(){
+  var tracksEl = document.getElementById('testiTracks'); if(!tracksEl) return;
+  var a = testiData.slice(0,4), b = testiData.slice(2);
+  var row1 = document.createElement('div'); row1.className='testi-track testi-track-fwd';
+  row1.innerHTML = a.concat(a).map(makeCard).join('');
+  var row2 = document.createElement('div'); row2.className='testi-track testi-track-rev';
+  row2.innerHTML = b.concat(b).map(makeCard).join('');
+  tracksEl.appendChild(row1); tracksEl.appendChild(row2);
+})();
+
+/* ============================================================
+   PORTAL CHART (pure SVG, presentational, guarded)
+   ============================================================ */
+(function(){
+  var area = document.getElementById('chartArea');
+  if(!area) return;
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var actual = [400,800,1200,1600,2200,2800,3400,4000,4600,5100,5600,6000];
+  var target = [500,1000,1500,2000,2500,3000,3500,4000,4500,5000,5500,6000];
+  function build(){
+    area.innerHTML='';
+    var W = area.offsetWidth || 360, H = 140;
+    var pad = { l:6, r:6, t:14, b:8 };
+    var max = 6400;
+    function pts(arr){ return arr.map(function(v,i){ return [pad.l+(i/(months.length-1))*(W-pad.l-pad.r), H-pad.b-(v/max)*(H-pad.t-pad.b)]; }); }
+    var p = pts(actual), tp = pts(target);
+    function curve(P){ return P.map(function(pt,i){ return i===0 ? 'M'+pt[0]+','+pt[1] : 'C'+(P[i-1][0]+18)+','+P[i-1][1]+' '+(pt[0]-18)+','+pt[1]+' '+pt[0]+','+pt[1]; }).join(' '); }
+    var lineD = curve(p), tD = curve(tp);
+    var areaD = lineD+' L'+p[p.length-1][0]+','+(H-pad.b)+' L'+p[0][0]+','+(H-pad.b)+' Z';
+    var svg = '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">'+
+      '<defs><linearGradient id="pdGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00C46A" stop-opacity="0.28"/><stop offset="100%" stop-color="#00C46A" stop-opacity="0"/></linearGradient></defs>'+
+      '<path d="'+areaD+'" class="chart-area-path"/>'+
+      '<path d="'+tD+'" class="chart-line-path2"/>'+
+      '<path d="'+lineD+'" class="chart-line-path"/>'+
+      p.map(function(pt,i){ return '<circle class="chart-dot" cx="'+pt[0]+'" cy="'+pt[1]+'" r="3" data-i="'+i+'"/>'; }).join('')+
+      '</svg>';
+    area.innerHTML = svg;
+    var labels = document.getElementById('chartXLabels');
+    if(labels) labels.innerHTML = months.map(function(m){ return '<span>'+m[0]+'</span>'; }).join('');
+    var tip = document.getElementById('chartTooltip');
+    area.querySelectorAll('.chart-dot').forEach(function(dot){
+      dot.addEventListener('mouseenter', function(){
+        var i = parseInt(dot.dataset.i);
+        var cx = parseFloat(dot.getAttribute('cx')), cy = parseFloat(dot.getAttribute('cy'));
+        if(tip){ tip.innerHTML = '<strong>GHS '+actual[i].toLocaleString('en-GH')+'</strong>'+months[i]+' 2026'; tip.style.opacity='1'; tip.style.left=Math.max(0,Math.min(cx-40,W-120))+'px'; tip.style.top=(cy-52)+'px'; }
+      });
+      dot.addEventListener('mouseleave', function(){ if(tip) tip.style.opacity='0'; });
+    });
+    var line = area.querySelector('.chart-line-path');
+    if(line){ var len=line.getTotalLength(); line.style.strokeDasharray=len; line.style.strokeDashoffset=len; }
+  }
+  build();
+  window.addEventListener('resize', build);
+  new IntersectionObserver(function(en){
+    if(en[0].isIntersecting){ var line=area.querySelector('.chart-line-path'); if(line){ line.style.transition='stroke-dashoffset 1.6s cubic-bezier(.2,.8,.2,1)'; line.style.strokeDashoffset='0'; } }
+  }, { threshold:.3 }).observe(area);
+})();
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+function toggleFaq(el){
+  var item = el.parentElement;
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(i){ i.classList.remove('open'); });
+  if(!isOpen) item.classList.add('open');
+}
+
+/* ============================================================
+   APPLY MODAL — Premium two-step onboarding
+   (backend contract preserved exactly)
+   ============================================================ */
+var APPLY_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbxL7tR86AawPZ-2rQXOCQG8tPCGOYECjZS5ySM24pPIdd-waxgeXAAruzcgSISQfamh/exec';
+var _applyFormLoadedAt = null;
+var _photoFile = null;
+var _cardFile  = null;
+var _omAgreed  = false;
+var _omLoanId  = null;
+
+function openApplyModal(){
+  document.getElementById('apply-modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  _resetApplyModal();
+  _applyFormLoadedAt = Date.now();
+}
+function closeApplyModal(){
+  document.getElementById('apply-modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function _resetApplyModal(){
+  ['apply-name','apply-dob','apply-location','apply-phone','apply-whatsapp',
+   'apply-email','apply-occupation','apply-nok-name','apply-nok-phone',
+   'apply-ghana-card','apply-contrib-amount','apply-extra','apply-website'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.value = '';
+  });
+  ['apply-gender','apply-how-heard','apply-cashout-method'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.selectedIndex = 0;
+  });
+  ['apply-contrib-type','apply-loan-interest','apply-ack-rules','apply-ack-70','apply-ack-commit'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.value = '';
+  });
+  ['seg-weekly','seg-monthly'].forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.remove('active'); });
+  ['loan-yes','loan-maybe','loan-no'].forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.remove('selected'); });
+  _omAgreed = false; _omLoanId = null;
+  var chk = document.getElementById('om-agree-check'); if(chk) chk.classList.remove('checked');
+  var af = document.getElementById('om-agreement-footer'); if(af) af.setAttribute('aria-checked','false');
+  clearUpload('photo'); clearUpload('card');
+  var prev = document.getElementById('apply-amount-preview'); if(prev) prev.classList.remove('show');
+  _omMsg(1,'',''); _omMsg(2,'','');
+  var upl = document.getElementById('apply-uploading-notice'); if(upl) upl.classList.remove('show');
+  var succ = document.getElementById('apply-success-state'); if(succ) succ.classList.remove('active');
+  var stepper = document.querySelector('.om-stepper'); if(stepper) stepper.style.display='';
+  var btn = document.getElementById('apply-submit-btn'); if(btn){ btn.disabled=false; btn.textContent='Submit Application →'; }
+  _omGoStep(1);
+}
+
+function _omGoStep(step){
+  var b1=document.getElementById('om-body-1'), b2=document.getElementById('om-body-2');
+  var n1=document.getElementById('om-nav-1'),  n2=document.getElementById('om-nav-2');
+  var succ=document.getElementById('apply-success-state');
+  b1.classList.toggle('active', step===1);
+  b2.classList.toggle('active', step===2);
+  if(n1) n1.style.display = step===1 ? '' : 'none';
+  if(n2) n2.style.display = step===2 ? '' : 'none';
+  if(succ) succ.classList.toggle('active', step===3);
+  var num1=document.getElementById('om-num-1'), lbl1=document.getElementById('om-lbl-1');
+  var num2=document.getElementById('om-num-2'), lbl2=document.getElementById('om-lbl-2');
+  var line=document.getElementById('om-line-1');
+  if(step===1){
+    num1.className='om-step-num active'; lbl1.className='om-step-label active'; num1.textContent='1';
+    num2.className='om-step-num';        lbl2.className='om-step-label';
+    if(line) line.classList.remove('done');
+  } else if(step===2){
+    num1.className='om-step-num done'; lbl1.className='om-step-label done'; num1.textContent='✓';
+    num2.className='om-step-num active'; lbl2.className='om-step-label active';
+    if(line) line.classList.add('done');
+  }
+  var box=document.getElementById('apply-modal-box'); if(box) box.scrollTop=0;
+}
+function omGoStep1(){ _omGoStep(1); }
+function omGoStep2(){
+  _omMsg(1,'','');
+  var name  = (document.getElementById('apply-name').value||'').trim();
+  var phone = (document.getElementById('apply-phone').value||'').trim();
+  var email = (document.getElementById('apply-email').value||'').trim();
+  if(!name)  { _omMsg(1,'Please enter your full name.','error'); return; }
+  if(!phone) { _omMsg(1,'Please enter your phone number.','error'); return; }
+  if(!email || email.indexOf('@')===-1) { _omMsg(1,'Please enter a valid email address.','error'); return; }
+  _omGoStep(2);
+}
+
+function omSetContribType(type){
+  document.getElementById('apply-contrib-type').value = type;
+  document.getElementById('seg-weekly').classList.toggle('active',  type==='Weekly');
+  document.getElementById('seg-monthly').classList.toggle('active', type==='Monthly');
+  updateAmountPreview();
+}
+
+function omSetLoan(value, id){
+  document.getElementById('apply-loan-interest').value = value;
+  ['loan-yes','loan-maybe','loan-no'].forEach(function(lid){
+    document.getElementById(lid).classList.toggle('selected', lid===id);
+  });
+  _omLoanId = id;
+}
+
+function omToggleAgreement(){
+  _omAgreed = !_omAgreed;
+  var chk = document.getElementById('om-agree-check');
+  chk.classList.toggle('checked', _omAgreed);
+  var af = document.getElementById('om-agreement-footer'); if(af) af.setAttribute('aria-checked', _omAgreed);
+  var v = _omAgreed ? 'yes' : '';
+  ['apply-ack-rules','apply-ack-70','apply-ack-commit'].forEach(function(id){
+    document.getElementById(id).value = v;
+  });
+}
+
+function updateAmountPreview(){
+  var type = document.getElementById('apply-contrib-type').value;
+  var amt  = parseFloat(document.getElementById('apply-contrib-amount').value) || 0;
+  var prev = document.getElementById('apply-amount-preview');
+  if(!type || !amt){ prev.classList.remove('show'); return; }
+  var monthly = type==='Weekly' ? amt*4 : amt;
+  var perCycle = amt;
+  function fmt(n){ return '₵'+n.toLocaleString('en-GH',{minimumFractionDigits:0,maximumFractionDigits:0}); }
+  document.getElementById('preview-per-cycle').textContent = fmt(perCycle)+(type==='Weekly'?'/wk':'/mo');
+  document.getElementById('preview-monthly').textContent   = fmt(monthly);
+  document.getElementById('preview-annual').textContent    = fmt(monthly*12);
+  prev.classList.add('show');
+}
+
+/* Upload card click handlers (single-tap open picker) */
+function omPhotoCardClick(){
+  if(_photoFile) return;
+  var input = document.getElementById('apply-photo-input');
+  input.removeAttribute('capture');
+  input.click();
+}
+function omCardClick(){
+  if(_cardFile) return;
+  var input = document.getElementById('apply-card-input');
+  input.removeAttribute('capture');
+  input.click();
+}
+/* Legacy helper stubs (kept for backend compatibility) */
+function triggerCapture(id, face){ var el=document.getElementById(id); el.setAttribute('capture',face); el.click(); }
+function triggerGallery(id){ var el=document.getElementById(id); el.removeAttribute('capture'); el.click(); }
+
+/* Drag & drop (UX enhancement — feeds the same compression pipeline) */
+function omDragOver(e, card){ e.preventDefault(); card.classList.add('dragover'); }
+function omDragLeave(card){ card.classList.remove('dragover'); }
+function omDrop(e, card, which){
+  e.preventDefault(); card.classList.remove('dragover');
+  if((which==='photo' && _photoFile) || (which==='card' && _cardFile)) return;
+  var file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+  if(file) _processUploadFile(file, which);
+}
+
+/* File upload & compression */
+function handleUpload(input, which){
+  var file = input.files && input.files[0];
+  _processUploadFile(file, which);
+}
+function _processUploadFile(file, which){
+  if(!file) return;
+  if(!/^image\//.test(file.type)){ _omMsg(2,'Please choose an image file.','error'); return; }
+  if(file.size > 10*1024*1024){ _omMsg(2,'File is too large. Maximum 10MB.','error'); return; }
+  var maxPx   = which==='photo' ? 400  : 1200;
+  var quality = which==='photo' ? 0.82 : 0.88;
+  _compressImage(file, maxPx, quality, function(compressed){
+    if(which==='photo'){ _photoFile=compressed; _showUploadSuccess('photo',compressed); }
+    else               { _cardFile=compressed;  _showUploadSuccess('card', compressed); }
+  });
+}
+
+function _compressImage(file, maxPx, quality, callback){
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var img=new Image();
+    img.onload=function(){
+      var w=img.width,h=img.height;
+      if(w>h){if(w>maxPx){h=Math.round(h*maxPx/w);w=maxPx;}}
+      else   {if(h>maxPx){w=Math.round(w*maxPx/h);h=maxPx;}}
+      var canvas=document.createElement('canvas'); canvas.width=w; canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      canvas.toBlob(function(blob){
+        callback(new File([blob], file.name.replace(/\.[^.]+$/,'.jpg'),{type:'image/jpeg'}));
+      },'image/jpeg',quality);
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function _showUploadSuccess(which, file){
+  var card = document.getElementById(which==='photo' ? 'photo-card' : 'card-card');
+  card.classList.add('has-file');
+  if(which==='photo'){
+    var reader=new FileReader();
+    reader.onload=function(e){
+      var circle=document.getElementById('photo-circle');
+      circle.classList.add('has-photo');
+      circle.innerHTML='<img src="'+e.target.result+'" alt=""/>';
+      var thumb=document.getElementById('photo-thumb'); if(thumb) thumb.src=e.target.result;
+    };
+    reader.readAsDataURL(file);
+    document.getElementById('photo-name').textContent=file.name;
+  } else {
+    var reader2=new FileReader();
+    reader2.onload=function(e){ document.getElementById('card-thumb').src=e.target.result; };
+    reader2.readAsDataURL(file);
+    document.getElementById('card-name').textContent=file.name;
+  }
+}
+
+function clearUpload(which){
+  if(which==='photo'){ _photoFile=null; document.getElementById('apply-photo-input').value=''; }
+  else               { _cardFile=null;  document.getElementById('apply-card-input').value=''; }
+  var card = document.getElementById(which==='photo' ? 'photo-card' : 'card-card');
+  if(card) card.classList.remove('has-file');
+  if(which==='photo'){
+    var circle=document.getElementById('photo-circle');
+    if(circle){ circle.classList.remove('has-photo'); circle.textContent='📷'; }
+    var thumb=document.getElementById('photo-thumb'); if(thumb) thumb.src='';
+  } else {
+    var cthumb=document.getElementById('card-thumb'); if(cthumb) cthumb.src='';
+  }
+}
+
+function _omMsg(step, text, type){
+  var el=document.getElementById('om-msg-'+step); if(!el) return;
+  el.textContent=text;
+  el.className='om-msg'+(text?' show':'')+(type?' '+type:'');
+}
+
+function _fileToBase64(file){
+  return new Promise(function(resolve,reject){
+    if(!file){resolve(null);return;}
+    var r=new FileReader();
+    r.onload=function(e){resolve(e.target.result.split(',')[1]);};
+    r.onerror=function(){reject(new Error('Read failed'));};
+    r.readAsDataURL(file);
+  });
+}
+
+function submitApplyForm(){
+  _omMsg(2,'','');
+  var contribType  = document.getElementById('apply-contrib-type').value;
+  var contribAmount= (document.getElementById('apply-contrib-amount').value||'').trim();
+  if(!contribType)   { _omMsg(2,'Please select Weekly or Monthly contribution.','error'); return; }
+  if(!contribAmount || parseFloat(contribAmount)<=0){ _omMsg(2,'Please enter a valid contribution amount.','error'); return; }
+  if(!_omAgreed)     { _omMsg(2,'Please accept the Membership Agreement to proceed.','error'); return; }
+
+  var btn=document.getElementById('apply-submit-btn');
+  btn.disabled=true; btn.textContent='Submitting…';
+
+  var payload={
+    action:'submitMemberApplication',
+    website: document.getElementById('apply-website').value,
+    formLoadedAt: _applyFormLoadedAt,
+    name:         (document.getElementById('apply-name').value||'').trim(),
+    phone:        (document.getElementById('apply-phone').value||'').trim(),
+    email:        (document.getElementById('apply-email').value||'').trim(),
+    whatsapp:     (document.getElementById('apply-whatsapp').value||'').trim(),
+    dob:          (document.getElementById('apply-dob').value||'').trim(),
+    gender:       document.getElementById('apply-gender').value,
+    location:     (document.getElementById('apply-location').value||'').trim(),
+    occupation:   (document.getElementById('apply-occupation').value||'').trim(),
+    nokName:      (document.getElementById('apply-nok-name').value||'').trim(),
+    nokPhone:     (document.getElementById('apply-nok-phone').value||'').trim(),
+    howHeard:     document.getElementById('apply-how-heard').value,
+    ghanaCard:    (document.getElementById('apply-ghana-card').value||'').trim(),
+    contribType:  contribType,
+    contribAmount:contribAmount,
+    cashoutMethod:document.getElementById('apply-cashout-method').value,
+    loanInterest: document.getElementById('apply-loan-interest').value,
+    extra:        (document.getElementById('apply-extra').value||'').trim()
+  };
+
+  fetch(APPLY_ENDPOINT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)})
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(!data.success){
+      btn.disabled=false; btn.textContent='Submit Application →';
+      _omMsg(2,data.error||'Something went wrong. Please try again.','error');
+      return;
+    }
+    var appId=data.appId;
+    if(!_photoFile && !_cardFile){ _omShowSuccess(); return; }
+    btn.textContent='Uploading documents…';
+    document.getElementById('apply-uploading-notice').classList.add('show');
+    Promise.all([_fileToBase64(_photoFile),_fileToBase64(_cardFile)])
+    .then(function(results){
+      return fetch(APPLY_ENDPOINT_URL,{
+        method:'POST',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body:JSON.stringify({
+          action:'uploadApplicationFiles', appId:appId,
+          profilePhotoBase64:results[0]||null, profilePhotoMime:_photoFile?_photoFile.type:null,
+          ghanaCardBase64:results[1]||null,    ghanaCardMime:_cardFile?_cardFile.type:null
+        })
+      });
+    })
+    .then(function(r){return r.json();})
+    .then(function(){_omShowSuccess();})
+    .catch(function(){_omShowSuccess();});
+  })
+  .catch(function(){
+    btn.disabled=false; btn.textContent='Submit Application →';
+    _omMsg(2,'Connection error. Please check your internet and try again.','error');
+  });
+}
+
+function _omShowSuccess(){
+  var box=document.getElementById('apply-modal-box');
+  var b1=document.getElementById('om-body-1'), b2=document.getElementById('om-body-2');
+  var n1=document.getElementById('om-nav-1'),  n2=document.getElementById('om-nav-2');
+  var upl=document.getElementById('apply-uploading-notice');
+  var stepper=document.querySelector('.om-stepper');
+  if(b1) b1.classList.remove('active');
+  if(b2) b2.classList.remove('active');
+  if(n1) n1.style.display='none';
+  if(n2) n2.style.display='none';
+  if(upl) upl.classList.remove('show');
+  if(stepper) stepper.style.display='none';
+  var succ=document.getElementById('apply-success-state');
+  if(succ) succ.classList.add('active');
+  if(box) box.scrollTop=0;
+}
+</script>
+</body>
+</html>
