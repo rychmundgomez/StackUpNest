@@ -6,7 +6,7 @@
 //
 // Bump CACHE_VERSION whenever you deploy a new Index.html so
 // old cached shells are evicted on the next visit.
-// ============================================================
+// ============================================================C
 
 var CACHE_VERSION = 'sn-shell-v1';
 
