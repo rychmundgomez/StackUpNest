@@ -1253,7 +1253,7 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
       <div class="footer-col"><h4>Group</h4><a href="#how">How it works</a><a href="#features">Features</a><a href="#voices">Members</a><a href="#faq">FAQ</a></div>
       <div class="footer-col"><h4>Contact</h4><a href="mailto:gomezrychmund244@gmail.com">gomezrychmund244@gmail.com</a><a href="tel:+233540281796">+233 540 281 796</a><a href="#">Accra, Ghana</a></div>
     </div>
-    <div class="footer-bottom"><p>© 2025 StackUp Nest. All rights reserved.</p><div class="footer-legal"><a href="#" onclick="openLegal('privacy');return false;">Privacy Policy</a><a href="#" onclick="openLegal('terms');return false;">Terms of Service</a></div><span>SAVE · BORROW · TRADE</span></div>
+    <div class="footer-bottom"><p>© 2026 StackUp Nest. All rights reserved.</p><div class="footer-legal"><a href="#" onclick="openLegal('privacy');return false;">Privacy Policy</a><a href="#" onclick="openLegal('terms');return false;">Terms of Service</a></div><span>SAVE · BORROW · TRADE</span></div>
   </div>
 </footer>
 
@@ -1300,7 +1300,7 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
       <div class="om-card">
         <div class="om-card-label">Identity</div>
         <div class="om-field">
-          <label class="om-label" for="apply-name">Full Name <span style="color:var(--emerald)">*</span></label>
+          <label class="om-label" for="apply-name">Full Name <span style="color:var(--em)">*</span></label>
           <input class="om-input" type="text" id="apply-name" autocomplete="name" placeholder="e.g. Kwame Mensah"/>
         </div>
         <div class="om-row">
@@ -1323,7 +1323,7 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
       <div class="om-card">
         <div class="om-card-label">Contact</div>
         <div class="om-field">
-          <label class="om-label" for="apply-phone">Phone Number <span style="color:var(--emerald)">*</span></label>
+          <label class="om-label" for="apply-phone">Phone Number <span style="color:var(--em)">*</span></label>
           <input class="om-input" type="tel" id="apply-phone" autocomplete="tel" placeholder="024 123 4567"/>
         </div>
         <div class="om-row">
@@ -1332,7 +1332,7 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
             <input class="om-input" type="tel" id="apply-whatsapp" autocomplete="tel" placeholder="Same or different"/>
           </div>
           <div class="om-field">
-            <label class="om-label" for="apply-email">Email <span style="color:var(--emerald)">*</span></label>
+            <label class="om-label" for="apply-email">Email <span style="color:var(--em)">*</span></label>
             <input class="om-input" type="email" id="apply-email" autocomplete="email" placeholder="you@example.com"/>
           </div>
         </div>
@@ -1443,7 +1443,7 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
         <div class="om-card-label">Savings Preferences</div>
 
         <div class="om-field">
-          <label class="om-label">Contribution Schedule <span style="color:var(--emerald)">*</span></label>
+          <label class="om-label">Contribution Schedule <span style="color:var(--em)">*</span></label>
           <div class="om-segment" role="group" aria-label="Contribution schedule">
             <button type="button" class="om-segment-btn" id="seg-weekly" onclick="omSetContribType('Weekly')"><span class="mi mi-18">date_range</span> Weekly</button>
             <button type="button" class="om-segment-btn" id="seg-monthly" onclick="omSetContribType('Monthly')"><span class="mi mi-18">calendar_month</span> Monthly</button>
@@ -1452,7 +1452,7 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
         </div>
 
         <div class="om-field">
-          <label class="om-label" for="apply-contrib-amount">Fixed Amount (GHS) <span style="color:var(--emerald)">*</span></label>
+          <label class="om-label" for="apply-contrib-amount">Fixed Amount (GHS) <span style="color:var(--em)">*</span></label>
           <div class="om-amount-wrap">
             <span class="om-amount-currency">₵</span>
             <input class="om-input om-amount-input" type="number" id="apply-contrib-amount" min="1" step="0.01" placeholder="0.00" oninput="updateAmountPreview()"/>
@@ -1515,7 +1515,7 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
       <input type="hidden" id="apply-ack-commit" value=""/>
 
       <div class="om-field" style="margin-bottom:4px">
-        <label class="om-label" for="apply-extra">Anything else? <span style="color:var(--faint);font-weight:400;text-transform:none;letter-spacing:0">Optional</span></label>
+        <label class="om-label" for="apply-extra">Anything else? <span style="color:var(--on-light-faint);font-weight:400;text-transform:none;letter-spacing:0">Optional</span></label>
         <textarea class="om-input om-textarea" id="apply-extra" placeholder="Questions, notes, or referral details…"></textarea>
       </div>
 
@@ -1569,17 +1569,6 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeM
 })();
 
 /* ============================================================
-   DIVISION CARD CURSOR GLOW
-   ============================================================ */
-document.querySelectorAll('.div-card').forEach(function(card){
-  card.addEventListener('mousemove', function(e){
-    var r = card.getBoundingClientRect();
-    card.style.setProperty('--mx', ((e.clientX - r.left)/r.width*100)+'%');
-    card.style.setProperty('--my', ((e.clientY - r.top)/r.height*100)+'%');
-  });
-});
-
-/* ============================================================
    DIVISION MODALS
    ============================================================ */
 var modalData = [
@@ -1625,30 +1614,6 @@ function openModal(i){
   document.body.style.overflow = 'hidden';
 }
 function closeModal(){ document.getElementById('modal-overlay').classList.remove('open'); document.body.style.overflow = ''; }
-
-/* ============================================================
-   TESTIMONIALS
-   ============================================================ */
-var testiData = [
-  { q:'The Member Portal makes it so easy to track everything. Every contribution I\'ve made and my loan balance in one place — very professional.', name:'Kofi Asante', role:'Member since 2025', i:'KA' },
-  { q:'I applied for a loan through the portal and it was approved the next day. The whole process was smooth and repayment tracking is completely clear.', name:'Abena Boateng', role:'Member since 2025', i:'AB' },
-  { q:'The weekly reminders genuinely help me stay disciplined. Year-end cashout was exactly what was promised. Already recommending to friends.', name:'Emmanuel Owusu', role:'Member since 2025', i:'EO' },
-  { q:'Three income streams in one group is something I didn\'t think was possible. StackUp Nest is run like a proper business — not a casual circle.', name:'Akosua Mensah', role:'Member since 2025', i:'AM' },
-  { q:'Love that every transaction is logged and visible. No surprises, no excuses. The transparency here is unmatched compared to other groups.', name:'Kweku Darkwa', role:'Member since 2025', i:'KD' },
-  { q:'Getting activated was fast and the welcome email was detailed. I knew exactly what to expect from day one. That level of organization is rare.', name:'Esi Adjei', role:'Member since 2025', i:'EA' }
-];
-function makeCard(d){
-  return '<div class="testi-card"><div class="testi-stars">★★★★★</div><blockquote>"'+d.q+'"</blockquote><div class="testi-author"><div class="testi-avatar">'+d.i+'</div><div><div class="testi-name">'+d.name+'</div><div class="testi-role">'+d.role+'</div></div></div></div>';
-}
-(function(){
-  var tracksEl = document.getElementById('testiTracks'); if(!tracksEl) return;
-  var a = testiData.slice(0,4), b = testiData.slice(2);
-  var row1 = document.createElement('div'); row1.className='testi-track testi-track-fwd';
-  row1.innerHTML = a.concat(a).map(makeCard).join('');
-  var row2 = document.createElement('div'); row2.className='testi-track testi-track-rev';
-  row2.innerHTML = b.concat(b).map(makeCard).join('');
-  tracksEl.appendChild(row1); tracksEl.appendChild(row2);
-})();
 
 /* ============================================================
    PORTAL CHART (pure SVG, presentational, guarded)
