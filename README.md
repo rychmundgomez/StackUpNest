@@ -1,6 +1,6 @@
 # StackUp Nest — Marketing Site
 
-A single-file, production-ready landing page for **StackUp Nest** (legally registered as *FutureFund Group*), Ghana's savings, loans and trading circle. Built as one self-contained HTML document — no build step, no bundler, no dependencies to install.
+A single-file, production-ready landing page for **StackUp Nest** (legally registered), Ghana's savings, loans and trading circle. Built as one self-contained HTML document — no build step, no bundler, no dependencies to install.
 
 ![Status](https://img.shields.io/badge/status-production-16b877) ![Type](https://img.shields.io/badge/type-static%20HTML-0b1a13) ![Region](https://img.shields.io/badge/market-Ghana-e7c98a)
 
