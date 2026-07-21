@@ -1954,6 +1954,7 @@ function submitApplyForm(){
       return;
     }
     var appId=data.appId;
+      var uploadToken=data.uploadToken; // ← NEW: one-time token from submitMemberApplication
     if(!_photoFile && !_cardFile){ _omShowSuccess(); return; }
     btn.textContent='Uploading documents…';
     document.getElementById('apply-uploading-notice').classList.add('show');
@@ -1963,7 +1964,7 @@ function submitApplyForm(){
         method:'POST',
         headers:{'Content-Type':'text/plain;charset=utf-8'},
         body:JSON.stringify({
-          action:'uploadApplicationFiles', appId:appId,
+          action:'uploadApplicationFiles', appId:appId, uploadToken:uploadToken,
           profilePhotoBase64:results[0]||null, profilePhotoMime:_photoFile?_photoFile.type:null,
           ghanaCardBase64:results[1]||null,    ghanaCardMime:_cardFile?_cardFile.type:null
         })
