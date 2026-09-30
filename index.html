@@ -26,13 +26,13 @@
 <title>StackUp Nest — Save. Borrow. Trade.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..600,0..1,0&display=block" rel="stylesheet"/>
 <style>
 /* ============================================================
    STACKUP NEST — EDITORIAL REDESIGN
    Craft reference: Huly.io rhythm (darklight) · emerald brand
-   Type: Fraunces (display serif) · Inter (UI) · DM Mono (labels)
+   Type: Fraunces (display serif) · DM Sans (UI) · DM Mono (labels)
    ============================================================ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -56,7 +56,7 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
   --ink-line-2:rgba(180,255,220,.16);
   --on-dark:#eaf4ee;
   --on-dark-mut:rgba(225,240,231,.62);
-  --on-dark-faint:rgba(225,240,231,.40);
+  --on-dark-faint:rgba(225,240,231,.60);
 
   /* Light world (paper / product sections) */
   --paper:#f3f1ea;         /* warm off-white — feels printed, not sterile */
@@ -75,7 +75,7 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
   --maxw:1240px;--gut:clamp(20px,5vw,52px);--nav-h:74px;
 
   --f-disp:'Fraunces',Georgia,serif;
-  --f-ui:'Inter',system-ui,-apple-system,sans-serif;
+  --f-ui:'DM Sans',system-ui,-apple-system,sans-serif;
   --f-mono:'DM Mono',ui-monospace,monospace;
 
   --sh-1:0 1px 2px rgba(11,26,19,.05);
@@ -740,6 +740,63 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
   .legal-head{padding:14px 16px}
   .legal-body{padding:18px 16px;font-size:14px}
 }
+
+/* ============================================================
+   DESIGN PASS — additive overrides, no markup or logic changed
+   ============================================================ */
+:root{--ease-out:cubic-bezier(.23,1,.32,1)}
+
+/* Reveal: shorter travel, strong ease-out */
+.rv{transform:translateY(22px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+
+/* Floating glass nav (fixed element, so blur is cheap) */
+#navbar{top:14px;height:auto;pointer-events:none}
+#navbar.scrolled{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:0}
+.nav-inner{pointer-events:auto;max-width:min(1060px,calc(100% - 28px));padding:8px 8px 8px 18px;border-radius:var(--r-pill);background:rgba(8,26,18,.5);border:1px solid var(--ink-line-2);-webkit-backdrop-filter:saturate(150%) blur(16px);backdrop-filter:saturate(150%) blur(16px);transition:background .35s var(--ease-out),box-shadow .35s var(--ease-out)}
+#navbar.scrolled .nav-inner{background:rgba(5,17,12,.8);box-shadow:0 14px 40px -20px rgba(0,0,0,.65)}
+
+/* Buttons: the .arr spans were empty. Give them a real nested arrow chip */
+.btn .arr{flex:none;width:30px;height:30px;border-radius:50%;margin-left:4px;background:rgba(4,20,13,.14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2304140d' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M8 7h9v9'/%3E%3C/svg%3E") center/13px no-repeat;transition:transform .35s var(--ease-out)}
+.on-dark-ghost .arr,.btn-dark .arr{background:rgba(235,244,238,.14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23eaf4ee' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M8 7h9v9'/%3E%3C/svg%3E") center/13px no-repeat}
+.btn:has(.arr){padding-right:10px}
+.btn-lg:has(.arr){padding-right:12px}
+.btn:hover .arr{transform:translate(2px,-2px)}
+.btn:active{transform:scale(.97);transition:transform .12s var(--ease-out)}
+.btn-em:active,.btn-dark:active,.sec-light .btn-ghost:active,.sec-dark .btn-ghost:active,.on-dark-ghost:active{transform:scale(.97)}
+.nav-cta:active{transform:scale(.97)}
+
+/* No sticky hover on touch */
+@media (hover:none){
+  .btn:hover,.btn-em:hover,.btn-dark:hover,.nav-cta:hover,.cell:hover,
+  .sec-light .btn-ghost:hover,.sec-dark .btn-ghost:hover,.on-dark-ghost:hover{transform:none}
+  .btn:hover .arr{transform:none}
+}
+
+/* Section labels: drop the numbered index and rule, keep a quiet pill */
+.eyebrow .idx,.eyebrow .ln{display:none}
+.eyebrow{gap:0;font-size:11px;letter-spacing:.16em;padding:7px 14px;border-radius:var(--r-pill);border:1px solid var(--line-2)}
+.sec-dark .eyebrow,#cta .eyebrow{border-color:var(--ink-line-2)}
+
+/* Value columns: the label becomes the headline word, not a mono caption */
+.vp-col .ul{display:none}
+.vp-col .mk{font-family:var(--f-disp);font-style:italic;font-weight:400;font-size:clamp(2.2rem,3.6vw,3.1rem);letter-spacing:-.02em;line-height:1;color:var(--em-deep);margin-bottom:22px}
+
+/* Bento cells: soft outer ring gives a machined-tray feel */
+.cell{box-shadow:inset 0 1px 0 rgba(235,244,238,.07),0 0 0 5px rgba(180,255,220,.025)}
+
+/* Grain without blend modes (cheaper to composite on phones) */
+.grain::before{mix-blend-mode:normal;opacity:.035}
+
+/* Text wrapping */
+.display,.hero-h1,.cell h3,.vp-col h3,.step-bd h3,.faq-q{text-wrap:balance}
+.lead,.hero-sub,.vp-col p,.cell p,.step-bd p{text-wrap:pretty}
+
+/* Sticky apply bar (phones only): the nav CTA is hidden there */
+.m-apply{display:none}
+@media (max-width:860px){
+  .m-apply{display:inline-flex;position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:800;justify-content:center;transform:translateY(calc(100% + 30px));visibility:hidden;transition:transform .45s var(--ease-out),visibility 0s linear .45s}
+  .m-apply.show{transform:none;visibility:visible;transition:transform .45s var(--ease-out),visibility 0s}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -800,6 +857,8 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
   <a href="#apply" class="mm-cta" onclick="toggleMenu();openApplyModal();">Apply to StackUp Nest</a>
 </div>
+
+<button class="btn btn-em btn-lg m-apply" id="mApply" type="button" onclick="openApplyModal()" tabindex="-1" aria-hidden="true">Apply for membership <span class="arr"></span></button>
 
 <!-- ============ HERO ============ -->
 <header id="hero" class="grain">
@@ -1569,6 +1628,26 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeM
     entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target); } });
   }, { threshold:.12, rootMargin:'0px 0px -40px 0px' });
   document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+})();
+
+/* ============================================================
+   STICKY APPLY BAR (phones): shows once the hero buttons have scrolled away
+   ============================================================ */
+(function(){
+  var bar = document.getElementById('mApply');
+  if(!bar || !('IntersectionObserver' in window)) return;
+  var seen = { hero:true, cta:false, foot:false };
+  function update(){
+    var show = !seen.hero && !seen.cta && !seen.foot;
+    bar.classList.toggle('show', show);
+    bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+    bar.tabIndex = show ? 0 : -1;
+  }
+  function watch(sel, key){
+    var el = document.querySelector(sel); if(!el) return;
+    new IntersectionObserver(function(en){ seen[key] = en[0].isIntersecting; update(); }).observe(el);
+  }
+  watch('.hero-btns','hero'); watch('#cta','cta'); watch('footer','foot');
 })();
 
 /* ============================================================
