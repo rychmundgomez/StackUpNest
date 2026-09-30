@@ -797,6 +797,17 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
   .m-apply{display:inline-flex;position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:800;justify-content:center;transform:translateY(calc(100% + 30px));visibility:hidden;transition:transform .45s var(--ease-out),visibility 0s linear .45s}
   .m-apply.show{transform:none;visibility:visible;transition:transform .45s var(--ease-out),visibility 0s}
 }
+
+/* Process steps: the pill tags become a plain hairline fact list in a right-hand column */
+.step-bd{max-width:none;display:grid;grid-template-columns:minmax(0,600px) minmax(180px,250px);column-gap:clamp(28px,5vw,72px);align-items:start}
+.step-bd>*{grid-column:1}
+.step-bd>.step-tags{grid-column:2;grid-row:1 / span 3;display:flex;flex-direction:column;gap:0;margin-top:2px}
+.step-tags span{font-size:13.5px;line-height:1.4;color:var(--on-light-2);background:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:11px 0}
+.step-tags span:last-child{border-bottom:1px solid var(--line)}
+@media (max-width:1000px){
+  .step-bd{grid-template-columns:minmax(0,1fr)}
+  .step-bd>.step-tags{grid-column:1;grid-row:auto;margin-top:6px}
+}
 </style>
 <script type="application/ld+json">
 {
