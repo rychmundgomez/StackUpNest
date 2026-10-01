@@ -808,6 +808,10 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
   .step-bd{grid-template-columns:minmax(0,1fr)}
   .step-bd>.step-tags{grid-column:1;grid-row:auto;margin-top:6px}
 }
+
+/* Keyboard skip link: hidden until focused */
+.skip-link{position:fixed;left:14px;top:-60px;z-index:1200;padding:10px 16px;border-radius:var(--r-pill);background:var(--em);color:#04140d;font-weight:600;font-size:14px;transition:top .2s var(--ease-out)}
+.skip-link:focus{top:14px}
 </style>
 <script type="application/ld+json">
 {
@@ -840,6 +844,7 @@ footer{background:var(--ink);color:var(--on-dark-mut);padding:0 0 40px;border-to
 <body>
 
 <!-- ============ NAV ============ -->
+<a class="skip-link" href="#trust">Skip to content</a>
 <nav id="navbar">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo" aria-label="StackUp Nest home">
